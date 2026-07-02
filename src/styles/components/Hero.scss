@@ -1,0 +1,60 @@
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  width: 100%;
+  overflow: hidden;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(11, 11, 12, 0.55) 0%,
+      rgba(11, 11, 12, 0.35) 40%,
+      rgba(11, 11, 12, 0.65) 100%
+    );
+    z-index: 1;
+  }
+
+  &__topo {
+    z-index: 1;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--sp-4);
+    padding: 0 var(--sp-3);
+  }
+
+  &__kicker {
+    font-family: var(--font-structural);
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--fog);
+  }
+
+  &__mark {
+    width: auto;
+    height: clamp(70px, 14vw, 170px);
+  }
+}

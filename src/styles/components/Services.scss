@@ -1,0 +1,115 @@
+.services {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  padding: var(--sp-12) 0;
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--sp-2);
+    margin-bottom: var(--sp-6);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    border-top: 1px solid var(--hair);
+    border-left: 1px solid var(--hair);
+
+    @media (min-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &__cell {
+    position: relative;
+    padding: var(--sp-5) var(--sp-4);
+    border-right: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    color: var(--ink);
+    background: var(--paper);
+    transition: border-color var(--transition-base);
+    min-height: 220px;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--ink);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--transition-base);
+    }
+
+    &:hover,
+    &:focus-within {
+      border-color: var(--ink);
+
+      &::before {
+        transform: scaleX(1);
+      }
+
+      .services__icon {
+        color: var(--ink);
+        transform: translateY(-3px);
+      }
+
+      .services__index {
+        color: var(--ink);
+      }
+    }
+  }
+
+  &__index {
+    font-family: var(--font-structural);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    color: var(--concrete);
+    transition: color var(--transition-base);
+  }
+
+  &__icon {
+    width: 30px;
+    height: 30px;
+    color: var(--concrete);
+    transition: color var(--transition-base), transform var(--transition-base);
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &__name {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.3rem;
+    margin-top: auto;
+  }
+
+  &__copy {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    opacity: 0.7;
+  }
+}

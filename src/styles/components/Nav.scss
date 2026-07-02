@@ -1,0 +1,128 @@
+.nav {
+  --nav-edge: var(--sp-3);
+
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 100;
+  height: var(--nav-h);
+  color: var(--paper);
+  transition: color var(--transition-base);
+
+  @media (min-width: 1024px) {
+    --nav-edge: var(--sp-6);
+  }
+
+  &--light {
+    color: var(--ink);
+  }
+
+  &__logo {
+    position: fixed;
+    top: 0;
+    left: var(--nav-edge);
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    z-index: 101;
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity var(--transition-base), transform var(--transition-base);
+
+    img {
+      height: 32px;
+      width: auto;
+
+      @media (min-width: 1024px) {
+        height: 44px;
+      }
+    }
+
+    &--hidden {
+      opacity: 0;
+      transform: scale(0.82);
+      pointer-events: none;
+    }
+  }
+
+  &__burger {
+    position: fixed;
+    top: 0;
+    right: var(--nav-edge);
+    height: var(--nav-h);
+    width: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    z-index: 101;
+
+    span {
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: currentColor;
+      transition: transform var(--transition-fast), opacity var(--transition-fast);
+    }
+  }
+
+  &--open &__burger {
+    span:first-child {
+      transform: translateY(3.5px) rotate(45deg);
+    }
+    span:last-child {
+      transform: translateY(-3.5px) rotate(-45deg);
+    }
+  }
+
+  &__panel {
+    position: fixed;
+    top: var(--nav-h);
+    right: var(--nav-edge);
+    z-index: 100;
+    min-width: 200px;
+    background: var(--ink);
+    color: var(--paper);
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+  }
+
+  &--open &__panel {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  &__panel-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__panel-link {
+    display: block;
+    padding: 0.9em 1.2em;
+    font-family: var(--font-structural);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fog);
+    border-bottom: 1px solid rgba(243, 242, 238, 0.12);
+    transition: color var(--transition-fast), background-color var(--transition-fast);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--paper);
+      background: rgba(243, 242, 238, 0.06);
+    }
+
+    &--active {
+      color: var(--paper);
+    }
+  }
+
+  &__panel-list li:last-child &__panel-link {
+    border-bottom: none;
+  }
+}

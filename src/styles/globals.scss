@@ -1,0 +1,196 @@
+
+:root {
+  // Brand colors
+  --ink:       #0B0B0C;
+  --graphite:  #171719;
+  --paper:     #F3F2EE;
+  --paper-2:   #EAE9E3;
+  --concrete:  #8A8A85;
+  --fog:       #D9D8D1;
+  --hair:      #C9C8C0;
+
+  --surface: var(--paper);
+  --on-surface: var(--ink);
+
+  --nav-h: 72px;
+  @media (min-width: 1024px) {
+    --nav-h: 96px;
+  }
+
+  // Typography
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-structural: 'Archivo Expanded', 'Archivo', system-ui, sans-serif;
+  --font-body: 'Archivo', system-ui, sans-serif;
+
+  // Spacing scale (8px base)
+  --sp-1: 0.5rem;   // 8px
+  --sp-2: 1rem;     // 16px
+  --sp-3: 1.5rem;   // 24px
+  --sp-4: 2rem;     // 32px
+  --sp-5: 2.5rem;   // 40px
+  --sp-6: 3rem;     // 48px
+  --sp-8: 4rem;     // 64px
+  --sp-10: 5rem;    // 80px
+  --sp-12: 6rem;    // 96px
+  --sp-16: 8rem;    // 128px
+  --sp-20: 10rem;   // 160px
+
+  // Shadow (low-opacity ink-tint only, used sparingly)
+  --shadow-ink: 0 12px 32px rgba(11, 11, 12, 0.10);
+
+  // Transitions — spring-style easing, transform/opacity only
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-fast: 200ms var(--ease-spring);
+  --transition-base: 400ms var(--ease-spring);
+  --transition-slow: 700ms var(--ease-spring);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink);
+  background-color: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+// Global focus-visible — always visible, ink ring
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+// Utility
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 var(--sp-4);
+
+  @media (min-width: 768px) {
+    padding: 0 var(--sp-8);
+  }
+}
+
+// Structural / eyebrow / index / metadata label
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  font-family: var(--font-structural);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--ink);
+
+  &::before {
+    content: '';
+    width: 0.5em;
+    height: 1px;
+    background: currentColor;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+em, i {
+  font-style: italic;
+}
+
+// Scroll reveal
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity var(--transition-slow), transform var(--transition-slow);
+
+  &[data-reveal-delay="100"] { transition-delay: 100ms; }
+  &[data-reveal-delay="150"] { transition-delay: 150ms; }
+  &[data-reveal-delay="200"] { transition-delay: 200ms; }
+  &[data-reveal-delay="300"] { transition-delay: 300ms; }
+  &[data-reveal-delay="400"] { transition-delay: 400ms; }
+  &[data-reveal-delay="500"] { transition-delay: 500ms; }
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+// Ink-section grain texture (subtle, applied via .grain class)
+.grain {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}

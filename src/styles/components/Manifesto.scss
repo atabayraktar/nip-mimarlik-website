@@ -1,0 +1,111 @@
+.manifesto {
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  padding: var(--sp-12) 0;
+  overflow: hidden;
+
+  &__topo {
+    z-index: 0;
+  }
+
+  &__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+  }
+
+  &__eyebrow {
+    margin-bottom: var(--sp-4);
+  }
+
+  &__headline {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(2.25rem, 7vw, 5rem);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--sp-3);
+  }
+
+  &__line {
+    display: block;
+  }
+
+  &__word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    margin-right: 0.28em;
+  }
+
+  &__word-inner {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(105%);
+    transition: opacity 0.7s var(--ease-spring), transform 0.7s var(--ease-spring);
+
+    &.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    em {
+      font-style: italic;
+    }
+  }
+
+  &__body {
+    max-width: 46ch;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--concrete);
+  }
+
+  &__marquee {
+    position: relative;
+    z-index: 1;
+    margin-top: var(--sp-12);
+    border-top: 1px solid var(--hair);
+    border-bottom: 1px solid var(--hair);
+    padding: var(--sp-3) 0;
+    overflow: hidden;
+  }
+
+  &__marquee-track {
+    display: flex;
+    width: max-content;
+    gap: var(--sp-6);
+    animation: marquee 28s linear infinite;
+
+    span {
+      font-family: var(--font-structural);
+      font-size: 0.8rem;
+      letter-spacing: 0.22em;
+      color: var(--concrete);
+      white-space: nowrap;
+
+      &::after {
+        content: '·';
+        margin-left: var(--sp-6);
+        color: var(--concrete);
+      }
+    }
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .manifesto__marquee-track {
+    animation: none;
+  }
+  .manifesto__word-inner {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

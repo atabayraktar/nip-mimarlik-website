@@ -1,0 +1,70 @@
+import TopoLines from './TopoLines'
+
+const LINES = [
+  ['Lorem', 'ipsum', 'dolor.'],
+  ['Sit', 'amet', 'consectetur.'],
+  ['Elit', 'sed', 'do.'],
+]
+
+const MARQUEE_ITEMS = [
+  'LOREM',
+  'IPSUM',
+  'DOLOR',
+  'SIT AMET',
+  'CONSECTETUR',
+  'ADIPISCING',
+  'ELIT',
+]
+
+export default function Manifesto() {
+  let wordCount = 0
+
+  return (
+    <section id="manifesto" data-theme="paper" className="manifesto">
+      <TopoLines tone="paper" className="manifesto__topo" parallax seed={2} />
+
+      <div className="container manifesto__inner">
+        <p className="eyebrow manifesto__eyebrow">Manifesto</p>
+
+        <h2 className="manifesto__headline">
+          {LINES.map((line, li) => (
+            <span className="manifesto__line" key={li}>
+              {line.map((word, wi) => {
+                const isLast = wi === line.length - 1
+                const delay = wordCount * 55
+                wordCount += 1
+                return (
+                  <span className="manifesto__word" key={wi}>
+                    <span
+                      className="manifesto__word-inner"
+                      data-reveal
+                      style={{ transitionDelay: `${delay}ms` }}
+                    >
+                      {isLast ? <em>{word}</em> : word}
+                    </span>
+                  </span>
+                )
+              })}
+            </span>
+          ))}
+        </h2>
+
+        <p className="manifesto__body" data-reveal>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+          incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam quis nostrud
+          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat — duis aute
+          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          pariatur.
+        </p>
+      </div>
+
+      <div className="manifesto__marquee" aria-hidden="true">
+        <div className="manifesto__marquee-track">
+          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+            <span key={i}>{item}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
