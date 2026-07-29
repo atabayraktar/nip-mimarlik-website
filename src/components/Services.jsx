@@ -2,50 +2,41 @@ import TopoLines from './TopoLines'
 
 const ICONS = {
   design: (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <path d="M4 28 16 4l12 24" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M9.5 17h13" stroke="currentColor" strokeWidth="1.3" />
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 20V10.5L12 4l8 6.5V20" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M4 20h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M10 20v-5h4v5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   ),
   interior: (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <rect x="5" y="6" width="22" height="20" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M5 14h22M16 6v20" stroke="currentColor" strokeWidth="1.3" />
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="4" y="4" width="16" height="16" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M4 11h16M12 4v16" stroke="currentColor" strokeWidth="1.5" />
     </svg>
   ),
   landscape: (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <path d="M3 24 11 12l5 6 3-4 10 10" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M3 24h26" stroke="currentColor" strokeWidth="1.3" />
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M3 17c2-3 4-3 6 0s4 3 6 0 4-3 6 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M3 12c2-3 4-3 6 0s4 3 6 0 4-3 6 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.55" />
+      <path d="M3 7c2-3 4-3 6 0s4 3 6 0 4-3 6 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" opacity="0.3" />
     </svg>
   ),
   restoration: (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <path
-        d="M25 12a9 9 0 1 1-2.2-6.2"
-        stroke="currentColor"
-        strokeWidth="1.3"
-      />
-      <path d="M25 4v6h-6" stroke="currentColor" strokeWidth="1.3" />
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M20 12a8 8 0 1 1-2.34-5.66" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M20 3v6h-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
   consulting: (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <path
-        d="M5 8h22v13H14l-5 5v-5H5z"
-        stroke="currentColor"
-        strokeWidth="1.3"
-      />
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 5h16v11H9l-4 4V5Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M7.5 9h9M7.5 12.5h5.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   ),
   visualization: (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
-      <path
-        d="M16 4 27 10v12L16 28 5 22V10z"
-        stroke="currentColor"
-        strokeWidth="1.3"
-      />
-      <path d="M16 4v24M5 10l11 6 11-6" stroke="currentColor" strokeWidth="1.3" />
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 3 20 7.5v9L12 21 4 16.5v-9L12 3Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M12 12v9M4 7.5 12 12l8-4.5" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   ),
 }
@@ -94,11 +85,17 @@ export default function Services() {
 
         <ul className="services__grid">
           {SERVICES.map((s, i) => (
-            <li className="services__cell" key={s.name} data-reveal data-reveal-delay={String((i % 3) * 100)}>
-              <span className="services__index">{String(i + 1).padStart(2, '0')}</span>
+            <li
+              className="services__row"
+              key={s.name}
+              data-reveal
+              data-reveal-delay={String(Math.floor(i / 2) * 100)}
+            >
               <span className="services__icon">{ICONS[s.icon]}</span>
-              <h3 className="services__name">{s.name}</h3>
-              <p className="services__copy">{s.copy}</p>
+              <span className="services__text">
+                <h3 className="services__name">{s.name}</h3>
+                <p className="services__copy">{s.copy}</p>
+              </span>
             </li>
           ))}
         </ul>

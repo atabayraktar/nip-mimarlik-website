@@ -2,8 +2,12 @@
   position: relative;
   background: var(--paper);
   color: var(--ink);
-  padding: var(--sp-12) 0;
+  padding: var(--sp-8) 0;
   overflow: hidden;
+
+  @media (min-width: 768px) {
+    padding: var(--sp-12) 0;
+  }
 
   &__topo {
     z-index: 0;
@@ -48,10 +52,6 @@
     &.revealed {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    em {
-      font-style: italic;
     }
   }
 

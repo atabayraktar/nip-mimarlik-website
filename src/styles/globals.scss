@@ -9,6 +9,9 @@
   --fog:       #D9D8D1;
   --hair:      #C9C8C0;
 
+  // Functional (error state only — not a brand accent)
+  --error: #7A2E37;
+
   --surface: var(--paper);
   --on-surface: var(--ink);
 
@@ -150,7 +153,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 em, i {
-  font-style: italic;
+  font-style: normal;
 }
 
 // Scroll reveal

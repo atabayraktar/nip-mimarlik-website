@@ -2,12 +2,11 @@ import Head from 'next/head'
 import Nav from '../components/Nav'
 import AboutIntro from '../components/AboutIntro'
 import Education from '../components/Education'
-import WorkedProjects from '../components/WorkedProjects'
 import AboutVideo from '../components/AboutVideo'
 import Footer from '../components/Footer'
 
 const SITE_URL = 'https://nipmimarlik.com'
-const TITLE = 'İdil Hakkımda — Nilüfer İdil Postacı · NİP Mimarlık'
+const TITLE = 'nip | Nilüfer İdil Postacı'
 const DESCRIPTION =
   'NİP Mimarlık kurucusu, mimar Nilüfer İdil Postacı hakkında: eğitim geçmişi, yaklaşımı ve birlikte çalıştığı projeler.'
 const OG_IMAGE = `${SITE_URL}/logos/nip_ink_sq.png`
@@ -60,10 +59,9 @@ export default function Idil() {
       <Nav />
 
       <main id="main-content">
+        <AboutVideo />
         <AboutIntro />
         <Education />
-        <WorkedProjects />
-        <AboutVideo />
       </main>
 
       <Footer />

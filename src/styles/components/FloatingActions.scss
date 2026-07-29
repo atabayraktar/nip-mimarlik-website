@@ -1,0 +1,127 @@
+.floating-stack {
+  position: fixed;
+  right: var(--sp-2);
+  bottom: var(--sp-4);
+  z-index: 95;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @media (min-width: 640px) {
+    right: var(--sp-4);
+  }
+
+  @media (min-width: 1024px) {
+    right: var(--sp-6);
+    bottom: var(--sp-6);
+  }
+}
+
+.floating-icon-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  color: var(--paper);
+  box-shadow: var(--shadow-ink);
+  transition: background-color var(--transition-base), color var(--transition-base),
+    transform var(--transition-fast);
+
+  & + & {
+    border-top: 1px solid rgba(243, 242, 238, 0.16);
+  }
+
+  svg {
+    width: 26px;
+    height: 26px;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (min-width: 640px) {
+    width: 46px;
+    height: 46px;
+
+    svg {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    width: 52px;
+    height: 52px;
+
+    svg {
+      width: 26px;
+      height: 26px;
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: var(--paper);
+    color: var(--ink);
+    transform: translateY(-3px);
+  }
+
+  &:active {
+    transform: translateY(-1px);
+  }
+}
+
+.floating-scroll-top-wrap {
+  position: fixed;
+  left: var(--sp-2);
+  bottom: var(--sp-4);
+  z-index: 95;
+
+  @media (min-width: 640px) {
+    left: var(--sp-4);
+  }
+
+  @media (min-width: 1024px) {
+    left: var(--sp-6);
+    bottom: var(--sp-6);
+  }
+}
+
+.floating-scroll-top {
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+
+  &--visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  &.floating-icon-btn:hover,
+  &.floating-icon-btn:focus-visible {
+    transform: translateY(-3px);
+  }
+
+  &--visible.floating-icon-btn:active {
+    transform: translateY(-1px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floating-icon-btn,
+  .floating-scroll-top {
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .floating-scroll-top {
+    transform: none;
+
+    &--visible {
+      transform: none;
+    }
+  }
+}

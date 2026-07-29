@@ -1,4 +1,6 @@
 import { useEffect } from 'react'
+import { setLenis } from '../lib/lenis'
+import FloatingActions from '../components/FloatingActions'
 import '../styles/globals.scss'
 import '../styles/components/TopoLines.scss'
 import '../styles/components/Nav.scss'
@@ -11,8 +13,8 @@ import '../styles/components/ContactFormModal.scss'
 import '../styles/components/Footer.scss'
 import '../styles/components/AboutIntro.scss'
 import '../styles/components/Education.scss'
-import '../styles/components/WorkedProjects.scss'
 import '../styles/components/AboutVideo.scss'
+import '../styles/components/FloatingActions.scss'
 import '../styles/pages/index.scss'
 import '../styles/pages/idil.scss'
 
@@ -32,8 +34,12 @@ export default function App({ Component, pageProps }) {
         requestAnimationFrame(raf)
       }
       requestAnimationFrame(raf)
+      setLenis(lenis)
     })
-    return () => lenis?.destroy()
+    return () => {
+      setLenis(null)
+      lenis?.destroy()
+    }
   }, [])
 
   useEffect(() => {
@@ -65,5 +71,10 @@ export default function App({ Component, pageProps }) {
     }
   }, [])
 
-  return <Component {...pageProps} />
+  return (
+    <>
+      <Component {...pageProps} />
+      <FloatingActions />
+    </>
+  )
 }

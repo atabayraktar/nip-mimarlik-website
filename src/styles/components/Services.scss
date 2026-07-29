@@ -3,7 +3,11 @@
   overflow: hidden;
   background: var(--paper);
   color: var(--ink);
-  padding: var(--sp-12) 0;
+  padding: var(--sp-8) 0;
+
+  @media (min-width: 768px) {
+    padding: var(--sp-12) 0;
+  }
 
   .container {
     position: relative;
@@ -16,7 +20,7 @@
     align-items: baseline;
     justify-content: space-between;
     gap: var(--sp-2);
-    margin-bottom: var(--sp-6);
+    margin-bottom: var(--sp-5);
   }
 
   &__grid {
@@ -25,91 +29,87 @@
     border-top: 1px solid var(--hair);
     border-left: 1px solid var(--hair);
 
-    @media (min-width: 600px) {
+    @media (min-width: 700px) {
       grid-template-columns: repeat(2, 1fr);
     }
-
-    @media (min-width: 1024px) {
-      grid-template-columns: repeat(3, 1fr);
-    }
   }
 
-  &__cell {
+  &__row {
     position: relative;
-    padding: var(--sp-5) var(--sp-4);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    padding: var(--sp-3) var(--sp-4);
+    min-height: 108px;
     border-right: 1px solid var(--hair);
     border-bottom: 1px solid var(--hair);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-2);
-    color: var(--ink);
     background: var(--paper);
-    transition: border-color var(--transition-base);
-    min-height: 220px;
-    overflow: hidden;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--ink);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform var(--transition-base);
-    }
-
-    &:hover,
-    &:focus-within {
-      border-color: var(--ink);
-
-      &::before {
-        transform: scaleX(1);
-      }
-
-      .services__icon {
-        color: var(--ink);
-        transform: translateY(-3px);
-      }
-
-      .services__index {
-        color: var(--ink);
-      }
-    }
-  }
-
-  &__index {
-    font-family: var(--font-structural);
-    font-size: 0.68rem;
-    letter-spacing: 0.16em;
-    color: var(--concrete);
-    transition: color var(--transition-base);
+    color: var(--ink);
   }
 
   &__icon {
-    width: 30px;
-    height: 30px;
-    color: var(--concrete);
-    transition: color var(--transition-base), transform var(--transition-base);
+    flex: none;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--paper);
+    border: 1px solid var(--hair);
+    color: var(--ink);
+    transition: background-color var(--transition-base), color var(--transition-base),
+      border-color var(--transition-base);
 
     svg {
-      width: 100%;
-      height: 100%;
+      width: 22px;
+      height: 22px;
     }
+
+    @media (min-width: 1024px) {
+      width: 48px;
+      height: 48px;
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    .services__row:hover &,
+    .services__row:focus-within & {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--paper);
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
   }
 
   &__name {
     font-family: var(--font-display);
     font-weight: 400;
-    font-size: 1.3rem;
-    margin-top: auto;
+    font-size: 1.1rem;
+    line-height: 1.2;
+
+    @media (min-width: 1024px) {
+      font-size: 1.2rem;
+    }
   }
 
   &__copy {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    opacity: 0.7;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--concrete);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services__icon {
+    transition: none;
   }
 }

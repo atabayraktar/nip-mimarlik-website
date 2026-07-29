@@ -8,7 +8,7 @@ import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 
 const SITE_URL = 'https://nipmimarlik.com'
-const TITLE = 'NİP Mimarlık — Bağımsız Mimarlık Stüdyosu · Çanakkale'
+const TITLE = 'nip | Mimarlık ve Yapı Stüdyosu | Çanakkale'
 const DESCRIPTION =
   'NİP Mimarlık, Nilüfer İdil Postacı tarafından Çanakkale\'de yürütülen bağımsız mimarlık stüdyosudur. Mimari tasarım, iç mekan, peyzaj/topografya, restorasyon, danışmanlık ve 3B görselleştirme.'
 const OG_IMAGE = `${SITE_URL}/logos/nip_ink_sq.png`

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { scrollToTop } from '../lib/lenis'
+import TopoLines from './TopoLines'
 
 const LINKS = [
   { href: '/#manifesto', label: 'Manifesto' },
@@ -15,7 +17,7 @@ export default function Nav() {
   const [activeSection, setActiveSection] = useState(null)
   const [open, setOpen] = useState(false)
   const headerRef = useRef(null)
-  const panelRef = useRef(null)
+  const barRef = useRef(null)
   const burgerRef = useRef(null)
   const router = useRouter()
 
@@ -26,7 +28,7 @@ export default function Nav() {
   useEffect(() => {
     if (!open) return
     const onClickAway = (e) => {
-      if (panelRef.current?.contains(e.target) || burgerRef.current?.contains(e.target)) return
+      if (barRef.current?.contains(e.target) || burgerRef.current?.contains(e.target)) return
       setOpen(false)
     }
     const onKey = (e) => {
@@ -75,8 +77,14 @@ export default function Nav() {
   }, [router.asPath])
 
   const onDark = theme === 'ink' || theme === 'graphite'
-  const logoSrc = onDark ? '/logos/nip_paper.png' : '/logos/nip_ink.png'
+  const logoSrc = onDark || open ? '/logos/nip_paper.png' : '/logos/nip_ink.png'
   const overHero = activeSection === 'hero'
+
+  const handleLogoClick = (e) => {
+    if (router.pathname !== '/') return
+    e.preventDefault()
+    scrollToTop()
+  }
 
   return (
     <header
@@ -85,6 +93,7 @@ export default function Nav() {
     >
       <Link
         href="/"
+        onClick={handleLogoClick}
         className={`nav__logo ${overHero ? 'nav__logo--hidden' : ''}`}
         aria-label="NİP Mimarlık — Anasayfa"
       >
@@ -97,7 +106,7 @@ export default function Nav() {
         className="nav__burger"
         aria-label={open ? 'Menüyü kapat' : 'Menüyü aç'}
         aria-expanded={open}
-        aria-controls="nav-panel"
+        aria-controls="nav-bar"
         onClick={() => setOpen((v) => !v)}
       >
         <span />
@@ -105,18 +114,21 @@ export default function Nav() {
       </button>
 
       <div
-        id="nav-panel"
-        ref={panelRef}
-        className="nav__panel"
+        id="nav-bar"
+        ref={barRef}
+        className="nav__bar"
         aria-hidden={!open}
         {...(!open ? { inert: '' } : {})}
       >
-        <ul className="nav__panel-list">
+        <div className="nav__bar-fill" aria-hidden="true">
+          <TopoLines tone="ink" className="nav__bar-topo" parallax={false} seed={11} />
+        </div>
+        <ul className="nav__bar-list">
           {LINKS.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className={`nav__panel-link ${router.asPath === link.href ? 'nav__panel-link--active' : ''}`}
+                className={`nav__bar-link ${router.asPath === link.href ? 'nav__bar-link--active' : ''}`}
                 tabIndex={open ? 0 : -1}
               >
                 {link.label}
