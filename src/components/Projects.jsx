@@ -2,6 +2,8 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import TopoLines from './TopoLines'
 import { scrollToElement, stopScroll, startScroll } from '../lib/lenis'
 
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
+
 const FILTERS = [
   { key: 'all', label: 'Tümü' },
   { key: 'ic-mekan', label: 'İç Mekan' },
@@ -285,7 +287,7 @@ export default function Projects() {
     setFilter(key)
   }
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const flip = pendingFlip.current
     pendingFlip.current = null
     if (!flip) return

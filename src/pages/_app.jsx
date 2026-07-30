@@ -22,12 +22,9 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     let lenis
     import('lenis').then(({ default: Lenis }) => {
-      const isMobile = window.matchMedia('(max-width: 768px)').matches
       lenis = new Lenis({
         lerp: 0.08,
         smoothWheel: true,
-        smoothTouch: isMobile,
-        touchMultiplier: isMobile ? 2.5 : 2,
       })
       function raf(time) {
         lenis.raf(time)
