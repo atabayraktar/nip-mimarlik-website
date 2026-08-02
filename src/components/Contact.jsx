@@ -3,7 +3,6 @@ import TopoLines from './TopoLines'
 import ContactFormModal from './ContactFormModal'
 
 const ADDRESS = 'Yeni İzmir Yolu Cd. 20/20A, 17110 Çanakkale Merkez, Çanakkale'
-const MAPS_SRC = `https://www.google.com/maps?q=${encodeURIComponent(ADDRESS)}&output=embed`
 const MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`
 
 const ICONS = {
@@ -48,14 +47,8 @@ export default function Contact() {
     <section id="iletisim" data-theme="paper" className="contact">
       <TopoLines tone="paper" seed={5} />
       <div className="container">
-        <p className="eyebrow contact__eyebrow">İletişim / Ulaşım</p>
-
         <div className="contact__inner">
-          <div className="contact__map" data-reveal>
-            <iframe title="NİP Mimarlık Konum — Çanakkale" src={MAPS_SRC} loading="lazy" />
-          </div>
-
-          <div className="contact__info" data-reveal data-reveal-delay="150">
+          <div className="contact__info" data-reveal>
             <dl className="contact__list">
               <div>
                 <dt aria-label="Adres">{ICONS.pin}</dt>

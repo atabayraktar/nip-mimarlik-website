@@ -16,6 +16,9 @@ const MARQUEE_ITEMS = [
   'ELIT',
 ]
 
+// Marquee band temporarily disabled — keep markup/logic in place to re-enable later.
+const MARQUEE_ENABLED = false
+
 export default function Manifesto() {
   let wordCount = 0
 
@@ -24,47 +27,60 @@ export default function Manifesto() {
       <TopoLines tone="paper" className="manifesto__topo" parallax seed={2} />
 
       <div className="container manifesto__inner">
-        <p className="eyebrow manifesto__eyebrow">Manifesto</p>
+        <div className="manifesto__col">
+          <p className="eyebrow manifesto__eyebrow">Manifesto</p>
 
-        <h2 className="manifesto__headline">
-          {LINES.map((line, li) => (
-            <span className="manifesto__line" key={li}>
-              {line.map((word, wi) => {
-                const isLast = wi === line.length - 1
-                const delay = wordCount * 55
-                wordCount += 1
-                return (
-                  <span className="manifesto__word" key={wi}>
-                    <span
-                      className="manifesto__word-inner"
-                      data-reveal
-                      style={{ transitionDelay: `${delay}ms` }}
-                    >
-                      {isLast ? <em>{word}</em> : word}
+          <h2 className="manifesto__headline">
+            {LINES.map((line, li) => (
+              <span className="manifesto__line" key={li}>
+                {line.map((word, wi) => {
+                  const isLast = wi === line.length - 1
+                  const delay = wordCount * 55
+                  wordCount += 1
+                  return (
+                    <span className="manifesto__word" key={wi}>
+                      <span
+                        className="manifesto__word-inner"
+                        data-reveal
+                        style={{ transitionDelay: `${delay}ms` }}
+                      >
+                        {isLast ? <em>{word}</em> : word}
+                      </span>
                     </span>
-                  </span>
-                )
-              })}
-            </span>
-          ))}
-        </h2>
+                  )
+                })}
+              </span>
+            ))}
+          </h2>
 
-        <p className="manifesto__body" data-reveal>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat — duis aute
-          irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur.
-        </p>
-      </div>
+          <p className="manifesto__body" data-reveal>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat — duis aute
+            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur.
+          </p>
+        </div>
 
-      <div className="manifesto__marquee" aria-hidden="true">
-        <div className="manifesto__marquee-track">
-          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
-            <span key={i}>{item}</span>
-          ))}
+        <div className="manifesto__media" data-reveal data-reveal-delay="150">
+          <img
+            src="https://placehold.co/720x960/EAE9E3/8A8A85?text=+"
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+          />
         </div>
       </div>
+
+      {MARQUEE_ENABLED && (
+        <div className="manifesto__marquee" aria-hidden="true">
+          <div className="manifesto__marquee-track">
+            {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map((item, i) => (
+              <span key={i}>{item}</span>
+            ))}
+          </div>
+        </div>
+      )}
     </section>
   )
 }

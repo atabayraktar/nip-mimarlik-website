@@ -4,22 +4,10 @@
   min-height: 560px;
   width: 100%;
   overflow: hidden;
-  background: var(--ink);
+  background: var(--paper-2);
   display: flex;
   align-items: center;
   justify-content: center;
-
-  &__overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(11, 11, 12, 0.55) 0%,
-      rgba(11, 11, 12, 0.35) 40%,
-      rgba(11, 11, 12, 0.65) 100%
-    );
-    z-index: 1;
-  }
 
   &__topo {
     z-index: 1;
@@ -31,8 +19,8 @@
     width: 76px;
     height: 76px;
     border-radius: 0;
-    border: 1px solid rgba(243, 242, 238, 0.5);
-    color: var(--paper);
+    border: 1px solid rgba(11, 11, 12, 0.35);
+    color: var(--ink);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,7 +32,7 @@
     }
 
     &:hover {
-      border-color: var(--paper);
+      border-color: var(--ink);
       transform: scale(1.06);
     }
   }

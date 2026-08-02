@@ -6,8 +6,8 @@ import TopoLines from './TopoLines'
 
 const LINKS = [
   { href: '/#manifesto', label: 'Manifesto' },
-  { href: '/#hizmetler', label: 'Hizmetler' },
   { href: '/#projeler', label: 'Projeler' },
+  { href: '/#hizmetler', label: 'Hizmetler' },
   { href: '/#iletisim', label: 'İletişim' },
   { href: '/idil', label: 'İdil Hakkımda' },
 ]

@@ -59,9 +59,9 @@ export default function Idil() {
       <Nav />
 
       <main id="main-content">
-        <AboutVideo />
         <AboutIntro />
         <Education />
+        <AboutVideo />
       </main>
 
       <Footer />

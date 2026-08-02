@@ -40,21 +40,21 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: var(--sp-4);
+    gap: var(--sp-3);
     padding: 0 var(--sp-3);
   }
 
   &__kicker {
     font-family: var(--font-structural);
-    font-size: 0.72rem;
+    font-size: 0.62rem;
     font-weight: 500;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--fog);
   }
 
   &__mark {
     width: auto;
-    height: clamp(70px, 14vw, 170px);
+    height: clamp(48px, 9vw, 110px);
   }
 }

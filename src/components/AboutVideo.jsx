@@ -7,9 +7,8 @@ export default function AboutVideo() {
   const toggle = () => setPlaying((v) => !v)
 
   return (
-    <section id="hakkinda-video" data-theme="ink" className="about-video grain">
-      <div className="about-video__overlay" />
-      <TopoLines tone="ink" className="about-video__topo" seed={10} />
+    <section id="hakkinda-video" data-theme="paper" className="about-video">
+      <TopoLines tone="paper" className="about-video__topo" seed={10} />
 
       <button
         type="button"

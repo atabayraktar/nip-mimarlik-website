@@ -1,16 +1,15 @@
-
 :root {
   // Brand colors
-  --ink:       #0B0B0C;
-  --graphite:  #171719;
-  --paper:     #F3F2EE;
-  --paper-2:   #EAE9E3;
-  --concrete:  #8A8A85;
-  --fog:       #D9D8D1;
-  --hair:      #C9C8C0;
+  --ink: #0b0b0c;
+  --graphite: #171719;
+  --paper: #f3f2ee;
+  --paper-2: #eae9e3;
+  --concrete: #8a8a85;
+  --fog: #d9d8d1;
+  --hair: #c9c8c0;
 
   // Functional (error state only — not a brand accent)
-  --error: #7A2E37;
+  --error: #7a2e37;
 
   --surface: var(--paper);
   --on-surface: var(--ink);
@@ -21,25 +20,25 @@
   }
 
   // Typography
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-structural: 'Archivo Expanded', 'Archivo', system-ui, sans-serif;
-  --font-body: 'Archivo', system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
+  --font-structural: "Archivo Expanded", "Archivo", system-ui, sans-serif;
+  --font-body: "Archivo", system-ui, sans-serif;
 
   // Spacing scale (8px base)
-  --sp-1: 0.5rem;   // 8px
-  --sp-2: 1rem;     // 16px
-  --sp-3: 1.5rem;   // 24px
-  --sp-4: 2rem;     // 32px
-  --sp-5: 2.5rem;   // 40px
-  --sp-6: 3rem;     // 48px
-  --sp-8: 4rem;     // 64px
-  --sp-10: 5rem;    // 80px
-  --sp-12: 6rem;    // 96px
-  --sp-16: 8rem;    // 128px
-  --sp-20: 10rem;   // 160px
+  --sp-1: 0.5rem; // 8px
+  --sp-2: 1rem; // 16px
+  --sp-3: 1.5rem; // 24px
+  --sp-4: 2rem; // 32px
+  --sp-5: 2.5rem; // 40px
+  --sp-6: 3rem; // 48px
+  --sp-8: 4rem; // 64px
+  --sp-10: 5rem; // 80px
+  --sp-12: 6rem; // 96px
+  --sp-16: 8rem; // 128px
+  --sp-20: 10rem; // 160px
 
   // Shadow (low-opacity ink-tint only, used sparingly)
-  --shadow-ink: 0 12px 32px rgba(11, 11, 12, 0.10);
+  --shadow-ink: 0 12px 32px rgba(11, 11, 12, 0.1);
 
   // Transitions — spring-style easing, transform/opacity only
   --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
@@ -84,7 +83,8 @@ body {
   overflow-x: hidden;
 }
 
-img, video {
+img,
+video {
   max-width: 100%;
   height: auto;
   display: block;
@@ -103,7 +103,8 @@ button {
   color: inherit;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -138,21 +139,27 @@ ul, ol {
   color: var(--ink);
 
   &::before {
-    content: '';
+    content: "";
     width: 0.5em;
     height: 1px;
     background: currentColor;
   }
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-display);
   font-weight: 400;
   line-height: 1.05;
   letter-spacing: -0.02em;
 }
 
-em, i {
+em,
+i {
   font-style: normal;
 }
 
@@ -160,14 +167,28 @@ em, i {
 [data-reveal] {
   opacity: 0;
   transform: translateY(32px);
-  transition: opacity var(--transition-slow), transform var(--transition-slow);
+  transition:
+    opacity var(--transition-slow),
+    transform var(--transition-slow);
 
-  &[data-reveal-delay="100"] { transition-delay: 100ms; }
-  &[data-reveal-delay="150"] { transition-delay: 150ms; }
-  &[data-reveal-delay="200"] { transition-delay: 200ms; }
-  &[data-reveal-delay="300"] { transition-delay: 300ms; }
-  &[data-reveal-delay="400"] { transition-delay: 400ms; }
-  &[data-reveal-delay="500"] { transition-delay: 500ms; }
+  &[data-reveal-delay="100"] {
+    transition-delay: 100ms;
+  }
+  &[data-reveal-delay="150"] {
+    transition-delay: 150ms;
+  }
+  &[data-reveal-delay="200"] {
+    transition-delay: 200ms;
+  }
+  &[data-reveal-delay="300"] {
+    transition-delay: 300ms;
+  }
+  &[data-reveal-delay="400"] {
+    transition-delay: 400ms;
+  }
+  &[data-reveal-delay="500"] {
+    transition-delay: 500ms;
+  }
 }
 
 [data-reveal].revealed {
@@ -188,7 +209,7 @@ em, i {
   position: relative;
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     pointer-events: none;

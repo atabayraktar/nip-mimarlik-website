@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import TopoLines from './TopoLines'
-import { scrollToElement, stopScroll, startScroll } from '../lib/lenis'
+import { scrollToElement } from '../lib/lenis'
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
@@ -121,20 +121,13 @@ const ARROW_ICON = (
   </svg>
 )
 
-const ZOOM_ICON = (
-  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-    <circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" strokeWidth="1.5" />
-    <path d="M15.3 15.3 20 20M8 10.5h5M10.5 8v5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-  </svg>
-)
-
-function Swiper({ images, name, index, onIndexChange, zoomable, onZoom, className = '' }) {
+function Swiper({ images, name, index, onIndexChange, className = '' }) {
   const trackRef = useRef(null)
   const programmatic = useRef(false)
   const programmaticTimer = useRef(null)
 
   // Keep the track's scroll position in sync with `index`, however it changed
-  // (arrow click, dot, keyboard, or an external source like the lightbox).
+  // (arrow click, dot, or keyboard).
   useEffect(() => {
     const track = trackRef.current
     if (!track || !track.clientWidth) return
@@ -169,14 +162,7 @@ function Swiper({ images, name, index, onIndexChange, zoomable, onZoom, classNam
       <div className="swiper__track" ref={trackRef} onScroll={handleScroll}>
         {images.map((src, i) => (
           <div className="swiper__slide" key={src}>
-            {zoomable ? (
-              <button type="button" className="swiper__slide-btn" onClick={() => onZoom(i)} aria-label="Görseli büyüt">
-                <img src={src} alt={`${name} — ${i + 1}`} loading="lazy" />
-                <span className="swiper__zoom-hint">{ZOOM_ICON}</span>
-              </button>
-            ) : (
-              <img src={src} alt={`${name} — ${i + 1}`} loading="lazy" />
-            )}
+            <img src={src} alt={`${name} — ${i + 1}`} loading="lazy" />
           </div>
         ))}
       </div>
@@ -213,50 +199,10 @@ function Swiper({ images, name, index, onIndexChange, zoomable, onZoom, classNam
   )
 }
 
-function Lightbox({ project, index, onIndexChange, onClose }) {
-  useEffect(() => {
-    stopScroll()
-    const onKeyDown = (e) => {
-      if (e.key === 'Escape') onClose()
-      if (e.key === 'ArrowRight') onIndexChange(Math.min(project.images.length - 1, index + 1))
-      if (e.key === 'ArrowLeft') onIndexChange(Math.max(0, index - 1))
-    }
-    window.addEventListener('keydown', onKeyDown)
-    return () => {
-      window.removeEventListener('keydown', onKeyDown)
-      startScroll()
-    }
-  }, [onClose, index, onIndexChange, project.images.length])
-
-  return (
-    <div
-      className="lightbox"
-      role="dialog"
-      aria-modal="true"
-      aria-label={`${project.name} görselleri`}
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose()
-      }}
-    >
-      <button type="button" className="lightbox__close" onClick={onClose} aria-label="Kapat">
-        {CLOSE_ICON}
-      </button>
-      <Swiper
-        images={project.images}
-        name={project.name}
-        index={index}
-        onIndexChange={onIndexChange}
-        className="swiper--lightbox"
-      />
-    </div>
-  )
-}
-
 export default function Projects() {
   const [filter, setFilter] = useState('all')
   const [openId, setOpenId] = useState(null)
   const [activeIndex, setActiveIndex] = useState(0)
-  const [lightboxOpen, setLightboxOpen] = useState(false)
   const mediaRefs = useRef({})
   const cardRefs = useRef({})
   const pendingFlip = useRef(null)
@@ -277,12 +223,10 @@ export default function Projects() {
   const closeProject = (id) => {
     const node = mediaRefs.current[id]
     pendingFlip.current = { id, firstRect: node ? node.getBoundingClientRect() : null }
-    setLightboxOpen(false)
     setOpenId(null)
   }
 
   const selectFilter = (key) => {
-    setLightboxOpen(false)
     setOpenId(null)
     setFilter(key)
   }
@@ -332,8 +276,6 @@ export default function Projects() {
     node.addEventListener('transitionend', clear)
   }, [openId])
 
-  const openProjectData = openId != null ? visible.find((p) => p.id === openId) : null
-
   return (
     <section id="projeler" data-theme="paper" className="projects">
       <TopoLines tone="paper" seed={4} />
@@ -373,11 +315,6 @@ export default function Projects() {
                     name={p.name}
                     index={activeIndex}
                     onIndexChange={setActiveIndex}
-                    zoomable
-                    onZoom={(i) => {
-                      setActiveIndex(i)
-                      setLightboxOpen(true)
-                    }}
                   />
                 ) : (
                   <img src={p.images[0]} alt={`${p.name} — ${p.categoryLabel}`} loading="lazy" />
@@ -457,15 +394,6 @@ export default function Projects() {
           })}
         </ul>
       </div>
-
-      {lightboxOpen && openProjectData && (
-        <Lightbox
-          project={openProjectData}
-          index={activeIndex}
-          onIndexChange={setActiveIndex}
-          onClose={() => setLightboxOpen(false)}
-        />
-      )}
     </section>
   )
 }

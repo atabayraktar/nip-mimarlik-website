@@ -19,9 +19,9 @@ export default function Hero() {
       <TopoLines tone="ink" className="hero__topo" seed={1} />
 
       <div className="hero__content">
-        <p className="hero__kicker">Mimarlık ve Yapı Stüdyosu · Çanakkale</p>
-
         <img className="hero__mark" src="/logos/nip_paper.png" alt="NİP Mimarlık" />
+
+        <p className="hero__kicker">Mimarlık ve Yapı Stüdyosu · Çanakkale</p>
       </div>
     </section>
   )

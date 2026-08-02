@@ -83,8 +83,8 @@ export default function Home() {
       <main id="main-content">
         <Hero />
         <Manifesto />
-        <Services />
         <Projects />
+        <Services />
         <Contact />
       </main>
       <Footer />

@@ -55,7 +55,37 @@ export default function FloatingActions() {
   const [stackOffset, setStackOffset] = useState(null)
   const [scrollTopOffset, setScrollTopOffset] = useState(null)
   const [formOpen, setFormOpen] = useState(false)
+  const [theme, setTheme] = useState('ink')
   const router = useRouter()
+
+  useEffect(() => {
+    let observer
+
+    const setup = () => {
+      if (observer) observer.disconnect()
+      const sections = Array.from(document.querySelectorAll('[data-theme]'))
+      if (!sections.length) return
+
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) setTheme(entry.target.dataset.theme)
+          })
+        },
+        { rootMargin: '-50% 0px -50% 0px', threshold: 0 }
+      )
+      sections.forEach((s) => observer.observe(s))
+    }
+
+    setup()
+    window.addEventListener('resize', setup)
+    return () => {
+      window.removeEventListener('resize', setup)
+      observer?.disconnect()
+    }
+  }, [router.asPath])
+
+  const onDark = theme === 'ink' || theme === 'graphite'
 
   useEffect(() => {
     let footer = null
@@ -103,7 +133,7 @@ export default function FloatingActions() {
       >
         <button
           type="button"
-          className="floating-icon-btn floating-icon-btn--contact"
+          className={`floating-icon-btn floating-icon-btn--contact ${onDark ? '' : 'floating-icon-btn--on-light'}`}
           onClick={() => setFormOpen(true)}
           aria-label="İletişim Formu"
         >
@@ -111,7 +141,7 @@ export default function FloatingActions() {
         </button>
 
         <a
-          className="floating-icon-btn floating-icon-btn--whatsapp"
+          className={`floating-icon-btn floating-icon-btn--whatsapp ${onDark ? '' : 'floating-icon-btn--on-light'}`}
           href={`https://wa.me/${WHATSAPP_NUMBER}`}
           target="_blank"
           rel="noreferrer"
@@ -127,7 +157,7 @@ export default function FloatingActions() {
       >
         <button
           type="button"
-          className={`floating-icon-btn floating-scroll-top ${showScrollTop ? 'floating-scroll-top--visible' : ''}`}
+          className={`floating-icon-btn floating-scroll-top ${onDark ? '' : 'floating-icon-btn--on-light'} ${showScrollTop ? 'floating-scroll-top--visible' : ''}`}
           onClick={scrollToTop}
           aria-label="Sayfa başına dön"
           tabIndex={showScrollTop ? 0 : -1}
