@@ -28,6 +28,10 @@
     transform: scale(1);
     transition: opacity var(--transition-base), transform var(--transition-base);
 
+    @media (min-width: 1024px) {
+      left: 3.3rem;
+    }
+
     img {
       height: 32px;
       width: auto;
