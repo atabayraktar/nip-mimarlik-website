@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { scrollToTop } from '../lib/lenis'
-import TopoLines from './TopoLines'
 
 const LINKS = [
   { href: '/#manifesto', label: 'Manifesto' },
@@ -77,7 +76,7 @@ export default function Nav() {
   }, [router.asPath])
 
   const onDark = theme === 'ink' || theme === 'graphite'
-  const logoSrc = onDark || open ? '/logos/nip_paper.png' : '/logos/nip_ink.png'
+  const logoSrc = onDark ? '/logos/nip_paper.png' : '/logos/nip_ink.png'
   const overHero = activeSection === 'hero'
 
   const handleLogoClick = (e) => {
@@ -120,9 +119,6 @@ export default function Nav() {
         aria-hidden={!open}
         {...(!open ? { inert: '' } : {})}
       >
-        <div className="nav__bar-fill" aria-hidden="true">
-          <TopoLines tone="ink" className="nav__bar-topo" parallax={false} seed={11} />
-        </div>
         <ul className="nav__bar-list">
           {LINKS.map((link) => (
             <li key={link.href}>

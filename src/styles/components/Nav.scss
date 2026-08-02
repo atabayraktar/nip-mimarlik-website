@@ -1,6 +1,5 @@
 .nav {
   --nav-edge: var(--sp-3);
-  --nav-bar-h: 56px;
 
   position: fixed;
   inset: 0 0 auto 0;
@@ -11,7 +10,6 @@
 
   @media (min-width: 1024px) {
     --nav-edge: var(--sp-6);
-    --nav-bar-h: 72px;
   }
 
   &--light {
@@ -46,27 +44,18 @@
     }
   }
 
-  &--open &__logo {
-    transform: translateY(calc((var(--nav-bar-h) - var(--nav-h)) / 2));
-
-    @media (max-width: 600px) {
-      transform: none;
-    }
-  }
-
   &__burger {
     position: fixed;
     top: 0;
     right: var(--nav-edge);
     height: var(--nav-h);
-    width: 32px;
+    width: 44px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 6px;
     z-index: 101;
-    transition: transform var(--transition-base);
 
     span {
       display: block;
@@ -78,13 +67,6 @@
   }
 
   &--open &__burger {
-    color: var(--paper);
-    transform: translateY(calc((var(--nav-bar-h) - var(--nav-h)) / 2));
-
-    @media (max-width: 600px) {
-      transform: none;
-    }
-
     span:first-child {
       transform: translateY(3.5px) rotate(45deg);
     }
@@ -95,74 +77,31 @@
 
   &__bar {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--nav-bar-h);
+    top: var(--nav-h);
+    right: var(--nav-edge);
     z-index: 99;
+    max-width: calc(100vw - #{var(--nav-edge)} * 2);
+    max-height: calc(100dvh - var(--nav-h) - var(--sp-4));
+    overflow-y: auto;
     pointer-events: none;
-
-    @media (max-width: 600px) {
-      inset: 0;
-      height: 100dvh;
-    }
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
   }
 
-  &__bar-fill {
-    position: absolute;
-    inset: 0;
-    background: var(--ink);
-    transform-origin: right center;
-    transform: scaleX(0);
-    transition: transform var(--transition-slow);
-
-    @media (max-width: 600px) {
-      transform: none;
-      opacity: 0;
-      transition: opacity var(--transition-base);
-    }
-  }
-
-  &--open &__bar-fill {
-    transform: scaleX(1);
-
-    @media (max-width: 600px) {
-      transform: none;
-      opacity: 1;
-    }
+  &--open &__bar {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    transition: opacity var(--transition-base) 80ms, transform var(--transition-base) 80ms;
   }
 
   &__bar-list {
-    position: absolute;
-    inset: 0;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: var(--sp-2) var(--sp-5);
-    padding: 0 var(--sp-8) 0 var(--sp-4);
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-
-    @media (min-width: 1024px) {
-      gap: var(--sp-2) var(--sp-6);
-      padding: 0 var(--sp-10) 0 var(--sp-6);
-    }
-
-    @media (max-width: 600px) {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: var(--sp-4);
-      padding: calc(var(--nav-h) + var(--sp-5)) var(--sp-4) var(--sp-6);
-      overflow-y: auto;
-    }
-  }
-
-  &--open &__bar-list {
-    opacity: 1;
-    transition: opacity var(--transition-fast) 260ms;
-    pointer-events: auto;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--sp-1);
+    padding: var(--sp-1) 0 var(--sp-3);
   }
 
   &__bar-link {
@@ -173,16 +112,13 @@
     font-size: 0.68rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--fog);
-    transition: color var(--transition-fast);
+    text-align: right;
+    color: currentColor;
+    opacity: 0.55;
+    transition: opacity var(--transition-fast);
 
     @media (min-width: 1024px) {
-      font-size: 0.74rem;
-    }
-
-    @media (max-width: 600px) {
-      font-size: 1rem;
-      letter-spacing: 0.12em;
+      font-size: 0.7rem;
     }
 
     &::after {
@@ -190,18 +126,18 @@
       position: absolute;
       left: 0;
       right: 0;
-      bottom: -2px;
+      bottom: 0.2em;
       height: 1px;
       background: currentColor;
       transform: scaleX(0);
-      transform-origin: left;
+      transform-origin: right;
       transition: transform var(--transition-fast);
     }
 
     &:hover,
     &:focus-visible,
     &--active {
-      color: var(--paper);
+      opacity: 1;
 
       &::after {
         transform: scaleX(1);
