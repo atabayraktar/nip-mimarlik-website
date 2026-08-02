@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-const WHATSAPP_NUMBER = '905550000000'
+const WHATSAPP_NUMBER = '905316562909'
 
 const WHATSAPP_ICON = (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">

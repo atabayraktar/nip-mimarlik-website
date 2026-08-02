@@ -61,8 +61,8 @@ export default function Contact() {
               <div>
                 <dt aria-label="Telefon">{ICONS.phone}</dt>
                 <dd>
-                  <a href="tel:+905550000000" target="_blank" rel="noreferrer">
-                    +90 555 000 00 00
+                  <a href="tel:+905316562909" target="_blank" rel="noreferrer">
+                    +90 531 656 29 09
                   </a>
                 </dd>
               </div>

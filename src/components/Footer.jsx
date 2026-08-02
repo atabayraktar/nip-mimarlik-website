@@ -30,7 +30,7 @@ const WHATSAPP_ICON = (
   </svg>
 )
 
-const WHATSAPP_NUMBER = '905550000000'
+const WHATSAPP_NUMBER = '905316562909'
 
 export default function Footer() {
   const router = useRouter()

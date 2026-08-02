@@ -30,7 +30,7 @@ const jsonLd = {
       name: 'NİP Mimarlık',
       image: `${SITE_URL}/logos/nip_ink.png`,
       url: SITE_URL,
-      telephone: '+90 555 000 00 00',
+      telephone: '+90 531 656 29 09',
       email: 'info@nipmimarlik.com',
       address: {
         '@type': 'PostalAddress',
