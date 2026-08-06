@@ -1,5 +1,8 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import TopoLines from './TopoLines'
+import SectionToggle from './SectionToggle'
+import Collapse from './Collapse'
+import { useSection } from '../lib/sections'
 import { scrollToElement } from '../lib/lenis'
 
 const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
@@ -200,6 +203,7 @@ function Swiper({ images, name, index, onIndexChange, className = '' }) {
 }
 
 export default function Projects() {
+  const [sectionOpen] = useSection('projeler')
   const [filter, setFilter] = useState('all')
   const [openId, setOpenId] = useState(null)
   const [activeIndex, setActiveIndex] = useState(0)
@@ -281,8 +285,10 @@ export default function Projects() {
       <TopoLines tone="paper" seed={4} />
       <div className="container">
         <div className="projects__head">
-          <p className="eyebrow">Projeler</p>
+          <SectionToggle id="projeler" label="Projeler" />
+        </div>
 
+        <Collapse id="projeler" open={sectionOpen}>
           <div className="projects__filters" role="group" aria-label="Proje kategorisi filtrele">
             {FILTERS.map((f) => (
               <button
@@ -296,9 +302,8 @@ export default function Projects() {
               </button>
             ))}
           </div>
-        </div>
 
-        <ul className="projects__rows">
+          <ul className="projects__rows">
           {visible.map((p, i) => {
             const isOpen = openId === p.id
             const isHidden = openId != null && !isOpen
@@ -392,7 +397,8 @@ export default function Projects() {
               </li>
             )
           })}
-        </ul>
+          </ul>
+        </Collapse>
       </div>
     </section>
   )

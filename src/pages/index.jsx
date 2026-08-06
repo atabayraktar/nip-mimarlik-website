@@ -6,6 +6,7 @@ import Services from '../components/Services'
 import Projects from '../components/Projects'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
+import { SectionsProvider } from '../lib/sections'
 
 const SITE_URL = 'https://nipmimarlik.com'
 const TITLE = 'nip | Mimarlık ve Yapı Stüdyosu | Çanakkale'
@@ -79,14 +80,16 @@ export default function Home() {
         />
       </Head>
 
-      <Nav />
-      <main id="main-content">
-        <Hero />
-        <Manifesto />
-        <Projects />
-        <Services />
-        <Contact />
-      </main>
+      <SectionsProvider>
+        <Nav />
+        <main id="main-content">
+          <Hero />
+          <Manifesto />
+          <Projects />
+          <Services />
+          <Contact />
+        </main>
+      </SectionsProvider>
       <Footer />
     </>
   )

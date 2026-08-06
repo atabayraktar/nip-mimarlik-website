@@ -3,6 +3,37 @@ import { useRouter } from 'next/router'
 import { scrollToTop } from '../lib/lenis'
 import TopoLines from './TopoLines'
 
+const ADDRESS = 'Yeni İzmir Yolu Cd. 20/20A, 17110 Çanakkale Merkez, Çanakkale'
+const MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`
+
+const PIN_ICON = (
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path
+      d="M12 22s7-7.58 7-12.5A7 7 0 0 0 5 9.5C5 14.42 12 22 12 22Z"
+      stroke="currentColor"
+      strokeWidth="1.3"
+    />
+    <circle cx="12" cy="9.5" r="2.4" stroke="currentColor" strokeWidth="1.3" />
+  </svg>
+)
+
+const PHONE_ICON = (
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path
+      d="M5 4h3.4l1.6 4.5-2.2 1.8a12 12 0 0 0 5.9 5.9l1.8-2.2 4.5 1.6V19a2 2 0 0 1-2 2C10.6 21 3 13.4 3 6a2 2 0 0 1 2-2Z"
+      stroke="currentColor"
+      strokeWidth="1.3"
+    />
+  </svg>
+)
+
+const MAIL_ICON = (
+  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <rect x="3" y="5.5" width="18" height="13" stroke="currentColor" strokeWidth="1.3" />
+    <path d="M3.5 6.5 12 13l8.5-6.5" stroke="currentColor" strokeWidth="1.3" />
+  </svg>
+)
+
 const INSTAGRAM_ICON = (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
     <rect x="3.5" y="3.5" width="17" height="17" rx="4" stroke="currentColor" strokeWidth="1.3" />
@@ -58,6 +89,18 @@ export default function Footer() {
         <p className="footer__copy">© 2026 nip Mimarlık · Çanakkale · Tüm hakları saklıdır.</p>
 
         <div className="footer__socials">
+          <a className="footer__social" href={MAPS_LINK} target="_blank" rel="noreferrer" aria-label="Adres">
+            {PIN_ICON}
+          </a>
+
+          <a className="footer__social" href="tel:+905316562909" aria-label="Telefon">
+            {PHONE_ICON}
+          </a>
+
+          <a className="footer__social" href="mailto:info@nipmimarlik.com" aria-label="E-posta">
+            {MAIL_ICON}
+          </a>
+
           <a
             className="footer__social"
             href="https://instagram.com/nipmimarlik"

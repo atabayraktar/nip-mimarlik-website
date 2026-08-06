@@ -11,11 +11,16 @@
 
   &__topo {
     z-index: 0;
+    // Fixed vh height so the topo SVG doesn't reslice/jump as the section collapses.
+    height: 200vh;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
   }
 
   &__inner {
-    position: relative;
-    z-index: 1;
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--sp-6);

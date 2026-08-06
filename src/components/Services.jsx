@@ -1,4 +1,7 @@
 import TopoLines from './TopoLines'
+import SectionToggle from './SectionToggle'
+import Collapse from './Collapse'
+import { useSection } from '../lib/sections'
 
 const ICONS = {
   design: (
@@ -75,30 +78,34 @@ const SERVICES = [
 ]
 
 export default function Services() {
+  const [isOpen] = useSection('hizmetler')
+
   return (
     <section id="hizmetler" data-theme="paper" className="services">
       <TopoLines tone="paper" seed={3} />
       <div className="container">
         <div className="services__head">
-          <p className="eyebrow">Hizmetlerimiz</p>
+          <SectionToggle id="hizmetler" label="Hizmetlerimiz" />
         </div>
 
-        <ul className="services__grid">
-          {SERVICES.map((s, i) => (
-            <li
-              className="services__row"
-              key={s.name}
-              data-reveal
-              data-reveal-delay={String(Math.floor(i / 2) * 100)}
-            >
-              <span className="services__icon">{ICONS[s.icon]}</span>
-              <span className="services__text">
-                <h3 className="services__name">{s.name}</h3>
-                <p className="services__copy">{s.copy}</p>
-              </span>
-            </li>
-          ))}
-        </ul>
+        <Collapse id="hizmetler" open={isOpen}>
+          <ul className="services__grid">
+            {SERVICES.map((s, i) => (
+              <li
+                className="services__row"
+                key={s.name}
+                data-reveal
+                data-reveal-delay={String(Math.floor(i / 2) * 100)}
+              >
+                <span className="services__icon">{ICONS[s.icon]}</span>
+                <span className="services__text">
+                  <h3 className="services__name">{s.name}</h3>
+                  <p className="services__copy">{s.copy}</p>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </Collapse>
       </div>
     </section>
   )

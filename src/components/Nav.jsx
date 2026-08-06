@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { scrollToTop } from '../lib/lenis'
+import { scrollToTop, scrollToElement } from '../lib/lenis'
+import { useSectionsContext } from '../lib/sections'
+
+const SECTION_OPEN_DELAY = 420
 
 const LINKS = [
   { href: '/#manifesto', label: 'Manifesto' },
@@ -19,6 +22,7 @@ export default function Nav() {
   const barRef = useRef(null)
   const burgerRef = useRef(null)
   const router = useRouter()
+  const { openMap, openSection } = useSectionsContext()
 
   useEffect(() => {
     setOpen(false)
@@ -85,6 +89,21 @@ export default function Nav() {
     scrollToTop()
   }
 
+  const handleSectionLinkClick = (e, href) => {
+    if (router.pathname !== '/' || !href.startsWith('/#')) return
+    const id = href.slice(2)
+    const el = document.getElementById(id)
+    if (!el) return
+    e.preventDefault()
+    const wasClosed = openMap[id] === false
+    openSection(id)
+    if (wasClosed) {
+      setTimeout(() => scrollToElement(el), SECTION_OPEN_DELAY)
+    } else {
+      scrollToElement(el)
+    }
+  }
+
   return (
     <header
       ref={headerRef}
@@ -126,6 +145,7 @@ export default function Nav() {
                 href={link.href}
                 className={`nav__bar-link ${router.asPath === link.href ? 'nav__bar-link--active' : ''}`}
                 tabIndex={open ? 0 : -1}
+                onClick={(e) => handleSectionLinkClick(e, link.href)}
               >
                 {link.label}
               </Link>

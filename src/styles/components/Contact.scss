@@ -14,6 +14,15 @@
     z-index: 1;
   }
 
+  // Fixed vh height so the topo SVG doesn't reslice/jump as the section collapses.
+  .topo {
+    height: 200vh;
+  }
+
+  &__head {
+    margin-bottom: var(--sp-6);
+  }
+
   &__inner {
     display: flex;
   }
@@ -21,33 +30,31 @@
   &__info {
     display: flex;
     flex-direction: column;
-    max-width: 480px;
+    max-width: 760px;
   }
 
   &__list {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-4);
+    gap: var(--sp-6);
 
     div {
       display: flex;
       align-items: center;
-      gap: var(--sp-2);
+      gap: var(--sp-3);
+      min-width: 0;
     }
 
     dt {
       flex-shrink: 0;
-      width: 44px;
-      height: 44px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      background: var(--ink);
-      color: var(--paper);
+      color: var(--ink);
 
       svg {
-        width: 24px;
-        height: 24px;
+        width: 28px;
+        height: auto;
+        display: block;
       }
     }
 
@@ -55,13 +62,20 @@
       font-family: var(--font-display);
       font-size: 0.95rem;
       color: var(--ink);
+      min-width: 0;
 
       a {
         color: inherit;
         transition: color var(--transition-fast);
 
-        &:hover {
+        &:hover,
+        &:focus-visible {
           color: var(--concrete);
+        }
+
+        &:focus-visible {
+          outline: 1px solid currentColor;
+          outline-offset: 4px;
         }
       }
     }

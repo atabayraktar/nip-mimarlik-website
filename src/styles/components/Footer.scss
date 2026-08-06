@@ -88,8 +88,14 @@
       height: 100%;
     }
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       color: var(--paper);
+    }
+
+    &:focus-visible {
+      outline: 1px solid var(--paper);
+      outline-offset: 4px;
     }
   }
 }
