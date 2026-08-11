@@ -3,8 +3,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { scrollToTop, scrollToElement } from '../lib/lenis'
 import { useSectionsContext } from '../lib/sections'
+import { burgerDAtPhase, easeSpring } from '../lib/burgerMorph'
 
 const SECTION_OPEN_DELAY = 420
+const INITIAL_D = burgerDAtPhase(0)
 
 const LINKS = [
   { href: '/#manifesto', label: 'Manifesto' },
@@ -18,15 +20,50 @@ export default function Nav() {
   const [theme, setTheme] = useState('ink')
   const [activeSection, setActiveSection] = useState(null)
   const [open, setOpen] = useState(false)
+  const [burgerHover, setBurgerHover] = useState(false)
   const headerRef = useRef(null)
   const barRef = useRef(null)
   const burgerRef = useRef(null)
+  const pathRef = useRef(null)
+  const phaseRef = useRef(0)
+  const rafRef = useRef(null)
   const router = useRouter()
   const { openMap, openSection } = useSectionsContext()
 
   useEffect(() => {
     setOpen(false)
   }, [router.asPath])
+
+  useEffect(() => {
+    const targetPhase = open ? 2 : burgerHover ? 1 : 0
+    const fromPhase = phaseRef.current
+    if (fromPhase === targetPhase) return
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const distance = Math.abs(targetPhase - fromPhase)
+    const duration = reduceMotion ? 0 : distance * 280
+    let startTime = null
+
+    const tick = (now) => {
+      if (startTime === null) startTime = now
+      const t = duration === 0 ? 1 : Math.min(1, (now - startTime) / duration)
+      const eased = easeSpring(t)
+      const phase = fromPhase + (targetPhase - fromPhase) * eased
+      phaseRef.current = phase
+      const { d, fillRule } = burgerDAtPhase(phase)
+      pathRef.current?.setAttribute('d', d)
+      pathRef.current?.setAttribute('fill-rule', fillRule)
+      if (t < 1) {
+        rafRef.current = requestAnimationFrame(tick)
+      }
+    }
+
+    if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    rafRef.current = requestAnimationFrame(tick)
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [open, burgerHover])
 
   useEffect(() => {
     if (!open) return
@@ -126,9 +163,14 @@ export default function Nav() {
         aria-expanded={open}
         aria-controls="nav-bar"
         onClick={() => setOpen((v) => !v)}
+        onMouseEnter={() => setBurgerHover(true)}
+        onMouseLeave={() => setBurgerHover(false)}
+        onFocus={() => setBurgerHover(true)}
+        onBlur={() => setBurgerHover(false)}
       >
-        <span />
-        <span />
+        <svg className="nav__burger-mark" viewBox="0 0 810 270" aria-hidden="true">
+          <path ref={pathRef} d={INITIAL_D.d} fill="currentColor" fillRule={INITIAL_D.fillRule} />
+        </svg>
       </button>
 
       <div

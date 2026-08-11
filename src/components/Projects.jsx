@@ -96,20 +96,6 @@ const PROJECTS = [
     icon: 'https://placehold.co/64x64/0B0B0C/F3F2EE?text=05',
     images: projectImages('Proje+05'),
   },
-  {
-    id: 6,
-    name: 'Proje 06',
-    category: 'finanse',
-    categoryLabel: 'Finanse Edilenler',
-    location: 'Çanakkale, Türkiye',
-    year: '2026',
-    client: 'Yatırımcı Grubu',
-    typology: 'Konut Bloğu',
-    size: '3.200 m²',
-    status: 'Planlama',
-    icon: 'https://placehold.co/64x64/0B0B0C/F3F2EE?text=06',
-    images: projectImages('Proje+06'),
-  },
 ]
 
 const CLOSE_ICON = (

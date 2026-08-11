@@ -56,5 +56,10 @@
   &__mark {
     width: auto;
     height: clamp(48px, 9vw, 110px);
+    transition: transform var(--transition-fast);
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }
