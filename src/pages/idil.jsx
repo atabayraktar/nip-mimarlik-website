@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Nav from '../components/Nav'
 import TopoLines from '../components/TopoLines'
 import AboutIntro from '../components/AboutIntro'
 import Education from '../components/Education'
@@ -56,8 +55,6 @@ export default function Idil() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </Head>
-
-      <Nav />
 
       <div className="idil-ambient" aria-hidden="true">
         <TopoLines tone="paper" parallax={false} seed={7} />

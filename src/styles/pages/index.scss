@@ -1,9 +1,8 @@
-#manifesto,
-#hizmetler,
-#projeler,
-#iletisim {
-  scroll-margin-top: var(--nav-h);
-}
+// No scroll-margin-top here on purpose: the nav bar has no background of
+// its own (see Nav.scss), it's a transparent overlay that inverts to match
+// whatever is underneath. Reserving nav-height of space above a section on
+// scroll would leave that band showing the previous (e.g. black Hero)
+// section instead of the one being navigated to.
 
 // Single fixed topography layer behind every paper section — Hero and
 // Footer paint their own opaque ink background on top of it, so the

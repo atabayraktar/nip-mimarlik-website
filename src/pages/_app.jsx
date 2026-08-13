@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { setLenis } from '../lib/lenis'
+import { SectionsProvider } from '../lib/sections'
+import Nav from '../components/Nav'
 import FloatingActions from '../components/FloatingActions'
 import '../styles/globals.scss'
 import '../styles/components/TopoLines.scss'
@@ -69,9 +71,10 @@ export default function App({ Component, pageProps }) {
   }, [])
 
   return (
-    <>
+    <SectionsProvider>
+      <Nav />
       <Component {...pageProps} />
       <FloatingActions />
-    </>
+    </SectionsProvider>
   )
 }

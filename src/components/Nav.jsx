@@ -27,6 +27,7 @@ export default function Nav() {
   const pathRef = useRef(null)
   const phaseRef = useRef(0)
   const rafRef = useRef(null)
+  const pendingScrollId = useRef(null)
   const router = useRouter()
   const { openMap, openSection } = useSectionsContext()
 
@@ -82,39 +83,46 @@ export default function Nav() {
     }
   }, [open])
 
+  // Which section is "active" is whichever one's top edge has scrolled up
+  // past the nav — the last section in document order that's crossed that
+  // line. Reading real geometry on every scroll tick (rather than trusting
+  // whichever IntersectionObserver entries happen to batch together) means
+  // the highlighted item can never drift out of sync with what's on screen,
+  // no matter how a scroll got triggered (Lenis, hash jump, or a nav click).
   useEffect(() => {
-    let observer
+    const sections = Array.from(document.querySelectorAll('[data-theme]'))
+    if (!sections.length) return
 
-    const setup = () => {
-      if (observer) observer.disconnect()
+    let raf = null
+    const update = () => {
+      raf = null
       const navH = headerRef.current?.offsetHeight ?? 88
-      const sections = Array.from(document.querySelectorAll('[data-theme]'))
-      if (!sections.length) return
-
-      observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setTheme(entry.target.dataset.theme)
-              setActiveSection(entry.target.id || null)
-            }
-          })
-        },
-        {
-          rootMargin: `-${navH}px 0px -${Math.max(window.innerHeight - navH - 2, 0)}px 0px`,
-          threshold: 0,
+      let current = sections[0]
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= navH + 1) {
+          current = section
+        } else {
+          break
         }
-      )
-      sections.forEach((s) => observer.observe(s))
+      }
+      setTheme(current.dataset.theme)
+      setActiveSection(current.id || null)
     }
 
-    setup()
-    window.addEventListener('resize', setup)
-    return () => {
-      window.removeEventListener('resize', setup)
-      observer?.disconnect()
+    const onScroll = () => {
+      if (raf) return
+      raf = requestAnimationFrame(update)
     }
-  }, [router.asPath])
+
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [router.pathname])
 
   const onDark = theme === 'ink' || theme === 'graphite'
   const logoSrc = onDark ? '/logos/nip-logos/nip-light.webp' : '/logos/nip-logos/nip-dark.webp'
@@ -126,12 +134,9 @@ export default function Nav() {
     scrollToTop()
   }
 
-  const handleSectionLinkClick = (e, href) => {
-    if (router.pathname !== '/' || !href.startsWith('/#')) return
-    const id = href.slice(2)
+  const goToSection = (id) => {
     const el = document.getElementById(id)
     if (!el) return
-    e.preventDefault()
     const wasClosed = openMap[id] === false
     openSection(id)
     if (wasClosed) {
@@ -140,6 +145,35 @@ export default function Nav() {
       scrollToElement(el, { immediate: false })
     }
   }
+
+  // Section links never actually navigate to a "/#id" URL — same-page clicks
+  // just scroll, and clicks from another page (e.g. /idil) push the plain
+  // "/" route and scroll once it lands, so the address bar never picks up a
+  // hash the active-link state would then have to track. Since a same-page
+  // click no longer changes router.asPath, close the mobile menu explicitly
+  // here instead of relying on the asPath-watcher effect above.
+  const handleSectionLinkClick = (e, href) => {
+    if (!href.startsWith('/#')) return
+    e.preventDefault()
+    const id = href.slice(2)
+    setOpen(false)
+
+    if (router.pathname === '/') {
+      goToSection(id)
+    } else {
+      pendingScrollId.current = id
+      router.push('/')
+    }
+  }
+
+  useEffect(() => {
+    if (router.pathname !== '/' || !pendingScrollId.current) return
+    const id = pendingScrollId.current
+    pendingScrollId.current = null
+    // Give the freshly-mounted homepage a beat to lay out before measuring it.
+    const timer = setTimeout(() => goToSection(id), 60)
+    return () => clearTimeout(timer)
+  }, [router.pathname])
 
   return (
     <header
@@ -181,18 +215,25 @@ export default function Nav() {
         {...(!open ? { inert: '' } : {})}
       >
         <ul className="nav__bar-list">
-          {LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className={`nav__bar-link ${router.asPath === link.href ? 'nav__bar-link--active' : ''}`}
-                tabIndex={open ? 0 : -1}
-                onClick={(e) => handleSectionLinkClick(e, link.href)}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+          {LINKS.map((link) => {
+            const isActive =
+              link.href === '/idil'
+                ? router.pathname === '/idil'
+                : router.pathname === '/' && activeSection === link.href.slice(2)
+
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`nav__bar-link ${isActive ? 'nav__bar-link--active' : ''}`}
+                  tabIndex={open ? 0 : -1}
+                  onClick={(e) => handleSectionLinkClick(e, link.href)}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            )
+          })}
         </ul>
       </div>
     </header>
