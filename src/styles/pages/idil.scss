@@ -4,3 +4,10 @@
 #hakkinda-video {
   scroll-margin-top: var(--nav-h);
 }
+
+.idil-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--paper);
+}

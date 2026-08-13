@@ -6,13 +6,14 @@ import Services from '../components/Services'
 import Projects from '../components/Projects'
 import Contact from '../components/Contact'
 import Footer from '../components/Footer'
+import TopoLines from '../components/TopoLines'
 import { SectionsProvider } from '../lib/sections'
 
 const SITE_URL = 'https://nipmimarlik.com'
 const TITLE = 'nip | Mimarlık ve Yapı Stüdyosu | Çanakkale'
 const DESCRIPTION =
   'NİP Mimarlık, Nilüfer İdil Postacı tarafından Çanakkale\'de yürütülen bağımsız mimarlık stüdyosudur. Mimari tasarım, iç mekan, peyzaj/topografya, restorasyon, danışmanlık ve 3B görselleştirme.'
-const OG_IMAGE = `${SITE_URL}/logos/nip_ink_sq.png`
+const OG_IMAGE = `${SITE_URL}/logos/nip-logos/nip-dark.webp`
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -22,14 +23,14 @@ const jsonLd = {
       '@id': `${SITE_URL}/#organization`,
       name: 'NİP Mimarlık',
       url: SITE_URL,
-      logo: `${SITE_URL}/logos/nip_ink.png`,
+      logo: `${SITE_URL}/logos/nip-logos/nip-dark.webp`,
       sameAs: ['https://instagram.com/nipmimarlik'],
     },
     {
       '@type': 'LocalBusiness',
       '@id': `${SITE_URL}/#localbusiness`,
       name: 'NİP Mimarlık',
-      image: `${SITE_URL}/logos/nip_ink.png`,
+      image: `${SITE_URL}/logos/nip-logos/nip-dark.webp`,
       url: SITE_URL,
       telephone: '+90 531 656 29 09',
       email: 'info@nipmimarlik.com',
@@ -82,6 +83,11 @@ export default function Home() {
 
       <SectionsProvider>
         <Nav />
+
+        <div className="home-ambient" aria-hidden="true">
+          <TopoLines tone="paper" parallax={false} seed={2} />
+        </div>
+
         <main id="main-content">
           <Hero />
           <Manifesto />

@@ -1,5 +1,4 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
-import TopoLines from './TopoLines'
 import SectionToggle from './SectionToggle'
 import Collapse from './Collapse'
 import { useSection } from '../lib/sections'
@@ -268,7 +267,6 @@ export default function Projects() {
 
   return (
     <section id="projeler" data-theme="paper" className="projects">
-      <TopoLines tone="paper" seed={4} />
       <div className="container">
         <div className="projects__head">
           <SectionToggle id="projeler" label="Projeler" />

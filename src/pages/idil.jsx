@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Nav from '../components/Nav'
+import TopoLines from '../components/TopoLines'
 import AboutIntro from '../components/AboutIntro'
 import Education from '../components/Education'
 import AboutVideo from '../components/AboutVideo'
@@ -9,7 +10,7 @@ const SITE_URL = 'https://nipmimarlik.com'
 const TITLE = 'nip | Nilüfer İdil Postacı'
 const DESCRIPTION =
   'NİP Mimarlık kurucusu, mimar Nilüfer İdil Postacı hakkında: eğitim geçmişi, yaklaşımı ve birlikte çalıştığı projeler.'
-const OG_IMAGE = `${SITE_URL}/logos/nip_ink_sq.png`
+const OG_IMAGE = `${SITE_URL}/logos/nip-logos/nip-dark.webp`
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -57,6 +58,10 @@ export default function Idil() {
       </Head>
 
       <Nav />
+
+      <div className="idil-ambient" aria-hidden="true">
+        <TopoLines tone="paper" parallax={false} seed={7} />
+      </div>
 
       <main id="main-content">
         <AboutIntro />

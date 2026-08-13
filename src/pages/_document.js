@@ -10,9 +10,8 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Archivo:ital,wght@0,400;0,500;0,600;1,400&family=Archivo+Expanded:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="/logos/favicon-32.png" sizes="32x32" />
-        <link rel="icon" href="/logos/favicon-192.png" sizes="192x192" />
-        <link rel="apple-touch-icon" href="/logos/apple-touch-icon.png" />
+        <link rel="icon" href="/logos/nip-logos/favicon.png" />
+        <link rel="apple-touch-icon" href="/logos/nip-logos/favicon.png" />
       </Head>
       <body>
         <Main />

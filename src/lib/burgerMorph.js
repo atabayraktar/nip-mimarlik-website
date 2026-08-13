@@ -1,7 +1,7 @@
-// Point-matched morph keyframes for the nav burger: anahtar-logo mark ↔
+// Point-matched morph keyframes for the nav burger: nip-key mark ↔
 // 2-bar hamburger ↔ close (X). Each keyframe's `a` (14 pts) and `b` (4 pts)
 // arrays share point counts across keyframes so a straight per-vertex lerp
-// always yields a valid, non-crossing path — mirrors the anahtar-logo.svg
+// always yields a valid, non-crossing path — mirrors the nip-key.svg
 // path data (evenodd outline + inner square) scaled to its own 810x270 viewBox.
 
 // Subpath `b` is listed TL,TR,BR,BL (same winding + starting corner) in every
@@ -58,7 +58,7 @@ function lerpPoints(from, to, t) {
 
 // phase is continuous 0..2 across [anahtar, bars, close]. Both subpaths are
 // combined into a single path. Segment 0->1 (anahtar->bars) needs evenodd so
-// subpath b reads as anahtar-logo's cut-out gap, not a filled block. Segment
+// subpath b reads as nip-key's cut-out gap, not a filled block. Segment
 // 1->2 (bars->close) needs nonzero: the two arms overlap to form the X, and
 // with matching winding nonzero unions that overlap solid instead of holing
 // it out the way evenodd would.

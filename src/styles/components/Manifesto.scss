@@ -1,18 +1,11 @@
 .manifesto {
   position: relative;
-  background: var(--paper);
   color: var(--ink);
   padding: var(--sp-8) 0;
   overflow: hidden;
 
   @media (min-width: 768px) {
     padding: var(--sp-12) 0;
-  }
-
-  &__topo {
-    z-index: 0;
-    // Fixed vh height so the topo SVG doesn't reslice/jump as the section collapses.
-    height: 200vh;
   }
 
   .container {

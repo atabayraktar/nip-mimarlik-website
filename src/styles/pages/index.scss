@@ -4,3 +4,13 @@
 #iletisim {
   scroll-margin-top: var(--nav-h);
 }
+
+// Single fixed topography layer behind every paper section — Hero and
+// Footer paint their own opaque ink background on top of it, so the
+// pattern only ever breaks where the surface is actually black.
+.home-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: var(--paper);
+}

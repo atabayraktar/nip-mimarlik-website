@@ -1,12 +1,11 @@
 .about-intro {
   position: relative;
   overflow: hidden;
-  background: var(--paper);
   color: var(--ink);
-  padding: var(--sp-8) 0;
+  padding: var(--sp-8) 0 var(--sp-4);
 
   @media (min-width: 768px) {
-    padding: var(--sp-12) 0;
+    padding: var(--sp-12) 0 var(--sp-6);
   }
 
   &__inner {

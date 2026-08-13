@@ -1,9 +1,6 @@
-import TopoLines from './TopoLines'
-
 export default function AboutIntro() {
   return (
     <section id="hakkinda" data-theme="paper" className="about-intro">
-      <TopoLines tone="paper" seed={7} />
       <div className="container about-intro__inner">
         <div className="about-intro__portrait" data-reveal>
           <img

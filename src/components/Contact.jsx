@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import TopoLines from './TopoLines'
 import ContactFormModal from './ContactFormModal'
 import SectionToggle from './SectionToggle'
 import Collapse from './Collapse'
@@ -23,7 +22,6 @@ export default function Contact() {
 
   return (
     <section id="iletisim" data-theme="paper" className="contact">
-      <TopoLines tone="paper" seed={5} />
       <div className="container">
         <div className="contact__head">
           <SectionToggle id="iletisim" label="İletişim" />

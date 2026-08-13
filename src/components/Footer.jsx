@@ -83,7 +83,7 @@ export default function Footer() {
           className="footer__logo-link"
           aria-label="NİP Mimarlık — Anasayfa"
         >
-          <img className="footer__logo" src="/logos/nip_paper.png" alt="NİP Mimarlık" />
+          <img className="footer__logo" src="/logos/nip-logos/nip-light.webp" alt="NİP Mimarlık" />
         </Link>
 
         <p className="footer__copy">© 2026 nip Mimarlık · Çanakkale · Tüm hakları saklıdır.</p>

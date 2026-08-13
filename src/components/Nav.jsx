@@ -117,7 +117,7 @@ export default function Nav() {
   }, [router.asPath])
 
   const onDark = theme === 'ink' || theme === 'graphite'
-  const logoSrc = onDark ? '/logos/nip_paper.png' : '/logos/nip_ink.png'
+  const logoSrc = onDark ? '/logos/nip-logos/nip-light.webp' : '/logos/nip-logos/nip-dark.webp'
   const overHero = activeSection === 'hero'
 
   const handleLogoClick = (e) => {
@@ -135,9 +135,9 @@ export default function Nav() {
     const wasClosed = openMap[id] === false
     openSection(id)
     if (wasClosed) {
-      setTimeout(() => scrollToElement(el), SECTION_OPEN_DELAY)
+      setTimeout(() => scrollToElement(el, { immediate: false }), SECTION_OPEN_DELAY)
     } else {
-      scrollToElement(el)
+      scrollToElement(el, { immediate: false })
     }
   }
 

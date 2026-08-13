@@ -1,4 +1,3 @@
-import TopoLines from './TopoLines'
 import SectionToggle from './SectionToggle'
 import Collapse from './Collapse'
 import { useSection } from '../lib/sections'
@@ -82,7 +81,6 @@ export default function Services() {
 
   return (
     <section id="hizmetler" data-theme="paper" className="services">
-      <TopoLines tone="paper" seed={3} />
       <div className="container">
         <div className="services__head">
           <SectionToggle id="hizmetler" label="Hizmetlerimiz" />

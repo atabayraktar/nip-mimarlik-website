@@ -1,5 +1,3 @@
-import TopoLines from './TopoLines'
-
 const EDUCATION = [
   { year: '2012', degree: 'Mimarlık Lisansı', place: 'Lorem Üniversitesi' },
   { year: '2015', degree: 'Yüksek Lisans, Topografya & Peyzaj', place: 'İpsum Enstitüsü' },
@@ -15,7 +13,6 @@ const APPROACH = [
 export default function Education() {
   return (
     <section id="egitim" data-theme="paper" className="education">
-      <TopoLines tone="paper" seed={8} />
       <div className="container education__inner">
         <div className="education__col" data-reveal>
           <p className="eyebrow">Eğitim</p>

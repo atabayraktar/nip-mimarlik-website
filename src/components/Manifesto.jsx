@@ -1,4 +1,3 @@
-import TopoLines from './TopoLines'
 import SectionToggle from './SectionToggle'
 import Collapse from './Collapse'
 import { useSection } from '../lib/sections'
@@ -28,8 +27,6 @@ export default function Manifesto() {
 
   return (
     <section id="manifesto" data-theme="paper" className="manifesto">
-      <TopoLines tone="paper" className="manifesto__topo" parallax seed={2} />
-
       <div className="container">
         <SectionToggle id="manifesto" label="Manifesto" className="manifesto__eyebrow" />
 
