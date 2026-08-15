@@ -95,7 +95,7 @@ export default function FloatingActions() {
       raf = null
       if (!footer) return
       const rect = footer.getBoundingClientRect()
-      const gap = window.innerWidth >= 1024 ? 48 : 32
+      const gap = window.innerWidth >= 1024 ? 48 : 24
       const overlap = window.innerHeight - rect.top
       const offset = overlap > 0 ? overlap + gap : null
 

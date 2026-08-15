@@ -8,7 +8,20 @@
   padding: var(--sp-3);
   background: rgba(11, 11, 12, 0.72);
   backdrop-filter: blur(3px);
-  animation: contactModalIn var(--transition-base) var(--ease-spring);
+  animation: contactModalIn var(--transition-base);
+
+  // A plain `reverse` of the entrance keyframes rides the same ease-out
+  // curve backwards, which front-loads almost all the motion into the
+  // first ~50ms and reads as a snap — so the exit gets its own keyframes
+  // on a mirrored "ease-in" curve (spring's control points reflected)
+  // instead, spreading the fade/scale evenly across the full duration.
+  &--closing {
+    animation: contactModalOut 400ms cubic-bezier(0.64, 0, 0.78, 0) forwards;
+
+    .contact-modal__dialog {
+      animation: contactModalScaleOut 400ms cubic-bezier(0.64, 0, 0.78, 0) forwards;
+    }
+  }
 
   &__dialog {
     position: relative;
@@ -21,7 +34,7 @@
     border: 1px solid rgba(11, 11, 12, 0.12);
     color: var(--ink);
     padding: var(--sp-4) var(--sp-5) var(--sp-6);
-    animation: contactModalScaleIn var(--transition-base) var(--ease-spring);
+    animation: contactModalScaleIn var(--transition-base);
 
     &::-webkit-scrollbar {
       display: none;
@@ -182,9 +195,21 @@
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+@keyframes contactModalOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes contactModalScaleOut {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(12px) scale(0.98); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .contact-modal,
-  .contact-modal__dialog {
+  .contact-modal__dialog,
+  .contact-modal--closing,
+  .contact-modal--closing .contact-modal__dialog {
     animation: none;
   }
 }

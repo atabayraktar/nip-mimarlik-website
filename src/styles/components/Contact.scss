@@ -3,6 +3,7 @@
   overflow: hidden;
   color: var(--ink);
   padding: var(--sp-8) 0;
+  padding-bottom: var(--sp-16);
 
   @media (min-width: 768px) {
     padding: var(--sp-12) 0;

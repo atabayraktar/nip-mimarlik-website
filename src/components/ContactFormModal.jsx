@@ -21,10 +21,34 @@ const WHATSAPP_ICON = (
   </svg>
 )
 
+const CLOSE_DURATION = 400
+
 export default function ContactFormModal({ open, onClose }) {
   const dialogRef = useRef(null)
   const [form, setForm] = useState({ name: '', phone: '', message: '' })
   const [errors, setErrors] = useState({ name: false, phone: false, message: false })
+  const [mounted, setMounted] = useState(open)
+  const [closing, setClosing] = useState(false)
+
+  // Keeps the modal mounted for the closing animation instead of vanishing
+  // the instant `open` flips false — the timeout unmount matches the CSS
+  // reverse-animation duration below.
+  useEffect(() => {
+    if (open) {
+      setMounted(true)
+      setClosing(false)
+      return
+    }
+    if (!mounted) return
+
+    setClosing(true)
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const timer = setTimeout(() => {
+      setMounted(false)
+      setClosing(false)
+    }, reduce ? 0 : CLOSE_DURATION)
+    return () => clearTimeout(timer)
+  }, [open])
 
   useEffect(() => {
     if (!open) {
@@ -43,7 +67,7 @@ export default function ContactFormModal({ open, onClose }) {
     }
   }, [open, onClose])
 
-  if (!open) return null
+  if (!mounted) return null
 
   const update = (key) => (e) => {
     setForm((f) => ({ ...f, [key]: e.target.value }))
@@ -68,7 +92,11 @@ export default function ContactFormModal({ open, onClose }) {
   }
 
   return (
-    <div className="contact-modal" role="presentation" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
+    <div
+      className={`contact-modal ${closing ? 'contact-modal--closing' : ''}`}
+      role="presentation"
+      onMouseDown={(e) => e.target === e.currentTarget && onClose()}
+    >
       <div
         className="contact-modal__dialog"
         role="dialog"

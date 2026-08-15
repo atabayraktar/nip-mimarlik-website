@@ -76,7 +76,7 @@ export default function Footer() {
     <footer id="footer" data-theme="ink" className="footer grain">
       <TopoLines tone="ink" className="footer__topo" seed={6} />
 
-      <div className="container footer__inner">
+      <div className="footer__inner">
         <Link
           href="/"
           onClick={handleLogoClick}

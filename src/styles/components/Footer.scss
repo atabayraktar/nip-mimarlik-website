@@ -17,6 +17,7 @@
     align-items: center;
     gap: var(--sp-3);
     text-align: center;
+    padding: 0 var(--sp-3);
 
     @media (min-width: 700px) {
       display: grid;
@@ -24,6 +25,11 @@
       align-items: center;
       gap: var(--sp-4);
       text-align: left;
+    }
+
+    @media (min-width: 1024px) {
+      padding-left: 3.3rem;
+      padding-right: var(--sp-6);
     }
   }
 
@@ -35,6 +41,11 @@
     &:hover,
     &:focus-visible {
       opacity: 0.72;
+    }
+
+    &:hover .footer__logo,
+    &:focus-visible .footer__logo {
+      transform: scale(1.08);
     }
 
     &:focus-visible {
@@ -50,6 +61,7 @@
   &__logo {
     height: 38px;
     width: auto;
+    transition: transform var(--transition-fast);
 
     @media (min-width: 700px) {
       height: 46px;
@@ -81,7 +93,7 @@
     width: 22px;
     height: 22px;
     color: var(--concrete);
-    transition: color var(--transition-fast);
+    transition: color var(--transition-fast), transform var(--transition-fast);
 
     svg {
       width: 100%;
@@ -91,11 +103,22 @@
     &:hover,
     &:focus-visible {
       color: var(--paper);
+      transform: translateY(-3px) scale(1.08);
     }
 
     &:focus-visible {
       outline: 1px solid var(--paper);
       outline-offset: 4px;
     }
+
+    &:active {
+      transform: translateY(-1px) scale(1.04);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer__social {
+    transition: color var(--transition-fast);
   }
 }
