@@ -11,12 +11,8 @@ function hash(n) {
 // (instead of an approximated frame sequence) is what makes the motion read
 // as identical to the source video.
 const SOURCES = {
-  ink: '/videos/topo-ink.mp4',
-  paper: '/videos/topo-paper.mp4',
-}
-const POSTERS = {
-  ink: '/images/topography-backgrounds/topo-dark.webp',
-  paper: '/images/topography-backgrounds/topo-light.webp',
+  ink: '/videos/topo-dark.mp4',
+  paper: '/videos/topo-light.mp4',
 }
 
 export default function TopoLines({ tone = 'ink', className = '', parallax = true, seed = 0 }) {
@@ -106,7 +102,6 @@ export default function TopoLines({ tone = 'ink', className = '', parallax = tru
           className="topo__video"
           style={{ objectPosition: `${posX}% 50%` }}
           src={SOURCES[tone]}
-          poster={POSTERS[tone]}
           muted
           loop
           playsInline

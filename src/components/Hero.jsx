@@ -8,9 +8,8 @@ export default function Hero() {
         loop
         playsInline
         preload="auto"
-        poster="/images/topography-backgrounds/topo-dark.webp"
       >
-        <source src="/videos/topo-ink.mp4" type="video/mp4" />
+        <source src="/videos/topo-dark.mp4" type="video/mp4" />
       </video>
 
       <div className="hero__overlay" />

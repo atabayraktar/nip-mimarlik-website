@@ -24,12 +24,12 @@
 
     .topo__video {
       mix-blend-mode: multiply;
-      // multiply keeps every anti-aliased edge pixel visible (any non-white
-      // value darkens the page), so the stroke reads wider than the ink
-      // version, where screen blend on black mutes those same soft edges.
-      // Pushing contrast up burns the soft fringe back toward white and
-      // keeps only the dark core, so the line reads as thin as ink's.
-      filter: contrast(1.5);
+      // The source footage is low-contrast (near-white bg, light-grey
+      // strokes, luma ~195-235) — plain contrast() can't separate them
+      // because both sit above the pivot and just clip to white together.
+      // brightness() first pulls the stroke value below the pivot so the
+      // following contrast() can spread bg -> white and stroke -> dark.
+      filter: brightness(0.62) contrast(8);
     }
   }
 

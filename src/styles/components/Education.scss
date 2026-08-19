@@ -46,12 +46,20 @@
       font-family: var(--font-display);
       font-weight: 400;
       font-size: 1.1rem;
+
+      @media (min-width: 900px) {
+        font-size: 1.3rem;
+      }
     }
 
     p {
       font-size: 0.85rem;
       color: var(--concrete);
       margin-top: 0.2em;
+
+      @media (min-width: 900px) {
+        font-size: 1rem;
+      }
     }
   }
 
@@ -62,6 +70,10 @@
     color: var(--concrete);
     flex-shrink: 0;
     width: 3.5em;
+
+    @media (min-width: 900px) {
+      font-size: 0.8rem;
+    }
   }
 
 }
