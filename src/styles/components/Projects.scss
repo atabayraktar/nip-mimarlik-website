@@ -111,6 +111,11 @@
     &:focus-visible .projects__card-media img {
       transform: scale(1.035);
     }
+
+    &:hover .projects__card-icon,
+    &:focus-visible .projects__card-icon {
+      transform: scale(1.08);
+    }
   }
 
   &__card-top {
@@ -128,7 +133,8 @@
   &__card-icon {
     width: 56px;
     height: 56px;
-    object-fit: cover;
+    object-fit: contain;
+    transition: transform var(--transition-base);
   }
 
   &__card-title {
@@ -386,7 +392,8 @@
     animation: none;
   }
 
-  .projects__card-media img {
+  .projects__card-media img,
+  .projects__card-icon {
     transition: none;
   }
 

@@ -8,7 +8,7 @@ export default function Hero() {
         loop
         playsInline
         preload="auto"
-        poster="/images/topo/topo-ink.webp"
+        poster="/images/topography-backgrounds/topo-dark.webp"
       >
         <source src="/videos/topo-ink.mp4" type="video/mp4" />
       </video>
@@ -18,7 +18,7 @@ export default function Hero() {
       <div className="hero__content">
         <img
           className="hero__mark"
-          src="/logos/nip-logos/nip-light.webp"
+          src="/images/logos/nip-logos/nip-light.webp"
           alt="NİP Mimarlık"
           data-reveal
         />

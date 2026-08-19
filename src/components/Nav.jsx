@@ -125,7 +125,7 @@ export default function Nav() {
   }, [router.pathname])
 
   const onDark = theme === 'ink' || theme === 'graphite'
-  const logoSrc = onDark ? '/logos/nip-logos/nip-light.webp' : '/logos/nip-logos/nip-dark.webp'
+  const logoSrc = onDark ? '/images/logos/nip-logos/nip-light.webp' : '/images/logos/nip-logos/nip-dark.webp'
   const overHero = activeSection === 'hero'
 
   const handleLogoClick = (e) => {

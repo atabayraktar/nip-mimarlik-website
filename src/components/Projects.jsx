@@ -13,9 +13,6 @@ const FILTERS = [
   { key: 'finanse', label: 'Finanse Edilenler' },
 ]
 
-const DESCRIPTION =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-
 function projectImages(label) {
   return [
     `https://placehold.co/1200x900/EAE9E3/8A8A85?text=${label}+—+1`,
@@ -27,73 +24,108 @@ function projectImages(label) {
 const PROJECTS = [
   {
     id: 1,
-    name: 'Proje 01',
+    name: 'Sea Evi',
     category: 'dis-mekan',
     categoryLabel: 'Dış Mekan',
-    location: 'Çanakkale, Türkiye',
-    year: '2024',
+    location: 'Çanakkale, Yukarıinova Köyü',
     client: 'Özel Müşteri',
-    typology: 'Konut / Topografya',
-    size: '240 m²',
-    status: 'Tamamlandı',
-    icon: 'https://placehold.co/64x64/0B0B0C/F3F2EE?text=01',
-    images: projectImages('Proje+01'),
+    typology: 'Villa',
+    size: '130 m²',
+    status: 'Ruhsatlandı',
+    icon: '/images/logos/project-logos/proje-01.webp',
+    images: projectImages('Sea+Evi'),
+    description:
+      'Çanakkale’nin Yukarıinova Köyü’nde özgürlüğünü ilan eden bir yapı. Sınırları içinde, sınırsızlığı çizmek isteyen bir proje Sea Evi. Mümkün olan her noktasında doğaya açılan hatta kucaklayan bir duruş sergilemekte.',
   },
   {
     id: 2,
-    name: 'Proje 02',
-    category: 'ic-mekan',
-    categoryLabel: 'İç Mekan',
-    location: 'Çanakkale, Türkiye',
-    year: '2023',
+    name: 'Sasa Evi',
+    category: 'dis-mekan',
+    categoryLabel: 'Dış Mekan',
+    location: 'Çanakkale, Yukarıinova Köyü',
     client: 'Özel Müşteri',
-    typology: 'Atölye / İç Mekan',
-    size: '180 m²',
-    status: 'Tamamlandı',
-    icon: 'https://placehold.co/64x64/0B0B0C/F3F2EE?text=02',
-    images: projectImages('Proje+02'),
+    typology: 'Villa',
+    size: '130 m²',
+    status: 'Ruhsatlandı',
+    icon: '/images/logos/project-logos/proje-02.webp',
+    images: projectImages('Sasa+Evi'),
+    description:
+      'Çanakkale’nin Yukarıinova Köyü’nde, dere kenarında ve ormanla iç içe bir alanda yer alan Sasa Evi, ana tasarım kararı olarak avlulu bir yapıya sahip. Formu sayesinde kendi dünyasını kuran ve mahremiyetini oluşturan yapı, doğanın spontane akışına karşı tanımlı duruşuyla kullanıcısının yaşantısını yansıtıyor.',
   },
   {
     id: 3,
-    name: 'Proje 03',
+    name: 'Sade',
     category: 'finanse',
     categoryLabel: 'Finanse Edilenler',
-    location: 'Çanakkale, Türkiye',
-    year: '2025',
-    client: 'Yatırımcı Grubu',
-    typology: 'Karma Kullanım',
-    size: '2.580 m²',
-    status: 'Devam Ediyor',
-    icon: 'https://placehold.co/64x64/0B0B0C/F3F2EE?text=03',
-    images: projectImages('Proje+03'),
+    location: 'Çanakkale, Dardanos',
+    client: 'Müteahhitliğini yaptığımız proje',
+    typology: 'Villa Sitesi',
+    size: '630 m²',
+    status: 'Ruhsatlandı · İnşa Edildi',
+    icon: '/images/logos/project-logos/proje-03.webp',
+    images: projectImages('Sade'),
+    description:
+      'Sade, fazlalıklardan arınmış bir düşüncenin mekâna dönüşmüş hâli. Mimari yaklaşımımız hiçbir zaman dayatmak ya da sınırlandırmak olmadı; yalnızca bulunduğu yere ait, sade ama özenle düşünülmüş bir anlayışı temsil ediyoruz. Sade Projesi, Çanakkale’nin Dardanos mevkiinde abartıdan uzak, ferah ve sade yaşam alanlarını kullanıcılarına sunuyor.',
   },
   {
     id: 4,
-    name: 'Proje 04',
-    category: 'ic-mekan',
-    categoryLabel: 'İç Mekan',
-    location: 'Çanakkale, Türkiye',
-    year: '2022',
-    client: 'Kurumsal Müşteri',
-    typology: 'Ofis / İç Mekan',
-    size: '310 m²',
-    status: 'Tamamlandı',
-    icon: 'https://placehold.co/64x64/0B0B0C/F3F2EE?text=04',
-    images: projectImages('Proje+04'),
+    name: 'Var Evi',
+    category: 'dis-mekan',
+    categoryLabel: 'Dış Mekan',
+    location: 'Çanakkale, Çınarlı',
+    client: 'Özel Müşteri',
+    typology: 'Villa',
+    size: '200 m²',
+    status: 'Konsept Tasarımı Yapıldı',
+    icon: '/images/logos/project-logos/proje-04.webp',
+    images: projectImages('Var+Evi'),
+    description:
+      'Çevre insana göre şekillendi; şimdi ise insanların yaşam alanları parsellerin sınırlarına göre şekillenmekte. Biz de ofisimizde tasarım yaparken bu sınırlara bağlı kalmak zorunda olsak da kullanıcının var olma biçimine özgü tasarımlar yapıyoruz. Var Evi, Çanakkale’nin Çınarlı mevkiinde yer alan bir parselin tanımsızlığı içinde kendini var eden; kütlesel hareketlerle mekânları tanımlamayı ve bunu olabildiğince esnek bir şekilde kullanıcıyla buluşturmayı amaçlayan bir proje.',
   },
   {
     id: 5,
-    name: 'Proje 05',
+    name: 'P Evi',
+    category: 'ic-mekan',
+    categoryLabel: 'İç Mekan',
+    location: 'Çanakkale, Çınarlı',
+    client: 'Özel Müşteri',
+    typology: 'Salon Tasarımı',
+    size: '60 m²',
+    status: 'Tamamlandı',
+    icon: '/images/logos/project-logos/proje-05.webp',
+    images: projectImages('P+Evi'),
+    description:
+      'Çevre insana göre şekillendi; şimdi ise insanların yaşam alanları parsellerin sınırlarına göre şekillenmekte. Biz de ofisimizde tasarım yaparken bu sınırlara bağlı kalmak zorunda olsak da kullanıcının var olma biçimine özgü tasarımlar yapıyoruz. P Evi, kütlesel hareketlerle mekânları tanımlamayı ve bunu olabildiğince esnek bir şekilde kullanıcıyla buluşturmayı amaçlayan bir salon tasarımı.',
+  },
+  {
+    id: 6,
+    name: 'Ky Evi',
     category: 'dis-mekan',
     categoryLabel: 'Dış Mekan',
+    location: 'Çanakkale, Kepez',
+    client: 'Özel Müşteri',
+    typology: 'İkiz Villa',
+    size: '—',
+    status: 'Ruhsatlandı',
+    icon: '/images/logos/project-logos/proje-06.webp',
+    images: projectImages('Ky+Evi'),
+    description:
+      'Ky Evleri, Çanakkale’nin Kepez mevkiinde yer almakta; müteahhitleri için projelendirildi. Kullanıcısı için en fonksiyonel hâlde geniş oda kullanımları amaçlamış olan bir proje.',
+  },
+  {
+    id: 7,
+    name: 'St Evi',
+    category: 'ic-mekan',
+    categoryLabel: 'İç Mekan',
     location: 'Çanakkale, Türkiye',
-    year: '2025',
-    client: 'Belediye',
-    typology: 'Peyzaj / Topografya',
-    size: '860 m²',
-    status: 'Devam Ediyor',
-    icon: 'https://placehold.co/64x64/0B0B0C/F3F2EE?text=05',
-    images: projectImages('Proje+05'),
+    client: 'Özel Müşteri',
+    typology: 'Salon Tasarımı',
+    size: '50 m²',
+    status: 'Tasarlandı · İmalatı Yapıldı',
+    icon: '/images/logos/project-logos/proje-07.webp',
+    images: projectImages('St+Evi'),
+    description:
+      'Günün son dakikalarına şahitlik eden ve yoğun iş temposundan sonra bir dinlenme alanı, birlikte anlar yaratmayı sağlayan yaşam alanı olarak kullanılan salonda tasarım yeniliğine gidildi. Mermerin derin renkleri, ateşin sıcaklığı, yeşil ve kahve tonların birlikteliği; bütünde çeşitlilik, sonuçta ise uyum hedeflendi.',
   },
 ]
 
@@ -359,7 +391,7 @@ export default function Projects() {
 
                     {media}
 
-                    <p className="projects__card-desc">{DESCRIPTION}</p>
+                    <p className="projects__card-desc">{p.description}</p>
                   </div>
                 ) : (
                   <button

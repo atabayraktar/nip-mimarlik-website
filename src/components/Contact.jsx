@@ -22,52 +22,50 @@ export default function Contact() {
 
   return (
     <section id="iletisim" data-theme="paper" className="contact">
-      <div className="container">
-        <div className="contact__head">
-          <SectionToggle id="iletisim" label="İletişim" />
-        </div>
-
-        <Collapse id="iletisim" open={isOpen}>
-          <div className="contact__inner">
-            <div className="contact__info" data-reveal>
-              <dl className="contact__list">
-                <div>
-                  <dt aria-hidden="true">{BULLET_ICON}</dt>
-                  <dd>
-                    <a href={MAPS_LINK} target="_blank" rel="noreferrer">
-                      {ADDRESS}
-                    </a>
-                  </dd>
-                </div>
-                <div>
-                  <dt aria-hidden="true">{BULLET_ICON}</dt>
-                  <dd>
-                    <a href="tel:+905316562909">+90 531 656 29 09</a>
-                  </dd>
-                </div>
-                <div>
-                  <dt aria-hidden="true">{BULLET_ICON}</dt>
-                  <dd>
-                    <a href="mailto:info@nipmimarlik.com">info@nipmimarlik.com</a>
-                  </dd>
-                </div>
-                <div>
-                  <dt aria-hidden="true">{BULLET_ICON}</dt>
-                  <dd>
-                    <a href="https://instagram.com/nipmimarlik" target="_blank" rel="noreferrer">
-                      @nipmimarlik
-                    </a>
-                  </dd>
-                </div>
-              </dl>
-
-              <button type="button" className="contact__form-cta" onClick={() => setFormOpen(true)}>
-                İletişim Formu
-              </button>
-            </div>
-          </div>
-        </Collapse>
+      <div className="contact__head">
+        <SectionToggle id="iletisim" label="İletişim" />
       </div>
+
+      <Collapse id="iletisim" open={isOpen}>
+        <div className="contact__inner">
+          <div className="contact__info" data-reveal>
+            <dl className="contact__list">
+              <div>
+                <dt aria-hidden="true">{BULLET_ICON}</dt>
+                <dd>
+                  <a href={MAPS_LINK} target="_blank" rel="noreferrer">
+                    {ADDRESS}
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt aria-hidden="true">{BULLET_ICON}</dt>
+                <dd>
+                  <a href="tel:+905316562909">+90 531 656 29 09</a>
+                </dd>
+              </div>
+              <div>
+                <dt aria-hidden="true">{BULLET_ICON}</dt>
+                <dd>
+                  <a href="mailto:info@nipmimarlik.com">info@nipmimarlik.com</a>
+                </dd>
+              </div>
+              <div>
+                <dt aria-hidden="true">{BULLET_ICON}</dt>
+                <dd>
+                  <a href="https://instagram.com/nipmimarlik" target="_blank" rel="noreferrer">
+                    @nipmimarlik
+                  </a>
+                </dd>
+              </div>
+            </dl>
+
+            <button type="button" className="contact__form-cta" onClick={() => setFormOpen(true)}>
+              İletişim Formu
+            </button>
+          </div>
+        </div>
+      </Collapse>
 
       <ContactFormModal open={formOpen} onClose={() => setFormOpen(false)} />
     </section>

@@ -13,6 +13,14 @@
     padding: var(--sp-6) 0 var(--sp-12);
   }
 
+  @media (min-width: 900px) {
+    flex: 0 0 420px;
+    width: 420px;
+    height: auto;
+    min-height: 0;
+    padding: var(--sp-12) 0;
+  }
+
   &__frame {
     position: relative;
     max-width: 100%;
@@ -26,6 +34,13 @@
     @media (max-width: 767px) and (orientation: portrait) {
       width: 100%;
       aspect-ratio: auto;
+    }
+
+    // Desktop: match the About portrait's width exactly (420px) instead of
+    // deriving width from the row's height.
+    @media (min-width: 900px) {
+      width: 100%;
+      height: auto;
     }
   }
 

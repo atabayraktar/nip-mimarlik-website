@@ -4,16 +4,10 @@ const EDUCATION = [
   { year: '2018', degree: 'Restorasyon Sertifikası', place: 'Dolor Akademisi' },
 ]
 
-const APPROACH = [
-  'Lorem ipsum dolor sit amet consectetur adipiscing.',
-  'Sed do eiusmod tempor incididunt ut labore.',
-  'Ut enim ad minim veniam quis nostrud exercitation.',
-]
-
 export default function Education() {
   return (
     <section id="egitim" data-theme="paper" className="education">
-      <div className="container education__inner">
+      <div className="education__inner">
         <div className="education__col" data-reveal>
           <p className="eyebrow">Eğitim</p>
           <ul className="education__list">
@@ -24,18 +18,6 @@ export default function Education() {
                   <h3>{e.degree}</h3>
                   <p>{e.place}</p>
                 </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="education__col" data-reveal data-reveal-delay="150">
-          <p className="eyebrow">Yaklaşım</p>
-          <ul className="education__approach">
-            {APPROACH.map((line, i) => (
-              <li key={i}>
-                <span>{String(i + 1).padStart(2, '0')}</span>
-                <p>{line}</p>
               </li>
             ))}
           </ul>

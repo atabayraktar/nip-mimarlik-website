@@ -2,10 +2,10 @@
   position: relative;
   overflow: hidden;
   color: var(--ink);
-  padding: var(--sp-8) 0 var(--sp-4);
+  padding: var(--sp-8) 0;
 
   @media (min-width: 768px) {
-    padding: var(--sp-12) 0 var(--sp-6);
+    padding: var(--sp-12) 0;
   }
 
   &__inner {
@@ -17,7 +17,7 @@
     align-items: center;
 
     @media (min-width: 900px) {
-      grid-template-columns: 0.85fr 1.15fr;
+      grid-template-columns: 420px 1fr;
       gap: var(--sp-10);
     }
   }
@@ -34,18 +34,34 @@
     }
   }
 
+  &__text {
+    @media (min-width: 900px) {
+      justify-self: end;
+      width: fit-content;
+    }
+  }
+
+  &__heading {
+    margin-bottom: var(--sp-6);
+  }
+
   &__name {
     font-family: var(--font-display);
     font-weight: 300;
     font-size: clamp(2.25rem, 5.5vw, 3.75rem);
     letter-spacing: -0.02em;
-    margin: var(--sp-2) 0 var(--sp-4);
+    margin: var(--sp-2) 0 0;
   }
 
   &__bio {
-    max-width: 52ch;
+    max-width: 64ch;
     color: var(--concrete);
-    line-height: 1.75;
-    margin-bottom: var(--sp-3);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    margin-bottom: var(--sp-2);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }

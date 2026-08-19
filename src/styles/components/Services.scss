@@ -8,12 +8,9 @@
     padding: var(--sp-12) 0;
   }
 
-  .container {
+  &__head {
     position: relative;
     z-index: 1;
-  }
-
-  &__head {
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
@@ -23,12 +20,10 @@
   }
 
   &__grid {
+    position: relative;
+    z-index: 1;
     display: grid;
     grid-template-columns: 1fr;
-
-    @media (min-width: 700px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
   }
 
   &__row {

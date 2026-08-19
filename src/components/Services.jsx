@@ -64,16 +64,6 @@ const SERVICES = [
     name: 'Restorasyon',
     copy: 'Duis aute irure dolor in reprehenderit.',
   },
-  {
-    icon: 'consulting',
-    name: 'Danışmanlık',
-    copy: 'Excepteur sint occaecat cupidatat non.',
-  },
-  {
-    icon: 'visualization',
-    name: '3B Görselleştirme',
-    copy: 'Proident sunt in culpa qui officia.',
-  },
 ]
 
 export default function Services() {
@@ -81,30 +71,28 @@ export default function Services() {
 
   return (
     <section id="hizmetler" data-theme="paper" className="services">
-      <div className="container">
-        <div className="services__head">
-          <SectionToggle id="hizmetler" label="Hizmetlerimiz" />
-        </div>
-
-        <Collapse id="hizmetler" open={isOpen}>
-          <ul className="services__grid">
-            {SERVICES.map((s, i) => (
-              <li
-                className="services__row"
-                key={s.name}
-                data-reveal
-                data-reveal-delay={String(Math.floor(i / 2) * 100)}
-              >
-                <span className="services__icon">{ICONS[s.icon]}</span>
-                <span className="services__text">
-                  <h3 className="services__name">{s.name}</h3>
-                  <p className="services__copy">{s.copy}</p>
-                </span>
-              </li>
-            ))}
-          </ul>
-        </Collapse>
+      <div className="services__head">
+        <SectionToggle id="hizmetler" label="Hizmetlerimiz" />
       </div>
+
+      <Collapse id="hizmetler" open={isOpen}>
+        <ul className="services__grid">
+          {SERVICES.map((s, i) => (
+            <li
+              className="services__row"
+              key={s.name}
+              data-reveal
+              data-reveal-delay={String(i * 100)}
+            >
+              <span className="services__icon">{ICONS[s.icon]}</span>
+              <span className="services__text">
+                <h3 className="services__name">{s.name}</h3>
+                <p className="services__copy">{s.copy}</p>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Collapse>
     </section>
   )
 }

@@ -15,8 +15,8 @@ const SOURCES = {
   paper: '/videos/topo-paper.mp4',
 }
 const POSTERS = {
-  ink: '/images/topo/topo-ink.webp',
-  paper: '/images/topo/topo-paper.webp',
+  ink: '/images/topography-backgrounds/topo-dark.webp',
+  paper: '/images/topography-backgrounds/topo-light.webp',
 }
 
 export default function TopoLines({ tone = 'ink', className = '', parallax = true, seed = 0 }) {

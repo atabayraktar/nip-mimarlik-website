@@ -11,3 +11,11 @@
   z-index: -1;
   background: var(--paper);
 }
+
+.egitim-video {
+  @media (min-width: 900px) {
+    display: flex;
+    align-items: stretch;
+    gap: var(--sp-10);
+  }
+}
