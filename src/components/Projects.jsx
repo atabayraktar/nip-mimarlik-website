@@ -32,7 +32,7 @@ const PROJECTS = [
     typology: 'Villa',
     size: '130 m²',
     status: 'Ruhsatlandı',
-    icon: '/images/logos/project-logos/proje-01.webp',
+    icon: '/images/logos/project-logos/project-01.webp',
     images: projectImages('Sea+Evi'),
     description:
       'Çanakkale’nin Yukarıinova Köyü’nde özgürlüğünü ilan eden bir yapı. Sınırları içinde, sınırsızlığı çizmek isteyen bir proje Sea Evi. Mümkün olan her noktasında doğaya açılan hatta kucaklayan bir duruş sergilemekte.',
@@ -47,7 +47,7 @@ const PROJECTS = [
     typology: 'Villa',
     size: '130 m²',
     status: 'Ruhsatlandı',
-    icon: '/images/logos/project-logos/proje-02.webp',
+    icon: '/images/logos/project-logos/project-02.webp',
     images: projectImages('Sasa+Evi'),
     description:
       'Çanakkale’nin Yukarıinova Köyü’nde, dere kenarında ve ormanla iç içe bir alanda yer alan Sasa Evi, ana tasarım kararı olarak avlulu bir yapıya sahip. Formu sayesinde kendi dünyasını kuran ve mahremiyetini oluşturan yapı, doğanın spontane akışına karşı tanımlı duruşuyla kullanıcısının yaşantısını yansıtıyor.',
@@ -62,7 +62,7 @@ const PROJECTS = [
     typology: 'Villa Sitesi',
     size: '630 m²',
     status: 'Ruhsatlandı · İnşa Edildi',
-    icon: '/images/logos/project-logos/proje-03.webp',
+    icon: '/images/logos/project-logos/project-03.webp',
     images: projectImages('Sade'),
     description:
       'Sade, fazlalıklardan arınmış bir düşüncenin mekâna dönüşmüş hâli. Mimari yaklaşımımız hiçbir zaman dayatmak ya da sınırlandırmak olmadı; yalnızca bulunduğu yere ait, sade ama özenle düşünülmüş bir anlayışı temsil ediyoruz. Sade Projesi, Çanakkale’nin Dardanos mevkiinde abartıdan uzak, ferah ve sade yaşam alanlarını kullanıcılarına sunuyor.',
@@ -77,7 +77,7 @@ const PROJECTS = [
     typology: 'Villa',
     size: '200 m²',
     status: 'Konsept Tasarımı Yapıldı',
-    icon: '/images/logos/project-logos/proje-04.webp',
+    icon: '/images/logos/project-logos/project-04.webp',
     images: projectImages('Var+Evi'),
     description:
       'Çevre insana göre şekillendi; şimdi ise insanların yaşam alanları parsellerin sınırlarına göre şekillenmekte. Biz de ofisimizde tasarım yaparken bu sınırlara bağlı kalmak zorunda olsak da kullanıcının var olma biçimine özgü tasarımlar yapıyoruz. Var Evi, Çanakkale’nin Çınarlı mevkiinde yer alan bir parselin tanımsızlığı içinde kendini var eden; kütlesel hareketlerle mekânları tanımlamayı ve bunu olabildiğince esnek bir şekilde kullanıcıyla buluşturmayı amaçlayan bir proje.',
@@ -92,7 +92,7 @@ const PROJECTS = [
     typology: 'Salon Tasarımı',
     size: '60 m²',
     status: 'Tamamlandı',
-    icon: '/images/logos/project-logos/proje-05.webp',
+    icon: '/images/logos/project-logos/project-05.webp',
     images: projectImages('P+Evi'),
     description:
       'Çevre insana göre şekillendi; şimdi ise insanların yaşam alanları parsellerin sınırlarına göre şekillenmekte. Biz de ofisimizde tasarım yaparken bu sınırlara bağlı kalmak zorunda olsak da kullanıcının var olma biçimine özgü tasarımlar yapıyoruz. P Evi, kütlesel hareketlerle mekânları tanımlamayı ve bunu olabildiğince esnek bir şekilde kullanıcıyla buluşturmayı amaçlayan bir salon tasarımı.',
@@ -107,7 +107,7 @@ const PROJECTS = [
     typology: 'İkiz Villa',
     size: '—',
     status: 'Ruhsatlandı',
-    icon: '/images/logos/project-logos/proje-06.webp',
+    icon: '/images/logos/project-logos/project-06.webp',
     images: projectImages('Ky+Evi'),
     description:
       'Ky Evleri, Çanakkale’nin Kepez mevkiinde yer almakta; müteahhitleri için projelendirildi. Kullanıcısı için en fonksiyonel hâlde geniş oda kullanımları amaçlamış olan bir proje.',
@@ -122,7 +122,7 @@ const PROJECTS = [
     typology: 'Salon Tasarımı',
     size: '50 m²',
     status: 'Tasarlandı · İmalatı Yapıldı',
-    icon: '/images/logos/project-logos/proje-07.webp',
+    icon: '/images/logos/project-logos/project-07.webp',
     images: projectImages('St+Evi'),
     description:
       'Günün son dakikalarına şahitlik eden ve yoğun iş temposundan sonra bir dinlenme alanı, birlikte anlar yaratmayı sağlayan yaşam alanı olarak kullanılan salonda tasarım yeniliğine gidildi. Mermerin derin renkleri, ateşin sıcaklığı, yeşil ve kahve tonların birlikteliği; bütünde çeşitlilik, sonuçta ise uyum hedeflendi.',
