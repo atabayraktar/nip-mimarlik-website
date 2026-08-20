@@ -41,6 +41,12 @@ const KF_CLOSE = {
 
 export const BURGER_KEYFRAMES = [KF_ANAHTAR, KF_BARS, KF_CLOSE]
 
+// Skips the bars keyframe entirely for touch devices, which have no hover
+// preview step to justify passing through it — the key mark morphs
+// straight into the close X. Takes the same 0..2 phase range as
+// burgerDAtPhase (only 0 and 2 are ever targeted here) so phaseRef stays
+// on one consistent scale regardless of which renderer is active.
+
 function lerp(a, b, t) {
   return a + (b - a) * t
 }
@@ -71,6 +77,17 @@ export function burgerDAtPhase(phase) {
   const d =
     pointsToD(lerpPoints(from.a, to.a, t)) + ' ' + pointsToD(lerpPoints(from.b, to.b, t))
   return { d, fillRule: seg === 0 ? 'evenodd' : 'nonzero' }
+}
+
+export function burgerDDirect(phase) {
+  const t = Math.max(0, Math.min(1, phase / 2))
+  const d =
+    pointsToD(lerpPoints(KF_ANAHTAR.a, KF_CLOSE.a, t)) + ' ' + pointsToD(lerpPoints(KF_ANAHTAR.b, KF_CLOSE.b, t))
+  // Endpoints must keep their own winding rule (evenodd for the resting
+  // key mark's cut-out, nonzero for the X's overlapping arms to union
+  // solid) — the in-between shape is a throwaway blob, so a mid-morph
+  // switch is fine.
+  return { d, fillRule: t < 0.5 ? 'evenodd' : 'nonzero' }
 }
 
 // Matches --ease-spring: cubic-bezier(0.22, 1, 0.36, 1)

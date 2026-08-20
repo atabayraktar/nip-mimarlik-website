@@ -3,7 +3,8 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { scrollToTop, scrollToElement } from '../lib/lenis'
 import { useSectionsContext } from '../lib/sections'
-import { burgerDAtPhase, easeSpring } from '../lib/burgerMorph'
+import { burgerDAtPhase, burgerDDirect, easeSpring } from '../lib/burgerMorph'
+import TopoLines from './TopoLines'
 
 const SECTION_OPEN_DELAY = 420
 const INITIAL_D = burgerDAtPhase(0)
@@ -31,6 +32,8 @@ export default function Nav() {
   const [open, setOpen] = useState(false)
   const [sectionsSideBySide, setSectionsSideBySide] = useState(false)
   const [burgerHover, setBurgerHover] = useState(false)
+  const [hoverCapable, setHoverCapable] = useState(true)
+  const [atTop, setAtTop] = useState(true)
   const headerRef = useRef(null)
   const barRef = useRef(null)
   const burgerRef = useRef(null)
@@ -53,8 +56,22 @@ export default function Nav() {
     return () => mql.removeEventListener('change', update)
   }, [])
 
+  // Mobile/tablet (touch, no real hover) never sees the hover-preview bars
+  // step — the burger morphs straight from the key mark to the close X.
   useEffect(() => {
-    const targetPhase = open ? 2 : burgerHover ? 1 : 0
+    const mql = window.matchMedia('(hover: hover)')
+    const update = () => setHoverCapable(mql.matches)
+    update()
+    mql.addEventListener('change', update)
+    return () => mql.removeEventListener('change', update)
+  }, [])
+
+  useEffect(() => {
+    // burgerHover only matters on real hover devices. On touch, tapping the
+    // burger leaves it focused with no blur to clear it (no mouse to leave),
+    // so counting it here would strand the icon on the direct path's
+    // half-morphed blend between key and X once the menu closes.
+    const targetPhase = open ? 2 : hoverCapable && burgerHover ? 1 : 0
     const fromPhase = phaseRef.current
     if (fromPhase === targetPhase) return
 
@@ -69,7 +86,7 @@ export default function Nav() {
       const eased = easeSpring(t)
       const phase = fromPhase + (targetPhase - fromPhase) * eased
       phaseRef.current = phase
-      const { d, fillRule } = burgerDAtPhase(phase)
+      const { d, fillRule } = hoverCapable ? burgerDAtPhase(phase) : burgerDDirect(phase)
       pathRef.current?.setAttribute('d', d)
       pathRef.current?.setAttribute('fill-rule', fillRule)
       if (t < 1) {
@@ -82,7 +99,7 @@ export default function Nav() {
     return () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
     }
-  }, [open, burgerHover])
+  }, [open, burgerHover, hoverCapable])
 
   useEffect(() => {
     if (!open) return
@@ -142,6 +159,7 @@ export default function Nav() {
 
       setTheme(current.dataset.theme)
       setActiveSection((activeEl.id || current.id) ?? null)
+      setAtTop(window.scrollY < 4)
     }
 
     const onScroll = () => {
@@ -170,6 +188,12 @@ export default function Nav() {
   const onDark = theme === 'ink' || theme === 'graphite'
   const logoSrc = onDark ? '/images/logos/nip-logos/nip-light.webp' : '/images/logos/nip-logos/nip-dark.webp'
   const overHero = activeSection === 'hero'
+  // The mobile logo is hidden by default (see Nav.scss) and only shows for
+  // two cases: /idil has no hero mark of its own, so its top-of-page header
+  // shows it in place of one; and the open fullscreen mobile menu shows it
+  // top-left on a light background, where the plain paper panel otherwise
+  // has nothing there.
+  const showMobileLogo = (router.pathname === '/idil' && atTop) || (!onDark && open)
 
   const handleLogoClick = (e) => {
     if (router.pathname !== '/') return
@@ -177,11 +201,12 @@ export default function Nav() {
     scrollToTop()
   }
 
-  const goToSection = (id) => {
-    const el = document.getElementById(id)
+  const goToSection = (ids) => {
+    const list = Array.isArray(ids) ? ids : [ids]
+    const el = document.getElementById(list[0])
     if (!el) return
-    const wasClosed = openMap[id] === false
-    openSection(id)
+    const wasClosed = list.some((id) => openMap[id] === false)
+    list.forEach((id) => openSection(id))
     if (wasClosed) {
       setTimeout(() => scrollToElement(el, { immediate: false }), SECTION_OPEN_DELAY)
     } else {
@@ -195,26 +220,26 @@ export default function Nav() {
   // hash the active-link state would then have to track. Since a same-page
   // click no longer changes router.asPath, close the mobile menu explicitly
   // here instead of relying on the asPath-watcher effect above.
-  const handleSectionLinkClick = (e, href) => {
+  const handleSectionLinkClick = (e, href, combinedWith) => {
     if (!href.startsWith('/#')) return
     e.preventDefault()
-    const id = href.slice(2)
+    const ids = combinedWith ?? href.slice(2)
     setOpen(false)
 
     if (router.pathname === '/') {
-      goToSection(id)
+      goToSection(ids)
     } else {
-      pendingScrollId.current = id
+      pendingScrollId.current = ids
       router.push('/')
     }
   }
 
   useEffect(() => {
     if (router.pathname !== '/' || !pendingScrollId.current) return
-    const id = pendingScrollId.current
+    const ids = pendingScrollId.current
     pendingScrollId.current = null
     // Give the freshly-mounted homepage a beat to lay out before measuring it.
-    const timer = setTimeout(() => goToSection(id), 60)
+    const timer = setTimeout(() => goToSection(ids), 60)
     return () => clearTimeout(timer)
   }, [router.pathname])
 
@@ -226,7 +251,7 @@ export default function Nav() {
       <Link
         href="/"
         onClick={handleLogoClick}
-        className={`nav__logo ${overHero ? 'nav__logo--hidden' : ''}`}
+        className={`nav__logo ${overHero ? 'nav__logo--hidden' : ''} ${showMobileLogo ? 'nav__logo--mobile-visible' : ''}`}
         aria-label="NİP Mimarlık — Anasayfa"
       >
         <img src={logoSrc} alt="NİP Mimarlık" />
@@ -257,6 +282,10 @@ export default function Nav() {
         aria-hidden={!open}
         {...(!open ? { inert: '' } : {})}
       >
+        {open && (
+          <TopoLines tone={onDark ? 'ink' : 'paper'} className="nav__topo" parallax={false} seed={8} />
+        )}
+
         <ul className="nav__bar-list">
           {navLinks.map((link) => {
             const isActive =
@@ -273,7 +302,7 @@ export default function Nav() {
                   href={link.href}
                   className={`nav__bar-link ${isActive ? 'nav__bar-link--active' : ''}`}
                   tabIndex={open ? 0 : -1}
-                  onClick={(e) => handleSectionLinkClick(e, link.href)}
+                  onClick={(e) => handleSectionLinkClick(e, link.href, link.combinedWith)}
                 >
                   {link.label}
                 </Link>

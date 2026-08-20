@@ -30,9 +30,10 @@
 
     // The wordmark already appears large and centered in the Hero — the
     // small recurring header mark is desktop-only; on mobile it's dropped
-    // everywhere, not just while over Hero.
+    // by default (see &--mobile-visible below for the exceptions).
     @media (max-width: 1023px) {
-      display: none;
+      opacity: 0;
+      pointer-events: none;
     }
 
     @media (min-width: 1024px) {
@@ -58,6 +59,17 @@
       opacity: 0;
       transform: scale(0.82);
       pointer-events: none;
+    }
+
+    // Two cases on mobile/tablet: /idil at the very top of the page (no
+    // hero mark of its own to stand in for it), and the open fullscreen
+    // menu on a light background (the plain paper panel otherwise has
+    // nothing in that corner).
+    &--mobile-visible {
+      @media (max-width: 1023px) {
+        opacity: 1;
+        pointer-events: auto;
+      }
     }
   }
 
@@ -113,7 +125,19 @@
     transition: opacity var(--transition-base) 80ms, transform var(--transition-base) 80ms;
   }
 
+  // Only the fullscreen mobile menu gets the topo backdrop — the small
+  // floating desktop dropdown stays plain.
+  &__topo {
+    display: none;
+
+    @media (max-width: 1023px) {
+      display: block;
+    }
+  }
+
   &__bar-list {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -191,6 +215,19 @@
 
       &::after {
         transform: scaleX(1);
+      }
+    }
+
+    // The active-link highlight is a desktop cue (scroll position against
+    // an always-visible page). In the mobile full-screen menu it just
+    // reads as one item pre-selected, so it's dropped there.
+    @media (max-width: 1023px) {
+      &--active {
+        opacity: 0.55;
+
+        &::after {
+          transform: scaleX(0);
+        }
       }
     }
   }

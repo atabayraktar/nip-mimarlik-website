@@ -3,7 +3,10 @@ import { useEffect, useRef, useState } from 'react'
 export default function AboutVideo() {
   const sectionRef = useRef(null)
   const videoRef = useRef(null)
-  const autoHandledRef = useRef(false)
+  // Tracks a pause the user chose themselves (button/video click), as
+  // opposed to the observer auto-pausing it on scroll-out — only a user
+  // pause should stop the auto-play-on-scroll-back-into-view behavior.
+  const userPausedRef = useRef(false)
   const [playing, setPlaying] = useState(false)
 
   useEffect(() => {
@@ -13,9 +16,10 @@ export default function AboutVideo() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !autoHandledRef.current) {
-          autoHandledRef.current = true
-          video.play().catch(() => {})
+        if (entry.isIntersecting) {
+          if (!userPausedRef.current) video.play().catch(() => {})
+        } else {
+          video.pause()
         }
       },
       { threshold: 0.5 }
@@ -25,17 +29,18 @@ export default function AboutVideo() {
   }, [])
 
   const pause = () => {
-    autoHandledRef.current = true
+    userPausedRef.current = true
     videoRef.current?.pause()
   }
 
   const toggle = () => {
     const video = videoRef.current
     if (!video) return
-    autoHandledRef.current = true
     if (video.paused) {
+      userPausedRef.current = false
       video.play().catch(() => {})
     } else {
+      userPausedRef.current = true
       video.pause()
     }
   }

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { stopScroll, startScroll } from '../lib/lenis'
 
 const WHATSAPP_NUMBER = '905316562909'
 
@@ -55,14 +56,39 @@ export default function ContactFormModal({ open, onClose }) {
       setErrors({ name: false, phone: false, message: false })
       return
     }
-    document.body.style.overflow = 'hidden'
+    // Locks scroll without letting the scrollbar track disappear (which
+    // would shift the page width) — freezes the body in place at its
+    // current scroll offset instead of hiding overflow.
+    const scrollY = window.scrollY
+    const { body, documentElement: html } = document
+    const prevHtmlOverflowY = html.style.overflowY
+    const prevBodyPosition = body.style.position
+    const prevBodyTop = body.style.top
+    const prevBodyLeft = body.style.left
+    const prevBodyRight = body.style.right
+    html.style.overflowY = 'scroll'
+    body.style.position = 'fixed'
+    body.style.top = `-${scrollY}px`
+    body.style.left = '0'
+    body.style.right = '0'
+    stopScroll()
+
     const onKey = (e) => {
       if (e.key === 'Escape') onClose()
     }
     document.addEventListener('keydown', onKey)
     dialogRef.current?.querySelector('input')?.focus()
     return () => {
-      document.body.style.overflow = ''
+      html.style.overflowY = prevHtmlOverflowY
+      body.style.position = prevBodyPosition
+      body.style.top = prevBodyTop
+      body.style.left = prevBodyLeft
+      body.style.right = prevBodyRight
+      // Plain scrollTo(x, y) — and even `behavior: 'auto'` — defers to the
+      // global `scroll-behavior: smooth` and would visibly animate from 0
+      // back up to scrollY. Only 'instant' actually overrides it.
+      window.scrollTo({ top: scrollY, left: 0, behavior: 'instant' })
+      startScroll()
       document.removeEventListener('keydown', onKey)
     }
   }, [open, onClose])
