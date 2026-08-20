@@ -159,7 +159,18 @@
     background: var(--paper-2);
     flex: 1;
     min-width: 0;
+    // .projects__card-hit is column-direction with align-items: flex-start
+    // below 480px, so without an explicit cross-axis size this item would
+    // shrink-to-fit its content instead of filling the card width — before
+    // the lazy-loaded img has an intrinsic size to shrink-to-fit around,
+    // that collapses the aspect-ratio box to a sliver, then snaps to full
+    // height once the image loads, shifting everything below it.
+    align-self: stretch;
     will-change: transform;
+
+    @media (min-width: 480px) {
+      align-self: auto;
+    }
 
     img {
       width: 100%;

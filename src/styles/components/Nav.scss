@@ -28,6 +28,13 @@
     transform: scale(1);
     transition: opacity var(--transition-base), transform var(--transition-base);
 
+    // The wordmark already appears large and centered in the Hero — the
+    // small recurring header mark is desktop-only; on mobile it's dropped
+    // everywhere, not just while over Hero.
+    @media (max-width: 1023px) {
+      display: none;
+    }
+
     @media (min-width: 1024px) {
       left: 3.3rem;
     }

@@ -16,10 +16,20 @@ const LINKS = [
   { href: '/idil', label: 'İdil Hakkımda' },
 ]
 
+// Hizmetler + İletişim sit side by side starting at this width (see
+// .hizmet-iletisim in index.scss) — merge their nav entries into one item
+// from that point on, independent of the nav's own 1024px mobile/desktop
+// breakpoint. The height clause keeps this a tablet/desktop-only merge: a
+// phone rotated to landscape can clear 900px of width too (e.g. ~926px on
+// many phones) while staying short (~375–430px), and should still behave
+// like normal portrait mobile — separate nav items — not the desktop merge.
+const SECTIONS_SIDE_BY_SIDE_QUERY = '(min-width: 900px) and (min-height: 500px)'
+
 export default function Nav() {
   const [theme, setTheme] = useState('ink')
   const [activeSection, setActiveSection] = useState(null)
   const [open, setOpen] = useState(false)
+  const [sectionsSideBySide, setSectionsSideBySide] = useState(false)
   const [burgerHover, setBurgerHover] = useState(false)
   const headerRef = useRef(null)
   const barRef = useRef(null)
@@ -34,6 +44,14 @@ export default function Nav() {
   useEffect(() => {
     setOpen(false)
   }, [router.asPath])
+
+  useEffect(() => {
+    const mql = window.matchMedia(SECTIONS_SIDE_BY_SIDE_QUERY)
+    const update = () => setSectionsSideBySide(mql.matches)
+    update()
+    mql.addEventListener('change', update)
+    return () => mql.removeEventListener('change', update)
+  }, [])
 
   useEffect(() => {
     const targetPhase = open ? 2 : burgerHover ? 1 : 0
@@ -83,12 +101,20 @@ export default function Nav() {
     }
   }, [open])
 
-  // Which section is "active" is whichever one's top edge has scrolled up
-  // past the nav — the last section in document order that's crossed that
-  // line. Reading real geometry on every scroll tick (rather than trusting
-  // whichever IntersectionObserver entries happen to batch together) means
-  // the highlighted item can never drift out of sync with what's on screen,
-  // no matter how a scroll got triggered (Lenis, hash jump, or a nav click).
+  // Theme (ink/paper inversion) flips the instant a section's top edge
+  // scrolls past the nav — the last one in document order that's crossed
+  // that line — which is what makes the GAD-style colour inversion feel
+  // snappy right at the boundary.
+  //
+  // The active nav link uses a different rule: whichever section's range
+  // actually contains the reading line just below the nav. Plain "top has
+  // crossed the line" would keep a short section (e.g. Hizmetler on
+  // mobile) highlighted even once it's fully scrolled past and the next
+  // section fills the screen instead. But comparing raw visible *area*
+  // over-corrects the other way on tall viewports — right after landing
+  // on a short section, whatever follows it can cover more pixels of the
+  // remaining screen while the short section is still what's at the top.
+  // Checking containment at one fixed point avoids both failure modes.
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll('[data-theme]'))
     if (!sections.length) return
@@ -97,16 +123,25 @@ export default function Nav() {
     const update = () => {
       raf = null
       const navH = headerRef.current?.offsetHeight ?? 88
+      const readingLine = navH + 1
+
       let current = sections[0]
+      let atReadingLine = null
+
       for (const section of sections) {
-        if (section.getBoundingClientRect().top <= navH + 1) {
+        const rect = section.getBoundingClientRect()
+        if (rect.top <= readingLine) {
           current = section
-        } else {
-          break
+        }
+        if (rect.top <= readingLine && rect.bottom > readingLine) {
+          atReadingLine = section
         }
       }
+
+      const activeEl = atReadingLine ?? current
+
       setTheme(current.dataset.theme)
-      setActiveSection(current.id || null)
+      setActiveSection((activeEl.id || current.id) ?? null)
     }
 
     const onScroll = () => {
@@ -123,6 +158,14 @@ export default function Nav() {
       if (raf) cancelAnimationFrame(raf)
     }
   }, [router.pathname])
+
+  const navLinks = sectionsSideBySide
+    ? LINKS.filter((link) => link.href !== '/#iletisim').map((link) =>
+        link.href === '/#hizmetler'
+          ? { ...link, label: 'Hizmetler ve İletişim', combinedWith: ['hizmetler', 'iletisim'] }
+          : link
+      )
+    : LINKS
 
   const onDark = theme === 'ink' || theme === 'graphite'
   const logoSrc = onDark ? '/images/logos/nip-logos/nip-light.webp' : '/images/logos/nip-logos/nip-dark.webp'
@@ -215,11 +258,14 @@ export default function Nav() {
         {...(!open ? { inert: '' } : {})}
       >
         <ul className="nav__bar-list">
-          {LINKS.map((link) => {
+          {navLinks.map((link) => {
             const isActive =
               link.href === '/idil'
                 ? router.pathname === '/idil'
-                : router.pathname === '/' && activeSection === link.href.slice(2)
+                : router.pathname === '/' &&
+                  (link.combinedWith
+                    ? link.combinedWith.includes(activeSection)
+                    : activeSection === link.href.slice(2))
 
             return (
               <li key={link.href}>
