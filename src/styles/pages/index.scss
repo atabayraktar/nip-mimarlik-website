@@ -25,6 +25,15 @@
     gap: var(--sp-10);
   }
 
+  // 900-1024px, either orientation (iPad-mini landscape, iPad-midi/-pro
+  // portrait, ...): the two 460px cards + gap don't fit this width, so
+  // they wrap to stacked rows — shrink the row gap here too (see the
+  // matching padding trim in Services/Contact.scss) so the wrapped gap
+  // doesn't stack on top of a still-desktop-sized one.
+  @media (min-width: 900px) and (max-width: 1024px) {
+    gap: var(--sp-4);
+  }
+
   .services,
   .contact {
     @media (min-width: 900px) {

@@ -15,6 +15,16 @@
     bottom: var(--sp-6);
   }
 
+  // /idil's video column pins its right edge to the same page container
+  // edge the stack measures its own `right` from, so at this width band
+  // (iPad Pro portrait through small laptop windows — container hasn't
+  // hit its 1320px max-width yet, so the video sits right up against the
+  // viewport edge) the sp-6 offset above overlaps the video. Pull in
+  // closer to the edge until the container's own margins reopen the gap.
+  @media (min-width: 1024px) and (max-width: 1391px) {
+    right: 22px;
+  }
+
   // The buttons are wider than their icons for a comfortable tap target,
   // so centering the icon leaves it short of the button's right edge —
   // push it flush right instead, so the glyph lines up with the nav

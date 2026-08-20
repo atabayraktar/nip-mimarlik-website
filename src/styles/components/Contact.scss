@@ -9,6 +9,28 @@
     padding: var(--sp-12) 0;
   }
 
+  // Cramped viewports — mobile landscape and iPad-mini portrait — get a
+  // shorter gap, kept consistent with the other stacked sections. Only
+  // padding-top here (not the shorthand): the larger padding-bottom above
+  // is reserved for the footer, out of scope for this trim.
+  @media (max-height: 500px) and (orientation: landscape) {
+    padding-top: var(--sp-4);
+  }
+
+  @media (min-width: 768px) and (max-width: 833px) and (orientation: portrait) {
+    padding: var(--sp-6) 0;
+  }
+
+  // 900-1024px, either orientation (iPad-mini landscape, iPad-midi/-pro
+  // portrait, ...): Hizmetler/İletişim sit in the side-by-side flex row
+  // from 900px (see .hizmet-iletisim), but their 460px flex-basis + gap
+  // doesn't fit that width, so they wrap back to stacked rows — stacking
+  // Hizmetler's full sp-12 bottom against this section's own sp-12 top
+  // plus the row gap reads as a huge gap between them.
+  @media (min-width: 900px) and (max-width: 1024px) {
+    padding-top: var(--sp-6);
+  }
+
   &__head {
     position: relative;
     z-index: 1;

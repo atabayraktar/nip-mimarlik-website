@@ -183,6 +183,62 @@
       color: var(--ink);
     }
   }
+
+  // Mobile landscape only: a narrow single-column dialog barely fits a
+  // ~375-430px-tall viewport without heavy internal scrolling. Reflow it
+  // into two columns (title beside the form) and pair name/phone into a
+  // row, trading the extra landscape width for less required height —
+  // every other breakpoint is untouched.
+  @media (max-width: 1023px) and (max-height: 500px) and (orientation: landscape) {
+    &__dialog {
+      max-width: 720px;
+      max-height: 94vh;
+      display: grid;
+      grid-template-columns: minmax(160px, 220px) 1fr;
+      // Explicit row count so the form's `grid-row: 1 / -1` below spans
+      // exactly these two rows — without it, `-1` refers to the (empty)
+      // explicit grid's own last line, not the implicit rows eyebrow/title
+      // create by being placed, and the span collapses to nothing.
+      grid-template-rows: auto auto;
+      column-gap: var(--sp-5);
+      padding: var(--sp-3) var(--sp-4);
+    }
+
+    &__close {
+      top: var(--sp-2);
+      right: var(--sp-2);
+    }
+
+    &__eyebrow {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    &__title {
+      grid-column: 1;
+      grid-row: 2;
+      align-self: start;
+      margin-bottom: 0;
+    }
+
+    &__form {
+      grid-column: 2;
+      grid-row: 1 / -1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      column-gap: var(--sp-3);
+      row-gap: var(--sp-2);
+    }
+
+    &__field:nth-child(3),
+    &__submit {
+      grid-column: 1 / -1;
+    }
+
+    textarea {
+      min-height: 56px;
+    }
+  }
 }
 
 @keyframes contactModalIn {

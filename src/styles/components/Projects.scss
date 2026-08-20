@@ -8,6 +8,17 @@
     padding: var(--sp-12) 0;
   }
 
+  // Cramped viewports — mobile landscape and iPad-mini portrait — get a
+  // shorter gap, kept consistent across every stacked section instead of
+  // carrying the full mobile/desktop values into a short or narrow screen.
+  @media (max-height: 500px) and (orientation: landscape) {
+    padding: var(--sp-4) 0;
+  }
+
+  @media (min-width: 768px) and (max-width: 833px) and (orientation: portrait) {
+    padding: var(--sp-6) 0;
+  }
+
   .container {
     position: relative;
     z-index: 1;
