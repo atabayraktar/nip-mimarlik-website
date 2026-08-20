@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useTopoVariant, useRotatedFillSize } from '../lib/useResponsiveTopo'
 
 // Deterministic pseudo-random hash (no Math.random — must stay SSR-stable).
 function hash(n) {
@@ -9,10 +10,17 @@ function hash(n) {
 // The actual nip-topografya reference footage — contours build in from the
 // left/right edges and thicken over ~15s, then loop. Playing the real clip
 // (instead of an approximated frame sequence) is what makes the motion read
-// as identical to the source video.
+// as identical to the source video. Each tone ships a wide "desktop" cut and
+// a vertical "mobile" cut — see useTopoVariant for which plays where.
 const SOURCES = {
-  ink: '/videos/topo-dark.mp4',
-  paper: '/videos/topo-light.mp4',
+  ink: {
+    desktop: '/videos/topo-dark-desktop.mp4',
+    mobile: '/videos/topo-dark-mobile.mp4',
+  },
+  paper: {
+    desktop: '/videos/topo-light-desktop.mp4',
+    mobile: '/videos/topo-light-mobile.mp4',
+  },
 }
 
 export default function TopoLines({ tone = 'ink', className = '', parallax = true, seed = 0 }) {
@@ -20,6 +28,10 @@ export default function TopoLines({ tone = 'ink', className = '', parallax = tru
   const wrapRef = useRef(null)
   const videoRef = useRef(null)
   const [started, setStarted] = useState(false)
+  const { variant, rotated } = useTopoVariant()
+  const rotatedSize = useRotatedFillSize(wrapRef, rotated)
+  const src = SOURCES[tone][variant]
+  const loadedSrcRef = useRef(null)
 
   // Plays the clip only while the field is on screen; pauses it off-screen.
   useEffect(() => {
@@ -54,10 +66,17 @@ export default function TopoLines({ tone = 'ink', className = '', parallax = tru
       video.play().catch(() => {})
     }
 
+    // Re-loads only when the source actually flips (e.g. rotating the
+    // device between portrait/landscape swaps in the mobile/desktop clip) —
+    // not on every re-entry into view.
+    if (loadedSrcRef.current !== src) {
+      loadedSrcRef.current = src
+      video.load()
+    }
     if (video.readyState >= 1) settle()
     else video.addEventListener('loadedmetadata', settle, { once: true })
     return () => video.removeEventListener('loadedmetadata', settle)
-  }, [started, seed])
+  }, [started, seed, src])
 
   useEffect(() => {
     if (!parallax) return
@@ -99,9 +118,13 @@ export default function TopoLines({ tone = 'ink', className = '', parallax = tru
       <div ref={wrapRef} className="topo__inner">
         <video
           ref={videoRef}
-          className="topo__video"
-          style={{ objectPosition: `${posX}% 50%` }}
-          src={SOURCES[tone]}
+          className={`topo__video ${rotated ? 'topo__video--rotated' : ''}`}
+          style={
+            rotated && rotatedSize
+              ? { '--rotate-w': `${rotatedSize.height}px`, '--rotate-h': `${rotatedSize.width}px` }
+              : { objectPosition: `${posX}% 50%` }
+          }
+          src={src}
           muted
           loop
           playsInline

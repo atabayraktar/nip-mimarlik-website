@@ -12,7 +12,7 @@
   }
 
   &--ink {
-    --topo-opacity: 0.28;
+    --topo-opacity: 0.22;
 
     .topo__video {
       mix-blend-mode: screen;
@@ -20,7 +20,7 @@
   }
 
   &--paper {
-    --topo-opacity: 0.22;
+    --topo-opacity: 0.28;
 
     .topo__video {
       mix-blend-mode: multiply;
@@ -43,6 +43,19 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    // Fills a landscape container with the vertical mobile clip by laying
+    // it out at the container's height x width (swapped) then rotating
+    // 90deg, so the rotated box lands back on width x height exactly.
+    &--rotated {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: var(--rotate-w, 100%);
+      height: var(--rotate-h, 100%);
+      max-width: none;
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
   }
 }
 
