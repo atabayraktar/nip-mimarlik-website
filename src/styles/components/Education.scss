@@ -24,6 +24,7 @@
     min-width: 0;
     display: flex;
     align-items: center;
+    justify-content: flex-end;
   }
 
   &__inner {
@@ -33,6 +34,19 @@
     grid-template-columns: 1fr;
     gap: var(--sp-8);
     width: 100%;
+
+    // Lines up with the About text column above it: that column is capped
+    // at 64ch and pushed to the end of its grid track, so matching the same
+    // cap here (rather than shrinking to this content's own narrower
+    // fit-content width) lands both columns' left edges on the same x. The
+    // 0.88rem font-size is About's bio font-size, not this element's own —
+    // `ch` resolves against the element's own font-size, and every child
+    // here already sets its font-size in rem, so this only steers the `ch`
+    // math without changing any rendered text size.
+    @media (min-width: 900px) {
+      font-size: 0.88rem;
+      width: min(64ch, 100%);
+    }
   }
 
   &__col {

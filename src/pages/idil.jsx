@@ -63,8 +63,8 @@ export default function Idil() {
       <main id="main-content">
         <AboutIntro />
         <div className="container egitim-video">
-          <Education />
           <AboutVideo />
+          <Education />
         </div>
       </main>
 

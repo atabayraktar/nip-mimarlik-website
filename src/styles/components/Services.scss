@@ -19,16 +19,6 @@
     padding: var(--sp-6) 0;
   }
 
-  // 900-1024px, either orientation (iPad-mini landscape, iPad-midi/-pro
-  // portrait, ...): Hizmetler/İletişim sit in the side-by-side flex row
-  // from 900px (see .hizmet-iletisim), but their 460px flex-basis + gap
-  // doesn't fit that width, so they wrap back to stacked rows — stacking
-  // the full sp-12 bottom against İletişim's own sp-12 top plus the row
-  // gap reads as a huge gap between them.
-  @media (min-width: 900px) and (max-width: 1024px) {
-    padding-bottom: var(--sp-6);
-  }
-
   &__head {
     position: relative;
     z-index: 1;
@@ -45,6 +35,33 @@
     z-index: 1;
     display: grid;
     grid-template-columns: 1fr;
+
+    // 3 rows on the left, 2 on the right. Both columns stretch to the
+    // taller (left) column's height, then the right column distributes its
+    // 2 rows with space-evenly — landing them in the left column's gaps —
+    // instead of a hardcoded offset, so it stays correct as copy length
+    // (and so row height) changes.
+    @media (min-width: 900px) {
+      display: flex;
+      align-items: stretch;
+      gap: var(--sp-8);
+    }
+  }
+
+  &__col {
+    @media (min-width: 900px) {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-width: 0;
+      justify-content: space-between;
+    }
+  }
+
+  &__col--right {
+    @media (min-width: 900px) {
+      justify-content: space-evenly;
+    }
   }
 
   &__row {

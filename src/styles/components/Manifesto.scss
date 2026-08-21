@@ -5,7 +5,12 @@
   overflow: hidden;
 
   @media (min-width: 768px) {
-    padding: var(--sp-12) 0;
+    // Hero is edge-to-edge with no padding of its own, so this top padding
+    // is the entire visual gap above Manifesto — double it (matching a
+    // regular section-to-section gap, which is two sections' padding
+    // stacked) so it doesn't read as tighter than the rest of the rhythm.
+    padding-top: calc(var(--sp-12) * 2);
+    padding-bottom: var(--sp-12);
   }
 
   // Cramped viewports — mobile landscape and iPad-mini portrait — get a
@@ -60,7 +65,11 @@
   }
 
   &__eyebrow {
-    margin-bottom: var(--sp-4);
+    margin-bottom: var(--sp-2);
+
+    @media (min-width: 768px) {
+      margin-bottom: var(--sp-4);
+    }
   }
 
   &__headline {

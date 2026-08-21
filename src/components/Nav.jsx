@@ -11,26 +11,16 @@ const INITIAL_D = burgerDAtPhase(0)
 
 const LINKS = [
   { href: '/#manifesto', label: 'Manifesto' },
+  { href: '/idil', label: 'İdil Hakkında' },
   { href: '/#projeler', label: 'Projeler' },
   { href: '/#hizmetler', label: 'Hizmetler' },
   { href: '/#iletisim', label: 'İletişim' },
-  { href: '/idil', label: 'İdil Hakkımda' },
 ]
-
-// Hizmetler + İletişim sit side by side starting at this width (see
-// .hizmet-iletisim in index.scss) — merge their nav entries into one item
-// from that point on, independent of the nav's own 1024px mobile/desktop
-// breakpoint. The height clause keeps this a tablet/desktop-only merge: a
-// phone rotated to landscape can clear 900px of width too (e.g. ~926px on
-// many phones) while staying short (~375–430px), and should still behave
-// like normal portrait mobile — separate nav items — not the desktop merge.
-const SECTIONS_SIDE_BY_SIDE_QUERY = '(min-width: 900px) and (min-height: 500px)'
 
 export default function Nav() {
   const [theme, setTheme] = useState('ink')
   const [activeSection, setActiveSection] = useState(null)
   const [open, setOpen] = useState(false)
-  const [sectionsSideBySide, setSectionsSideBySide] = useState(false)
   const [burgerHover, setBurgerHover] = useState(false)
   const [hoverCapable, setHoverCapable] = useState(true)
   const [atTop, setAtTop] = useState(true)
@@ -47,14 +37,6 @@ export default function Nav() {
   useEffect(() => {
     setOpen(false)
   }, [router.asPath])
-
-  useEffect(() => {
-    const mql = window.matchMedia(SECTIONS_SIDE_BY_SIDE_QUERY)
-    const update = () => setSectionsSideBySide(mql.matches)
-    update()
-    mql.addEventListener('change', update)
-    return () => mql.removeEventListener('change', update)
-  }, [])
 
   // Mobile/tablet (touch, no real hover) never sees the hover-preview bars
   // step — the burger morphs straight from the key mark to the close X.
@@ -177,14 +159,6 @@ export default function Nav() {
     }
   }, [router.pathname])
 
-  const navLinks = sectionsSideBySide
-    ? LINKS.filter((link) => link.href !== '/#iletisim').map((link) =>
-        link.href === '/#hizmetler'
-          ? { ...link, label: 'Hizmetler ve İletişim', combinedWith: ['hizmetler', 'iletisim'] }
-          : link
-      )
-    : LINKS
-
   const onDark = theme === 'ink' || theme === 'graphite'
   const logoSrc = onDark ? '/images/logos/nip-logos/nip-light.webp' : '/images/logos/nip-logos/nip-dark.webp'
   const overHero = activeSection === 'hero'
@@ -220,10 +194,10 @@ export default function Nav() {
   // hash the active-link state would then have to track. Since a same-page
   // click no longer changes router.asPath, close the mobile menu explicitly
   // here instead of relying on the asPath-watcher effect above.
-  const handleSectionLinkClick = (e, href, combinedWith) => {
+  const handleSectionLinkClick = (e, href) => {
     if (!href.startsWith('/#')) return
     e.preventDefault()
-    const ids = combinedWith ?? href.slice(2)
+    const ids = href.slice(2)
     setOpen(false)
 
     if (router.pathname === '/') {
@@ -287,14 +261,11 @@ export default function Nav() {
         )}
 
         <ul className="nav__bar-list">
-          {navLinks.map((link) => {
+          {LINKS.map((link) => {
             const isActive =
               link.href === '/idil'
                 ? router.pathname === '/idil'
-                : router.pathname === '/' &&
-                  (link.combinedWith
-                    ? link.combinedWith.includes(activeSection)
-                    : activeSection === link.href.slice(2))
+                : router.pathname === '/' && activeSection === link.href.slice(2)
 
             return (
               <li key={link.href}>
@@ -302,7 +273,7 @@ export default function Nav() {
                   href={link.href}
                   className={`nav__bar-link ${isActive ? 'nav__bar-link--active' : ''}`}
                   tabIndex={open ? 0 : -1}
-                  onClick={(e) => handleSectionLinkClick(e, link.href, link.combinedWith)}
+                  onClick={(e) => handleSectionLinkClick(e, link.href)}
                 >
                   {link.label}
                 </Link>

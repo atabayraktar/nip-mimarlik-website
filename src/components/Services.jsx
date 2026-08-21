@@ -23,6 +23,21 @@ const ICONS = {
       <path d="M9 13l2 2 4-4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
+  contracting: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 20V9l6-3v14" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M10 20V4l6 2.5V20" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M4 20h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M13 9h2M13 13h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+  commitment: (
+    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M7 4h8l3 3v13H7V4Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M15 4v3h3" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+      <path d="M9.5 13.2l1.8 1.8 3.2-3.7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
 }
 
 const SERVICES = [
@@ -41,7 +56,32 @@ const SERVICES = [
     name: 'Proje Uygulama Danışmanlığı',
     copy: 'Tasarımın şantiyede doğru uygulanmasını takip eden saha denetimi ve süreç danışmanlığı.',
   },
+  {
+    icon: 'contracting',
+    name: 'Müteahhitlik',
+    copy: 'Kaba inşaattan teslim anahtarına, sahada uçtan uca yürütülen müteahhitlik ve inşaat yönetimi hizmeti.',
+  },
+  {
+    icon: 'commitment',
+    name: 'Taahhüt İşleri',
+    copy: 'Sözleşme kapsamındaki imalat ve teslim süreçlerinin zamanında, eksiksiz tamamlanmasını güvence altına alan taahhüt yönetimi.',
+  },
 ]
+
+const LEFT = SERVICES.slice(0, 3)
+const RIGHT = SERVICES.slice(3)
+
+function ServiceRow({ s, delay }) {
+  return (
+    <li className="services__row" data-reveal data-reveal-delay={String(delay)}>
+      <span className="services__icon">{ICONS[s.icon]}</span>
+      <span className="services__text">
+        <h3 className="services__name">{s.name}</h3>
+        <p className="services__copy">{s.copy}</p>
+      </span>
+    </li>
+  )
+}
 
 export default function Services() {
   const [isOpen] = useSection('hizmetler')
@@ -53,22 +93,18 @@ export default function Services() {
       </div>
 
       <Collapse id="hizmetler" open={isOpen}>
-        <ul className="services__grid">
-          {SERVICES.map((s, i) => (
-            <li
-              className="services__row"
-              key={s.name}
-              data-reveal
-              data-reveal-delay={String(i * 100)}
-            >
-              <span className="services__icon">{ICONS[s.icon]}</span>
-              <span className="services__text">
-                <h3 className="services__name">{s.name}</h3>
-                <p className="services__copy">{s.copy}</p>
-              </span>
-            </li>
-          ))}
-        </ul>
+        <div className="services__grid">
+          <ul className="services__col services__col--left">
+            {LEFT.map((s, i) => (
+              <ServiceRow s={s} delay={i * 100} key={s.name} />
+            ))}
+          </ul>
+          <ul className="services__col services__col--right">
+            {RIGHT.map((s, i) => (
+              <ServiceRow s={s} delay={(i + 3) * 100} key={s.name} />
+            ))}
+          </ul>
+        </div>
       </Collapse>
     </section>
   )

@@ -8,9 +8,9 @@ const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffec
 
 const FILTERS = [
   { key: 'all', label: 'Tümü' },
-  { key: 'ic-mekan', label: 'İç Mekan' },
-  { key: 'dis-mekan', label: 'Dış Mekan' },
-  { key: 'finanse', label: 'Finanse Edilenler' },
+  { key: 'mimari', label: 'Mimari Projeler' },
+  { key: 'ic-mekan', label: 'İç Mekan Projeleri' },
+  { key: 'mutahitlik', label: 'Mütahitlik Projeleri' },
 ]
 
 function projectImages(label) {
@@ -23,40 +23,10 @@ function projectImages(label) {
 
 const PROJECTS = [
   {
-    id: 1,
-    name: 'Sea Evi',
-    category: 'dis-mekan',
-    categoryLabel: 'Dış Mekan',
-    location: 'Çanakkale, Yukarıinova Köyü',
-    client: 'Özel Müşteri',
-    typology: 'Villa',
-    size: '130 m²',
-    status: 'Ruhsatlandı',
-    icon: '/images/logos/project-logos/project-01.webp',
-    images: projectImages('Sea+Evi'),
-    description:
-      'Çanakkale’nin Yukarıinova Köyü’nde özgürlüğünü ilan eden bir yapı. Sınırları içinde, sınırsızlığı çizmek isteyen bir proje Sea Evi. Mümkün olan her noktasında doğaya açılan hatta kucaklayan bir duruş sergilemekte.',
-  },
-  {
-    id: 2,
-    name: 'Sasa Evi',
-    category: 'dis-mekan',
-    categoryLabel: 'Dış Mekan',
-    location: 'Çanakkale, Yukarıinova Köyü',
-    client: 'Özel Müşteri',
-    typology: 'Villa',
-    size: '130 m²',
-    status: 'Ruhsatlandı',
-    icon: '/images/logos/project-logos/project-02.webp',
-    images: projectImages('Sasa+Evi'),
-    description:
-      'Çanakkale’nin Yukarıinova Köyü’nde, dere kenarında ve ormanla iç içe bir alanda yer alan Sasa Evi, ana tasarım kararı olarak avlulu bir yapıya sahip. Formu sayesinde kendi dünyasını kuran ve mahremiyetini oluşturan yapı, doğanın spontane akışına karşı tanımlı duruşuyla kullanıcısının yaşantısını yansıtıyor.',
-  },
-  {
     id: 3,
     name: 'Sade',
-    category: 'finanse',
-    categoryLabel: 'Finanse Edilenler',
+    category: 'mutahitlik',
+    categoryLabel: 'Mütahitlik Projeleri',
     location: 'Çanakkale, Dardanos',
     client: 'Müteahhitliğini yaptığımız proje',
     typology: 'Villa Sitesi',
@@ -68,25 +38,10 @@ const PROJECTS = [
       'Sade, fazlalıklardan arınmış bir düşüncenin mekâna dönüşmüş hâli. Mimari yaklaşımımız hiçbir zaman dayatmak ya da sınırlandırmak olmadı; yalnızca bulunduğu yere ait, sade ama özenle düşünülmüş bir anlayışı temsil ediyoruz. Sade Projesi, Çanakkale’nin Dardanos mevkiinde abartıdan uzak, ferah ve sade yaşam alanlarını kullanıcılarına sunuyor.',
   },
   {
-    id: 4,
-    name: 'Var Evi',
-    category: 'dis-mekan',
-    categoryLabel: 'Dış Mekan',
-    location: 'Çanakkale, Çınarlı',
-    client: 'Özel Müşteri',
-    typology: 'Villa',
-    size: '200 m²',
-    status: 'Konsept Tasarımı Yapıldı',
-    icon: '/images/logos/project-logos/project-04.webp',
-    images: projectImages('Var+Evi'),
-    description:
-      'Çevre insana göre şekillendi; şimdi ise insanların yaşam alanları parsellerin sınırlarına göre şekillenmekte. Biz de ofisimizde tasarım yaparken bu sınırlara bağlı kalmak zorunda olsak da kullanıcının var olma biçimine özgü tasarımlar yapıyoruz. Var Evi, Çanakkale’nin Çınarlı mevkiinde yer alan bir parselin tanımsızlığı içinde kendini var eden; kütlesel hareketlerle mekânları tanımlamayı ve bunu olabildiğince esnek bir şekilde kullanıcıyla buluşturmayı amaçlayan bir proje.',
-  },
-  {
     id: 5,
     name: 'P Evi',
     category: 'ic-mekan',
-    categoryLabel: 'İç Mekan',
+    categoryLabel: 'İç Mekan Projeleri',
     location: 'Çanakkale, Çınarlı',
     client: 'Özel Müşteri',
     typology: 'Salon Tasarımı',
@@ -98,10 +53,55 @@ const PROJECTS = [
       'Çevre insana göre şekillendi; şimdi ise insanların yaşam alanları parsellerin sınırlarına göre şekillenmekte. Biz de ofisimizde tasarım yaparken bu sınırlara bağlı kalmak zorunda olsak da kullanıcının var olma biçimine özgü tasarımlar yapıyoruz. P Evi, kütlesel hareketlerle mekânları tanımlamayı ve bunu olabildiğince esnek bir şekilde kullanıcıyla buluşturmayı amaçlayan bir salon tasarımı.',
   },
   {
+    id: 2,
+    name: 'Sasa Evi',
+    category: 'mimari',
+    categoryLabel: 'Mimari Projeler',
+    location: 'Çanakkale, Yukarıinova Köyü',
+    client: 'Özel Müşteri',
+    typology: 'Villa',
+    size: '130 m²',
+    status: 'Ruhsatlandı',
+    icon: '/images/logos/project-logos/project-02.webp',
+    images: projectImages('Sasa+Evi'),
+    description:
+      'Çanakkale’nin Yukarıinova Köyü’nde, dere kenarında ve ormanla iç içe bir alanda yer alan Sasa Evi, ana tasarım kararı olarak avlulu bir yapıya sahip. Formu sayesinde kendi dünyasını kuran ve mahremiyetini oluşturan yapı, doğanın spontane akışına karşı tanımlı duruşuyla kullanıcısının yaşantısını yansıtıyor.',
+  },
+  {
+    id: 7,
+    name: 'St Evi',
+    category: 'ic-mekan',
+    categoryLabel: 'İç Mekan Projeleri',
+    location: 'Çanakkale, Türkiye',
+    client: 'Özel Müşteri',
+    typology: 'Salon Tasarımı',
+    size: '50 m²',
+    status: 'Tasarlandı · İmalatı Yapıldı',
+    icon: '/images/logos/project-logos/project-07.webp',
+    images: projectImages('St+Evi'),
+    description:
+      'Günün son dakikalarına şahitlik eden ve yoğun iş temposundan sonra bir dinlenme alanı, birlikte anlar yaratmayı sağlayan yaşam alanı olarak kullanılan salonda tasarım yeniliğine gidildi. Mermerin derin renkleri, ateşin sıcaklığı, yeşil ve kahve tonların birlikteliği; bütünde çeşitlilik, sonuçta ise uyum hedeflendi.',
+  },
+  {
+    id: 1,
+    name: 'Sea Evi',
+    category: 'mimari',
+    categoryLabel: 'Mimari Projeler',
+    location: 'Çanakkale, Yukarıinova Köyü',
+    client: 'Özel Müşteri',
+    typology: 'Villa',
+    size: '130 m²',
+    status: 'Ruhsatlandı',
+    icon: '/images/logos/project-logos/project-01.webp',
+    images: projectImages('Sea+Evi'),
+    description:
+      'Çanakkale’nin Yukarıinova Köyü’nde özgürlüğünü ilan eden bir yapı. Sınırları içinde, sınırsızlığı çizmek isteyen bir proje Sea Evi. Mümkün olan her noktasında doğaya açılan hatta kucaklayan bir duruş sergilemekte.',
+  },
+  {
     id: 6,
     name: 'Ky Evi',
-    category: 'dis-mekan',
-    categoryLabel: 'Dış Mekan',
+    category: 'mimari',
+    categoryLabel: 'Mimari Projeler',
     location: 'Çanakkale, Kepez',
     client: 'Özel Müşteri',
     typology: 'İkiz Villa',
@@ -113,19 +113,19 @@ const PROJECTS = [
       'Ky Evleri, Çanakkale’nin Kepez mevkiinde yer almakta; müteahhitleri için projelendirildi. Kullanıcısı için en fonksiyonel hâlde geniş oda kullanımları amaçlamış olan bir proje.',
   },
   {
-    id: 7,
-    name: 'St Evi',
-    category: 'ic-mekan',
-    categoryLabel: 'İç Mekan',
-    location: 'Çanakkale, Türkiye',
+    id: 4,
+    name: 'Var Evi',
+    category: 'mimari',
+    categoryLabel: 'Mimari Projeler',
+    location: 'Çanakkale, Çınarlı',
     client: 'Özel Müşteri',
-    typology: 'Salon Tasarımı',
-    size: '50 m²',
-    status: 'Tasarlandı · İmalatı Yapıldı',
-    icon: '/images/logos/project-logos/project-07.webp',
-    images: projectImages('St+Evi'),
+    typology: 'Villa',
+    size: '200 m²',
+    status: 'Konsept Tasarımı Yapıldı',
+    icon: '/images/logos/project-logos/project-04.webp',
+    images: projectImages('Var+Evi'),
     description:
-      'Günün son dakikalarına şahitlik eden ve yoğun iş temposundan sonra bir dinlenme alanı, birlikte anlar yaratmayı sağlayan yaşam alanı olarak kullanılan salonda tasarım yeniliğine gidildi. Mermerin derin renkleri, ateşin sıcaklığı, yeşil ve kahve tonların birlikteliği; bütünde çeşitlilik, sonuçta ise uyum hedeflendi.',
+      'Çevre insana göre şekillendi; şimdi ise insanların yaşam alanları parsellerin sınırlarına göre şekillenmekte. Biz de ofisimizde tasarım yaparken bu sınırlara bağlı kalmak zorunda olsak da kullanıcının var olma biçimine özgü tasarımlar yapıyoruz. Var Evi, Çanakkale’nin Çınarlı mevkiinde yer alan bir parselin tanımsızlığı içinde kendini var eden; kütlesel hareketlerle mekânları tanımlamayı ve bunu olabildiğince esnek bir şekilde kullanıcıyla buluşturmayı amaçlayan bir proje.',
   },
 ]
 
@@ -227,6 +227,7 @@ export default function Projects() {
   const mediaRefs = useRef({})
   const cardRefs = useRef({})
   const pendingFlip = useRef(null)
+  const centerSettleRAF = useRef(null)
 
   const visible = useMemo(
     () => (filter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.category === filter)),
@@ -236,14 +237,22 @@ export default function Projects() {
   const openProject = (id) => {
     if (openId != null) return
     const node = mediaRefs.current[id]
-    pendingFlip.current = { id, firstRect: node ? node.getBoundingClientRect() : null }
+    pendingFlip.current = {
+      id,
+      firstRect: node ? node.getBoundingClientRect() : null,
+      firstScrollY: window.scrollY,
+    }
     setActiveIndex(0)
     setOpenId(id)
   }
 
   const closeProject = (id) => {
     const node = mediaRefs.current[id]
-    pendingFlip.current = { id, firstRect: node ? node.getBoundingClientRect() : null }
+    pendingFlip.current = {
+      id,
+      firstRect: node ? node.getBoundingClientRect() : null,
+      firstScrollY: window.scrollY,
+    }
     setOpenId(null)
   }
 
@@ -260,7 +269,43 @@ export default function Projects() {
     const cardNode = cardRefs.current[flip.id]
     if (cardNode) {
       const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 0
-      scrollToElement(cardNode, { offset: -(navH + 24) })
+      const isOpening = openId === flip.id
+
+      const idealTopGap = () => {
+        // Opening: centre the card in the full viewport — equal breathing
+        // room from the very top edge to the very bottom edge — but never
+        // let its top tuck under the fixed nav when the panel is taller
+        // than the viewport allows for true centering.
+        const centerGap = (window.innerHeight - cardNode.offsetHeight) / 2
+        return Math.max(navH + 24, centerGap)
+      }
+
+      const centerScroll = () => scrollToElement(cardNode, { offset: -idealTopGap() })
+
+      cancelAnimationFrame(centerSettleRAF.current)
+      centerSettleRAF.current = null
+
+      if (isOpening) {
+        centerScroll()
+        // A sibling section's own open/collapse transition (or a late
+        // font/content reflow above the grid) can still nudge the card's
+        // document position for a moment after this first measurement —
+        // keep correcting the scroll for a short settle window so the gap
+        // stays symmetric instead of freezing on a stale position.
+        const settleUntil = performance.now() + 500
+        const tick = () => {
+          if (cardRefs.current[flip.id] !== cardNode || !document.body.contains(cardNode)) return
+          if (Math.abs(cardNode.getBoundingClientRect().top - idealTopGap()) > 1) {
+            centerScroll()
+          }
+          if (performance.now() < settleUntil) {
+            centerSettleRAF.current = requestAnimationFrame(tick)
+          }
+        }
+        centerSettleRAF.current = requestAnimationFrame(tick)
+      } else {
+        scrollToElement(cardNode, { offset: -(navH + 24) })
+      }
     }
 
     if (!flip.firstRect) return
@@ -269,8 +314,13 @@ export default function Projects() {
     if (!node) return
 
     const lastRect = node.getBoundingClientRect()
+    // Opening also scrolls the page (to centre the card under the nav), so
+    // firstRect and lastRect were captured at two different scroll
+    // positions — compare them in document-absolute space, not viewport-
+    // relative, or the scroll delta bleeds into the FLIP transform as a
+    // spurious vertical offset.
     const dx = flip.firstRect.left - lastRect.left
-    const dy = flip.firstRect.top - lastRect.top
+    const dy = flip.firstRect.top + flip.firstScrollY - (lastRect.top + window.scrollY)
     const sx = flip.firstRect.width / lastRect.width
     const sy = flip.firstRect.height / lastRect.height
 
@@ -300,24 +350,28 @@ export default function Projects() {
   return (
     <section id="projeler" data-theme="paper" className="projects">
       <div className="container">
-        <div className="projects__head">
-          <SectionToggle id="projeler" label="Projeler" />
-        </div>
+        {openId == null && (
+          <div className="projects__head">
+            <SectionToggle id="projeler" label="Projeler" />
+          </div>
+        )}
 
         <Collapse id="projeler" open={sectionOpen}>
-          <div className="projects__filters" role="group" aria-label="Proje kategorisi filtrele">
-            {FILTERS.map((f) => (
-              <button
-                key={f.key}
-                type="button"
-                className={`projects__filter ${filter === f.key ? 'projects__filter--active' : ''}`}
-                aria-pressed={filter === f.key}
-                onClick={() => selectFilter(f.key)}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
+          {openId == null && (
+            <div className="projects__filters" role="group" aria-label="Proje kategorisi filtrele">
+              {FILTERS.map((f) => (
+                <button
+                  key={f.key}
+                  type="button"
+                  className={`projects__filter ${filter === f.key ? 'projects__filter--active' : ''}`}
+                  aria-pressed={filter === f.key}
+                  onClick={() => selectFilter(f.key)}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          )}
 
           <ul className="projects__rows">
           {visible.map((p, i) => {

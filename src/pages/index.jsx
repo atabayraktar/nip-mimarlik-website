@@ -87,7 +87,7 @@ export default function Home() {
         <Hero />
         <Manifesto />
         <Projects />
-        <div className="container hizmet-iletisim">
+        <div className="container">
           <Services />
           <Contact />
         </div>

@@ -6,7 +6,12 @@
   padding-bottom: var(--sp-16);
 
   @media (min-width: 768px) {
-    padding: var(--sp-12) 0;
+    // Footer's own top padding is a fixed, slim var(--sp-4) (it's a compact
+    // bar, not a rhythm section), so this bottom padding has to make up the
+    // rest of a regular section-to-section gap (two sections' padding
+    // stacked) on its own for the visual gap above the footer to match.
+    padding-top: var(--sp-12);
+    padding-bottom: var(--sp-20);
   }
 
   // Cramped viewports — mobile landscape and iPad-mini portrait — get a
@@ -19,16 +24,6 @@
 
   @media (min-width: 768px) and (max-width: 833px) and (orientation: portrait) {
     padding: var(--sp-6) 0;
-  }
-
-  // 900-1024px, either orientation (iPad-mini landscape, iPad-midi/-pro
-  // portrait, ...): Hizmetler/İletişim sit in the side-by-side flex row
-  // from 900px (see .hizmet-iletisim), but their 460px flex-basis + gap
-  // doesn't fit that width, so they wrap back to stacked rows — stacking
-  // Hizmetler's full sp-12 bottom against this section's own sp-12 top
-  // plus the row gap reads as a huge gap between them.
-  @media (min-width: 900px) and (max-width: 1024px) {
-    padding-top: var(--sp-6);
   }
 
   &__head {

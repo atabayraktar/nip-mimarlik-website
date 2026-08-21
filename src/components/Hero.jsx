@@ -18,6 +18,12 @@ export default function Hero() {
   useEffect(() => {
     const video = videoRef.current
     if (!video) return
+    // The `muted` JSX prop sets the HTML attribute, but browsers (Safari/iOS
+    // in particular) require the `muted` IDL property itself to be true at
+    // play() time for autoplay to be allowed — after hydration that property
+    // doesn't reliably end up set from the attribute alone, so set it here.
+    video.muted = true
+    video.defaultMuted = true
     video.load()
     video.play().catch(() => {})
   }, [src])
