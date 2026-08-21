@@ -35,80 +35,86 @@
   &__inner {
     position: relative;
     z-index: 1;
-    display: flex;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--sp-6) var(--sp-5);
   }
 
-  &__info {
-    display: flex;
-    flex-direction: column;
-    max-width: 760px;
+  &__item {
+    min-width: 0;
   }
 
-  &__list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-6);
-
-    div {
-      display: flex;
-      align-items: center;
-      gap: var(--sp-3);
-      min-width: 0;
-    }
-
-    dt {
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      color: var(--ink);
-
-      svg {
-        width: 28px;
-        height: auto;
-        display: block;
-      }
-    }
-
-    dd {
-      font-family: var(--font-display);
-      font-size: 0.95rem;
-      color: var(--ink);
-      min-width: 0;
-
-      a {
-        color: inherit;
-        transition: color var(--transition-fast);
-
-        &:hover,
-        &:focus-visible {
-          color: var(--concrete);
-        }
-
-        &:focus-visible {
-          outline: 1px solid currentColor;
-          outline-offset: 4px;
-        }
-      }
-    }
-  }
-
-  &__form-cta {
-    align-self: flex-start;
-    margin-top: var(--sp-6);
+  &__item-toggle {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    gap: 0.6em;
+    justify-content: flex-start;
+    text-align: left;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
     font-family: var(--font-structural);
     font-size: 0.72rem;
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.24em;
     text-transform: uppercase;
     color: var(--ink);
-    border: 1px solid var(--ink);
-    padding: 0.9em 1.6em;
-    transition: color var(--transition-fast), background-color var(--transition-fast);
+    transition: color var(--transition-fast);
 
     &:hover,
     &:focus-visible {
-      background: var(--ink);
-      color: var(--paper);
+      color: var(--concrete);
+    }
+
+    &:focus-visible {
+      outline: 1px solid currentColor;
+      outline-offset: 6px;
+    }
+
+    &[aria-expanded='true'] {
+      color: var(--concrete);
+    }
+  }
+
+  &__item-icon {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    color: inherit;
+
+    svg {
+      // Mark's own viewBox is 810x270 (3:1) — keep that ratio so it doesn't
+      // squash into a different silhouette than the nav burger's resting frame.
+      width: 20px;
+      height: calc(20px / 3);
+      display: block;
+    }
+  }
+
+  &__item-value {
+    margin-top: var(--sp-3);
+    font-family: var(--font-structural);
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--ink);
+
+    a {
+      color: inherit;
+      word-break: break-word;
+      transition: color var(--transition-fast);
+
+      &:hover,
+      &:focus-visible {
+        color: var(--concrete);
+      }
+
+      &:focus-visible {
+        outline: 1px solid currentColor;
+        outline-offset: 4px;
+      }
     }
   }
 }
