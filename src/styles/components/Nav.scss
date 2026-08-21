@@ -29,15 +29,26 @@
     transition: opacity var(--transition-base), transform var(--transition-base);
 
     // The wordmark already appears large and centered in the Hero — the
-    // small recurring header mark is desktop-only; on mobile it's dropped
-    // by default (see &--mobile-visible below for the exceptions).
-    @media (max-width: 1023px) {
+    // small recurring header mark only exists from tablet width up. True
+    // mobile phones drop it entirely, no exceptions (the fullscreen menu
+    // and /idil's top-of-page header just go without it there).
+    @media (max-width: 767px) {
       opacity: 0;
       pointer-events: none;
     }
 
-    @media (min-width: 1024px) {
-      left: 3.3rem;
+    // From tablet up, the mark is centered inside a box capped at its own
+    // natural footprint but never wider than --content-edge — the same
+    // left gutter .container's own content sits behind. That keeps it
+    // pinned near the true edge on wide desktop (the cap wins) while
+    // letting it shrink and re-center itself as that gutter narrows on
+    // tablet or a resized desktop window, instead of a fixed offset/size
+    // that runs into content once the window narrows.
+    @media (min-width: 768px) {
+      --logo-box: min(var(--content-edge), calc(60px + 2 * var(--sp-1)));
+      left: 0;
+      width: var(--logo-box);
+      justify-content: center;
     }
 
     img {
@@ -45,8 +56,12 @@
       width: auto;
       transition: transform var(--transition-fast);
 
-      @media (min-width: 1024px) {
-        height: 44px;
+      @media (min-width: 768px) {
+        // 44px is the natural/max size (mark's aspect ratio ≈ 1.371 w/h).
+        // Below it, height scales down 1:1 with however much of
+        // --logo-box is left after its own breathing padding, so the mark
+        // shrinks to fit the gutter instead of overlapping content.
+        height: clamp(22px, calc((var(--logo-box) - 2 * var(--sp-1)) / 1.371), 44px);
       }
     }
 
@@ -59,17 +74,6 @@
       opacity: 0;
       transform: scale(0.82);
       pointer-events: none;
-    }
-
-    // Two cases on mobile/tablet: /idil at the very top of the page (no
-    // hero mark of its own to stand in for it), and the open fullscreen
-    // menu on a light background (the plain paper panel otherwise has
-    // nothing in that corner).
-    &--mobile-visible {
-      @media (max-width: 1023px) {
-        opacity: 1;
-        pointer-events: auto;
-      }
     }
   }
 
@@ -84,12 +88,28 @@
     justify-content: center;
     z-index: 101;
     cursor: pointer;
+
+    // Mirrors the logo from tablet up: centered inside a box capped at its
+    // own natural footprint but never wider than --content-edge, so the
+    // key mark stays aligned with that same right gutter as it narrows or
+    // widens instead of sitting at a fixed inset.
+    @media (min-width: 768px) {
+      --burger-box: min(var(--content-edge), calc(44px + 2 * var(--sp-1)));
+      --mark-w: clamp(24px, calc(var(--burger-box) - 2 * var(--sp-1)), 44px);
+      right: 0;
+      width: var(--burger-box);
+    }
   }
 
   &__burger-mark {
     // Fills the 44px button — extra pixels smooth the X's diagonal edges.
     width: 44px;
     height: calc(44px / 3);
+
+    @media (min-width: 768px) {
+      width: var(--mark-w, 44px);
+      height: calc(var(--mark-w, 44px) / 3);
+    }
   }
 
   &__bar {
@@ -230,14 +250,6 @@
         }
       }
     }
-  }
-}
-
-.nav--open .nav__logo--hidden {
-  @media (max-width: 1023px) {
-    opacity: 1;
-    transform: scale(1);
-    pointer-events: auto;
   }
 }
 

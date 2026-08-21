@@ -19,6 +19,12 @@
     --nav-h: 96px;
   }
 
+  // Mirrors .container's own max-width/padding math below, so anything
+  // pinned outside the container (e.g. the nav logo) can size itself
+  // against the same real left gutter instead of guessing a fixed value.
+  --container-max: 1320px;
+  --content-edge: calc(max(0px, (100vw - var(--container-max)) / 2) + var(--sp-8));
+
   // Typography
   --font-display: "Fraunces", Georgia, serif;
   --font-structural: "Archivo Expanded", "Archivo", system-ui, sans-serif;
@@ -117,7 +123,7 @@ ol {
 // Utility
 .container {
   width: 100%;
-  max-width: 1320px;
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 var(--sp-4);
 

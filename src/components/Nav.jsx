@@ -23,7 +23,6 @@ export default function Nav() {
   const [open, setOpen] = useState(false)
   const [burgerHover, setBurgerHover] = useState(false)
   const [hoverCapable, setHoverCapable] = useState(true)
-  const [atTop, setAtTop] = useState(true)
   const headerRef = useRef(null)
   const barRef = useRef(null)
   const burgerRef = useRef(null)
@@ -141,7 +140,6 @@ export default function Nav() {
 
       setTheme(current.dataset.theme)
       setActiveSection((activeEl.id || current.id) ?? null)
-      setAtTop(window.scrollY < 4)
     }
 
     const onScroll = () => {
@@ -162,12 +160,6 @@ export default function Nav() {
   const onDark = theme === 'ink' || theme === 'graphite'
   const logoSrc = onDark ? '/images/logos/nip-logos/nip-light.webp' : '/images/logos/nip-logos/nip-dark.webp'
   const overHero = activeSection === 'hero'
-  // The mobile logo is hidden by default (see Nav.scss) and only shows for
-  // two cases: /idil has no hero mark of its own, so its top-of-page header
-  // shows it in place of one; and the open fullscreen mobile menu shows it
-  // top-left on a light background, where the plain paper panel otherwise
-  // has nothing there.
-  const showMobileLogo = (router.pathname === '/idil' && atTop) || (!onDark && open)
 
   const handleLogoClick = (e) => {
     if (router.pathname !== '/') return
@@ -225,7 +217,7 @@ export default function Nav() {
       <Link
         href="/"
         onClick={handleLogoClick}
-        className={`nav__logo ${overHero ? 'nav__logo--hidden' : ''} ${showMobileLogo ? 'nav__logo--mobile-visible' : ''}`}
+        className={`nav__logo ${overHero ? 'nav__logo--hidden' : ''}`}
         aria-label="NİP Mimarlık — Anasayfa"
       >
         <img src={logoSrc} alt="NİP Mimarlık" />
