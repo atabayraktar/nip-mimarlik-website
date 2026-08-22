@@ -1,18 +1,9 @@
-import { useSection } from '../lib/sections'
+import Eyebrow from './Eyebrow'
 
 export default function SectionToggle({ id, label, className = '' }) {
-  const [isOpen, toggle] = useSection(id)
-
   return (
-    <button
-      type="button"
-      className={`eyebrow eyebrow--toggle ${className}`.trim()}
-      aria-expanded={isOpen}
-      aria-controls={`${id}-panel`}
-      onClick={toggle}
-    >
-      <span className="eyebrow__icon" aria-hidden="true" />
+    <Eyebrow as="span" id={`${id}-heading`} className={className}>
       {label}
-    </button>
+    </Eyebrow>
   )
 }

@@ -5,7 +5,7 @@ import ContactFormModal from './ContactFormModal'
 import { useSection } from '../lib/sections'
 
 const ADDRESS = 'Yeni İzmir Yolu Cd. 20/20A, 17110 Çanakkale Merkez, Çanakkale'
-const MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`
+const MAPS_LINK = 'https://share.google/M7v9Fe0bI3dN86dxn'
 
 // Static resting frame (phase 0) of the nav burger's key/"anahtar" mark —
 // same mark, same viewBox, reused here as the bullet icon for every item.

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { stopScroll, startScroll } from '../lib/lenis'
 import ContactFormFields from './ContactFormFields'
+import Eyebrow from './Eyebrow'
 
 const CLOSE_DURATION = 400
 
@@ -90,7 +91,7 @@ export default function ContactFormModal({ open, onClose }) {
           </svg>
         </button>
 
-        <p className="eyebrow contact-modal__eyebrow">İletişim Formu</p>
+        <Eyebrow as="p" className="contact-modal__eyebrow">İletişim Formu</Eyebrow>
         <h3 id="contact-modal-title" className="contact-modal__title">
           Bilgilerinizi bırakın, <em>WhatsApp'tan yazalım.</em>
         </h3>

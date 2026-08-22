@@ -1,7 +1,8 @@
+import Eyebrow from './Eyebrow'
+
 const EDUCATION = [
-  { year: '2012', degree: 'Mimarlık Lisansı', place: 'Lorem Üniversitesi' },
-  { year: '2015', degree: 'Yüksek Lisans, Topografya & Peyzaj', place: 'İpsum Enstitüsü' },
-  { year: '2018', degree: 'Restorasyon Sertifikası', place: 'Dolor Akademisi' },
+  { year: '2016–2021', degree: 'Mimarlık Lisansı', place: 'İstanbul Bilgi Üniversitesi' },
+  { year: '2021–2022', degree: 'Yüksek Lisans, Mimari Tasarım Programı', place: 'İstanbul Bilgi Üniversitesi' },
 ]
 
 export default function Education() {
@@ -9,7 +10,7 @@ export default function Education() {
     <section id="egitim" data-theme="paper" className="education">
       <div className="education__inner">
         <div className="education__col" data-reveal>
-          <p className="eyebrow">Eğitim</p>
+          <Eyebrow as="p">Eğitim</Eyebrow>
           <ul className="education__list">
             {EDUCATION.map((e) => (
               <li key={e.year}>

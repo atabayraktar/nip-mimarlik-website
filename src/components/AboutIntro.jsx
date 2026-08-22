@@ -1,3 +1,5 @@
+import Eyebrow from './Eyebrow'
+
 export default function AboutIntro() {
   return (
     <section id="hakkinda" data-theme="paper" className="about-intro">
@@ -12,7 +14,7 @@ export default function AboutIntro() {
 
         <div className="about-intro__text" data-reveal data-reveal-delay="150">
           <div className="about-intro__heading">
-            <p className="eyebrow">Kurucu · Mimar</p>
+            <Eyebrow as="p">Kurucu · Mimar</Eyebrow>
             <h1 className="about-intro__name">
               Nilüfer <em>İdil Postacı</em>
             </h1>

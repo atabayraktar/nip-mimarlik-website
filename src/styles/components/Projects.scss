@@ -30,7 +30,7 @@
     align-items: center;
     justify-content: space-between;
     gap: var(--sp-3);
-    margin-bottom: var(--sp-6);
+    margin-bottom: var(--sp-5);
   }
 
   &__filters {
@@ -38,6 +38,10 @@
     flex-wrap: wrap;
     gap: var(--sp-1);
     margin-bottom: var(--sp-5);
+
+    @media (min-width: 768px) {
+      margin-bottom: 46px;
+    }
   }
 
   &__filter {

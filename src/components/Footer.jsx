@@ -3,8 +3,7 @@ import { useRouter } from 'next/router'
 import { scrollToTop } from '../lib/lenis'
 import TopoLines from './TopoLines'
 
-const ADDRESS = 'Yeni İzmir Yolu Cd. 20/20A, 17110 Çanakkale Merkez, Çanakkale'
-const MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(ADDRESS)}`
+const MAPS_LINK = 'https://share.google/M7v9Fe0bI3dN86dxn'
 
 const PIN_ICON = (
   <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
