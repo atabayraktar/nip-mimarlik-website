@@ -39,14 +39,19 @@
 
     // From tablet up, the mark is centered inside a box capped at its own
     // natural footprint but never wider than --content-edge — the same
-    // left gutter .container's own content sits behind. That keeps it
-    // pinned near the true edge on wide desktop (the cap wins) while
-    // letting it shrink and re-center itself as that gutter narrows on
-    // tablet or a resized desktop window, instead of a fixed offset/size
-    // that runs into content once the window narrows.
+    // left gutter .container's own content sits behind, so the box's outer
+    // edge can never cross into real content no matter how tight the
+    // gutter gets. Within that hard limit, the box's near edge sits
+    // --nav-edge in from the true viewport edge whenever there's room for
+    // both the offset and the mark's natural size (a normal desktop
+    // window); as the gutter narrows, that offset itself gets squeezed out
+    // first, so the mark falls back to flush-and-shrinking (still centered
+    // in whatever's left) rather than ever overlapping content.
     @media (min-width: 768px) {
-      --logo-box: min(var(--content-edge), calc(60px + 2 * var(--sp-1)));
-      left: 0;
+      --logo-cap: calc(60px + 2 * var(--sp-1));
+      --logo-reach: min(var(--content-edge), calc(var(--nav-edge) + var(--logo-cap)));
+      --logo-box: min(var(--logo-cap), var(--logo-reach));
+      left: calc(var(--logo-reach) - var(--logo-box));
       width: var(--logo-box);
       justify-content: center;
     }
@@ -89,14 +94,16 @@
     z-index: 101;
     cursor: pointer;
 
-    // Mirrors the logo from tablet up: centered inside a box capped at its
-    // own natural footprint but never wider than --content-edge, so the
-    // key mark stays aligned with that same right gutter as it narrows or
-    // widens instead of sitting at a fixed inset.
+    // Mirrors the logo's box math (see its comment) on the right edge: the
+    // box's outer edge is hard-capped at --content-edge so it can never
+    // cross into real content, and pulls in --nav-edge from the true
+    // viewport edge only when the gutter has room for both.
     @media (min-width: 768px) {
-      --burger-box: min(var(--content-edge), calc(44px + 2 * var(--sp-1)));
+      --burger-cap: calc(44px + 2 * var(--sp-1));
+      --burger-reach: min(var(--content-edge), calc(var(--nav-edge) + var(--burger-cap)));
+      --burger-box: min(var(--burger-cap), var(--burger-reach));
       --mark-w: clamp(24px, calc(var(--burger-box) - 2 * var(--sp-1)), 44px);
-      right: 0;
+      right: calc(var(--burger-reach) - var(--burger-box));
       width: var(--burger-box);
     }
   }

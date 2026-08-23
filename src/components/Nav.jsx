@@ -17,6 +17,10 @@ const LINKS = [
   { href: '/#iletisim', label: 'İletişim' },
 ]
 
+const LINK_SECTION_IDS = new Set(
+  LINKS.filter((link) => link.href.startsWith('/#')).map((link) => link.href.slice(2))
+)
+
 export default function Nav() {
   const [theme, setTheme] = useState('ink')
   const [activeSection, setActiveSection] = useState(null)
@@ -85,6 +89,13 @@ export default function Nav() {
   useEffect(() => {
     if (!open) return
     const onClickAway = (e) => {
+      // Only the primary (left) button counts as "clicking away". A
+      // middle-button mousedown is how many mice start click-to-scroll
+      // autoscroll — a real mousedown that lands on whatever the cursor is
+      // over at that instant, which is almost never inside the dropdown,
+      // so it was closing the menu every time someone used it to scroll
+      // down to a section instead of actually clicking away from it.
+      if (e.button !== 0) return
       if (barRef.current?.contains(e.target) || burgerRef.current?.contains(e.target)) return
       setOpen(false)
     }
@@ -134,6 +145,30 @@ export default function Nav() {
         if (rect.top <= readingLine && rect.bottom > readingLine) {
           atReadingLine = section
         }
+      }
+
+      // The reading line sits fixed just below the nav, near the top of the
+      // viewport. When the trailing sections (İletişim, Footer) are short
+      // enough that the remaining scrollable distance is less than the
+      // viewport height, the page can hit its true scroll end while that
+      // line is still sitting inside whatever tall section came before them
+      // — so it never crosses into İletişim at all. At the bottom of the
+      // page there's nowhere further to scroll, so fall back to the last
+      // linkable section for the active nav link.
+      //
+      // This only overrides which LINK is highlighted, never `current` —
+      // `current` also drives the theme/colour inversion, which must keep
+      // tracking whatever section is actually rendered behind the nav's own
+      // band (still Hizmetler/İletişim's light background at this point,
+      // since Footer's dark background hasn't scrolled up into it yet).
+      // Forcing current straight to Footer here would flip the nav to its
+      // dark (light-on-dark) colors while the real background behind it is
+      // still light, making the burger/links render invisible — not closed,
+      // just the same color as the page.
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2
+      if (atBottom) {
+        atReadingLine = [...sections].reverse().find((s) => LINK_SECTION_IDS.has(s.id)) ?? atReadingLine
       }
 
       const activeEl = atReadingLine ?? current
