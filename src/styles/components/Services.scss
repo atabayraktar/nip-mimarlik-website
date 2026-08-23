@@ -36,14 +36,12 @@
     display: grid;
     grid-template-columns: 1fr;
 
-    // 3 rows on the left, 2 on the right. Both columns stretch to the
-    // taller (left) column's height, then the right column distributes its
-    // 2 rows with space-evenly — landing them in the left column's gaps —
-    // instead of a hardcoded offset, so it stays correct as copy length
-    // (and so row height) changes.
+    // 3 rows on the left, 2 on the right. Both columns top-align and stack
+    // with the same row gap, so row 1 and row 2 land level across both
+    // columns instead of the right pair floating centered between rows.
     @media (min-width: 900px) {
       display: flex;
-      align-items: stretch;
+      align-items: flex-start;
       gap: var(--sp-8);
     }
   }
@@ -54,13 +52,7 @@
       flex-direction: column;
       flex: 1;
       min-width: 0;
-      justify-content: space-between;
-    }
-  }
-
-  &__col--right {
-    @media (min-width: 900px) {
-      justify-content: space-evenly;
+      justify-content: flex-start;
     }
   }
 

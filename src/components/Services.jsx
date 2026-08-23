@@ -5,37 +5,42 @@ import { useSection } from '../lib/sections'
 const ICONS = {
   design: (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M5 19h14L7 4v15Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <circle cx="9.8" cy="14.2" r="1.3" stroke="currentColor" strokeWidth="1.5" />
+      <circle cx="12" cy="4.4" r="1.5" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M12 5.9 7 20" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <path d="M12 5.9l4.3 11.3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <path d="M16.3 17.2l2.7 3.3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M6 20.4h2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
     </svg>
   ),
   interior: (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M6 12V7.5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2V12" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M4 12h16v4.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V12Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M5 17.5v2M19 17.5v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M4 7a2 2 0 0 1 2-2h3v16H6a2 2 0 0 1-2-2V7Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+      <path d="M9.5 5h4v13.5h-4z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+      <path d="M14.5 5h3.5a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2h-3.5z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
     </svg>
   ),
   consulting: (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M7.5 5h9a1 1 0 0 1 1 1v13.5H6.5V6a1 1 0 0 1 1-1Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M9.7 5V4a1 1 0 0 1 1-1h2.6a1 1 0 0 1 1 1v1" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M9 13l2 2 4-4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="5" y="4.5" width="14" height="17" rx="1.4" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+      <path d="M9 4.5v-.7A1.3 1.3 0 0 1 10.3 2.5h3.4A1.3 1.3 0 0 1 15 3.8v.7" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+      <path d="M8.7 12.9l2.3 2.3 4.3-5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   ),
   contracting: (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M4 20V9l6-3v14" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M10 20V4l6 2.5V20" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M4 20h16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M13 9h2M13 13h2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M7 21V4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <path d="M3 21h11" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <path d="M3.5 4h16" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <path d="M3.5 4v2.4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <path d="M16 8.8V4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
     </svg>
   ),
   commitment: (
     <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M7 4h8l3 3v13H7V4Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M15 4v3h3" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-      <path d="M9.5 13.2l1.8 1.8 3.2-3.7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="12" cy="7.2" r="4" stroke="currentColor" strokeWidth="1.4" />
+      <circle cx="12" cy="7.2" r="1.1" stroke="currentColor" strokeWidth="1.4" />
+      <path d="M12 11.2V20" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      <path d="M12 15.4h2.6M12 18.1h2.6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
     </svg>
   ),
 }
@@ -44,27 +49,27 @@ const SERVICES = [
   {
     icon: 'design',
     name: 'Mimari Proje',
-    copy: 'Konsept aşamasından uygulama projesine, mekânın karakterini tanımlayan bütüncül tasarım süreci.',
+    copy: 'Konsept tasarımdan ruhsatlandırma ve uygulama projelerine kadar, yapının tüm mimari süreçlerinin bütüncül bir yaklaşımla ele alınmasını kapsar.',
   },
   {
     icon: 'interior',
-    name: 'İç Mekan Tasarımı',
-    copy: 'Malzeme, ışık ve dokunun kullanım ihtiyacına göre dengelendiği özgün iç mekân kurguları.',
+    name: 'İç Mekân ve Konsept Tasarımı',
+    copy: 'Mevcut mekânın; işlev, malzeme, ışık ve doku bütünlüğü içinde, kullanıcı ihtiyaçları ve hedeflenen fonksiyon doğrultusunda yeniden tanımlanmasını kapsar.',
   },
   {
     icon: 'consulting',
     name: 'Proje Uygulama Danışmanlığı',
-    copy: 'Tasarımın şantiyede doğru uygulanmasını takip eden saha denetimi ve süreç danışmanlığı.',
+    copy: 'Mimari ruhsat ve uygulama projelerinin sahada doğru biçimde hayata geçirilmesi için yürütülen saha denetimi, uygulama takibi ve imalat süreci danışmanlığını kapsar.',
   },
   {
     icon: 'contracting',
     name: 'Müteahhitlik',
-    copy: 'Kaba inşaattan teslim anahtarına, sahada uçtan uca yürütülen müteahhitlik ve inşaat yönetimi hizmeti.',
+    copy: 'Arsaların kat karşılığı veya satın alma yoluyla değerlendirilerek projelendirilmesini ve tüm inşaat süreçlerinin tarafımızca yürütülmesini kapsar.',
   },
   {
     icon: 'commitment',
     name: 'Taahhüt İşleri',
-    copy: 'Sözleşme kapsamındaki imalat ve teslim süreçlerinin zamanında, eksiksiz tamamlanmasını güvence altına alan taahhüt yönetimi.',
+    copy: 'Ofisimiz bünyesinde tasarlanan projelerin; müşteri talebi doğrultusunda yapı inşası veya iç mekân uygulamalarına ilişkin tüm süreçlerinin yürütülerek anahtar teslim tamamlanmasını kapsar.',
   },
 ]
 
