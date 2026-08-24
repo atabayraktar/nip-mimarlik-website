@@ -7,6 +7,11 @@
   height: var(--nav-h);
   color: var(--paper);
   transition: color var(--transition-base);
+  // The header itself is just a full-width invisible strip — only the
+  // logo/burger/dropdown inside it should actually catch clicks, or
+  // anything that scrolls up underneath this band (e.g. the projects
+  // filters) becomes unclickable even though nothing is visibly there.
+  pointer-events: none;
 
   @media (min-width: 1024px) {
     --nav-edge: var(--sp-6);
@@ -25,6 +30,7 @@
     align-items: center;
     z-index: 101;
     opacity: 1;
+    pointer-events: auto;
     transform: scale(1);
     transition: opacity var(--transition-base), transform var(--transition-base);
 
@@ -92,6 +98,7 @@
     align-items: center;
     justify-content: center;
     z-index: 101;
+    pointer-events: auto;
     cursor: pointer;
 
     // Mirrors the logo's box math (see its comment) on the right edge: the
