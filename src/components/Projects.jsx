@@ -21,14 +21,14 @@ function projectImages(label) {
   ]
 }
 
-const PROJECTS = [
+export const PROJECTS = [
   {
     id: 3,
     name: 'Sade Projesi',
     category: 'mutahitlik',
     categoryLabel: 'Mütahitlik Projeleri',
     location: 'Çanakkale, Dardanos',
-    client: 'Müteahhitliğini yaptığımız proje',
+    client: 'Müteahhit Firma',
     typology: 'Villa Sitesi',
     size: '630 m²',
     status: 'Ruhsatlandırıldı · İnşa Edildi',
@@ -141,7 +141,7 @@ const ARROW_ICON = (
   </svg>
 )
 
-function Swiper({ images, name, index, onIndexChange, className = '' }) {
+function Swiper({ images, name, location, index, onIndexChange, className = '' }) {
   const trackRef = useRef(null)
   const programmatic = useRef(false)
   const programmaticTimer = useRef(null)
@@ -182,7 +182,7 @@ function Swiper({ images, name, index, onIndexChange, className = '' }) {
       <div className="swiper__track" ref={trackRef} onScroll={handleScroll}>
         {images.map((src, i) => (
           <div className="swiper__slide" key={src}>
-            <img src={src} alt={`${name} — ${i + 1}`} loading="lazy" />
+            <img src={src} alt={`${name} — ${location} — ${i + 1}`} loading="lazy" />
           </div>
         ))}
       </div>
@@ -388,11 +388,16 @@ export default function Projects() {
                   <Swiper
                     images={p.images}
                     name={p.name}
+                    location={p.location}
                     index={activeIndex}
                     onIndexChange={setActiveIndex}
                   />
                 ) : (
-                  <img src={p.images[0]} alt={`${p.name} — ${p.categoryLabel}`} loading="lazy" />
+                  <img
+                    src={p.images[0]}
+                    alt={`${p.name} — ${p.typology} — ${p.location}`}
+                    loading="lazy"
+                  />
                 )}
               </div>
             )

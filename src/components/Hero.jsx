@@ -52,13 +52,16 @@ export default function Hero() {
         <img
           className="hero__mark"
           src="/images/logos/nip-logos/nip-light.webp"
-          alt="NİP Mimarlık"
+          alt="nip Mimarlık"
+          width={151}
+          height={110}
+          fetchpriority="high"
           data-reveal
         />
 
-        <p className="hero__kicker" data-reveal data-reveal-delay="150">
+        <h1 className="hero__kicker" data-reveal data-reveal-delay="150">
           Mimarlık ve Yapı Stüdyosu · Çanakkale
-        </p>
+        </h1>
       </div>
     </section>
   )

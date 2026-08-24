@@ -1,3 +1,3 @@
 # nip-mimarlik-website
 
-Website for NİP Architecture.
+Website for nip Architecture.

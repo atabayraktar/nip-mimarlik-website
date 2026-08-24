@@ -70,6 +70,8 @@ export default function Manifesto() {
                 src="https://placehold.co/720x960/EAE9E3/8A8A85?text=+"
                 alt=""
                 aria-hidden="true"
+                width={720}
+                height={960}
                 loading="lazy"
               />
             </div>

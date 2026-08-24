@@ -253,9 +253,9 @@ export default function Nav() {
         href="/"
         onClick={handleLogoClick}
         className={`nav__logo ${overHero ? 'nav__logo--hidden' : ''}`}
-        aria-label="NİP Mimarlık — Anasayfa"
+        aria-label="nip Mimarlık — Anasayfa"
       >
-        <img src={logoSrc} alt="NİP Mimarlık" />
+        <img src={logoSrc} alt="nip Mimarlık" width={302} height={220} />
       </Link>
 
       <button
