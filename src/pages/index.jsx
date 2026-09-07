@@ -13,7 +13,7 @@ const DESCRIPTION =
   'nip Mimarlık, Nilüfer İdil Postacı’nın Çanakkale’de kurduğu bağımsız mimarlık ve yapı stüdyosu. Mimari proje, iç mekan ve konsept tasarımı, proje uygulama danışmanlığı, müteahhitlik ve taahhüt işlerinde uçtan uca çözümler sunar.'
 const KEYWORDS =
   'nip Mimarlık, Çanakkale mimarlık, Çanakkale mimarlık ofisi, Çanakkale mimar, Çanakkale mimarlık stüdyosu, mimari proje Çanakkale, iç mekan tasarımı Çanakkale, konsept tasarım, proje uygulama danışmanlığı, müteahhitlik Çanakkale, taahhüt işleri, villa projesi Çanakkale, Nilüfer İdil Postacı, Kepez, Dardanos, Yukarıinova, Çınarlı'
-const OG_IMAGE = `${SITE_URL}/images/logos/nip-logos/nip-dark.webp`
+const OG_IMAGE = `${SITE_URL}/images/og/og-home.jpg`
 
 const ADDRESS = {
   '@type': 'PostalAddress',
@@ -61,6 +61,7 @@ const FOUNDER = {
   '@id': `${SITE_URL}/idil/#person`,
   name: 'Nilüfer İdil Postacı',
   jobTitle: 'Kurucu · Mimar',
+  image: `${SITE_URL}/images/about/idil-hakkinda.webp`,
   url: `${SITE_URL}/idil/`,
 }
 
@@ -95,7 +96,7 @@ const jsonLd = {
         '@type': 'ImageObject',
         url: `${SITE_URL}/images/logos/nip-logos/nip-dark.webp`,
       },
-      image: `${SITE_URL}/images/logos/nip-logos/nip-dark.webp`,
+      image: OG_IMAGE,
       founder: FOUNDER,
       contactPoint: {
         '@type': 'ContactPoint',
@@ -131,7 +132,7 @@ const jsonLd = {
       '@type': ['LocalBusiness', 'Architect', 'GeneralContractor'],
       '@id': `${SITE_URL}/#localbusiness`,
       name: 'nip Mimarlık',
-      image: `${SITE_URL}/images/logos/nip-logos/nip-dark.webp`,
+      image: OG_IMAGE,
       url: SITE_URL,
       telephone: '+90 531 656 29 09',
       email: 'info@nipmimarlik.com',
@@ -182,10 +183,10 @@ export default function Home() {
         <meta property="og:description" content={DESCRIPTION} />
         <meta property="og:url" content={SITE_URL} />
         <meta property="og:image" content={OG_IMAGE} />
-        <meta property="og:image:type" content="image/webp" />
-        <meta property="og:image:width" content="600" />
-        <meta property="og:image:height" content="437" />
-        <meta property="og:image:alt" content="nip Mimarlık" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="nip Mimarlık — Çanakkale mimarlık ve yapı stüdyosu" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={TITLE} />

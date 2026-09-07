@@ -6,9 +6,14 @@ export default function AboutIntro() {
       <div className="container about-intro__inner">
         <div className="about-intro__portrait" data-reveal>
           <img
-            src="https://placehold.co/900x1100/EAE9E3/8A8A85?text=İdil+Postacı"
+            src="/images/about/idil-hakkinda.webp"
+            srcSet="/images/about/idil-hakkinda-840.webp 840w, /images/about/idil-hakkinda.webp 1600w"
+            sizes="(min-width: 900px) 420px, 100vw"
             alt="Nilüfer İdil Postacı portresi"
-            loading="lazy"
+            width={1600}
+            height={2400}
+            loading="eager"
+            fetchpriority="high"
           />
         </div>
 

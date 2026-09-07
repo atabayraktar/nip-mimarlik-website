@@ -21,6 +21,17 @@ function projectImages(label) {
   ]
 }
 
+function projectPhotos(slug, count) {
+  return Array.from({ length: count }, (_, i) => `/images/projects/${slug}/${String(i + 1).padStart(2, '0')}.webp`)
+}
+
+// The closed card only ever renders this at ~424px CSS width — a
+// dedicated small thumb instead of the full-res swiper image avoids
+// serving ~2200px-wide renders into a fraction of that box.
+function projectThumb(slug) {
+  return `/images/projects/${slug}/01-thumb.webp`
+}
+
 export const PROJECTS = [
   {
     id: 3,
@@ -33,7 +44,8 @@ export const PROJECTS = [
     size: '630 m²',
     status: 'Ruhsatlandırıldı · İnşa Edildi',
     icon: '/images/logos/project-logos/project-03.webp',
-    images: projectImages('Sade'),
+    images: projectPhotos('sade', 16),
+    thumb: projectThumb('sade'),
     description:
       'Sade, fazlalıklardan arınmış bir düşüncenin mekâna dönüşmüş hâli. Mimari yaklaşımımız hiçbir zaman dayatmak ya da sınırlandırmak olmadı; yalnızca bulunduğu yere ait, sade ama özenle düşünülmüş bir anlayışı temsil ediyoruz. Sade Projesi, Çanakkale’nin Dardanos mevkiinde abartıdan uzak, ferah ve sade yaşam alanlarını kullanıcılarına sunuyor.',
   },
@@ -48,7 +60,8 @@ export const PROJECTS = [
     size: '60 m²',
     status: 'Tasarlandı · İmalatı Yapıldı',
     icon: '/images/logos/project-logos/project-05.webp',
-    images: projectImages('P+Evi'),
+    images: projectPhotos('p-evi', 7),
+    thumb: projectThumb('p-evi'),
     description:
       'Nip Ofisi’nde tasarlanan P Evi salonu, zamansızlık ilkesini benimserken doğayı betimleyen renk paletiyle sakin ve olgunlaşmış bir yaşamı temsil ediyor. Yalın tasarım dili ve doğal tonların birlikteliği, kullanıcılarına konforlu ve sade bir yaşam alanı sunuyor.',
   },
@@ -63,7 +76,8 @@ export const PROJECTS = [
     size: '130 m²',
     status: 'Ruhsatlandırıldı',
     icon: '/images/logos/project-logos/project-02.webp',
-    images: projectImages('Sasa+Evi'),
+    images: projectPhotos('sasa', 6),
+    thumb: projectThumb('sasa'),
     description:
       'Çanakkale’nin Yukarıinova Köyü’nde, dere kenarında ve ormanla iç içe bir alanda yer alan Sasa Evi, ana tasarım kararı olarak avlulu bir yapıya sahip. Formu sayesinde kendi dünyasını kuran ve mahremiyetini oluşturan yapı, doğanın spontane akışına karşı tanımlı duruşuyla kullanıcısının yaşantısını yansıtıyor.',
   },
@@ -93,7 +107,8 @@ export const PROJECTS = [
     size: '130 m²',
     status: 'Ruhsatlandırıldı',
     icon: '/images/logos/project-logos/project-01.webp',
-    images: projectImages('Sea+Evi'),
+    images: projectPhotos('sea', 6),
+    thumb: projectThumb('sea'),
     description:
       'Çanakkale’nin Yukarıinova Köyü’nde özgürlüğünü ilan eden bir yapı. Sınırları içinde, sınırsızlığı çizmek isteyen bir proje Sea Evi. Mümkün olan her noktasında doğaya açılan hatta kucaklayan bir duruş sergilemekte.',
   },
@@ -108,7 +123,8 @@ export const PROJECTS = [
     size: '220 m²',
     status: 'Ruhsatlandırıldı',
     icon: '/images/logos/project-logos/project-06.webp',
-    images: projectImages('XE+Projesi'),
+    images: projectPhotos('xe', 9),
+    thumb: projectThumb('xe'),
     description:
       'Çanakkale’nin Kepez bölgesinde yer alan XE projesi, müteahhit firma için projelendirildi. Kullanıcı ihtiyaçlarının ön planda tutulduğu projede, geniş ve işlevsel mekân kullanımlarıyla konforlu bir yaşam kurgusu oluşturuldu.',
   },
@@ -123,7 +139,8 @@ export const PROJECTS = [
     size: '200 m²',
     status: 'Konsept Tasarımı Yapıldı',
     icon: '/images/logos/project-logos/project-04.webp',
-    images: projectImages('Var+Evi'),
+    images: projectPhotos('var', 2),
+    thumb: projectThumb('var'),
     description:
       'Çevre insana göre şekillendi; şimdi ise insanların yaşam alanları parsellerin sınırlarına göre şekillenmekte. Biz de ofisimizde tasarım yaparken bu sınırlara bağlı kalmak zorunda olsak da kullanıcının var olma biçimine özgü tasarımlar yapıyoruz. Var Evi, Çanakkale’nin Çınarlı mevkiinde yer alan bir parselin tanımsızlığı içinde kendini var eden; kütlesel hareketlerle mekânları tanımlamayı ve bunu olabildiğince esnek bir şekilde kullanıcıyla buluşturmayı amaçlayan bir proje.',
   },
@@ -394,7 +411,7 @@ export default function Projects() {
                   />
                 ) : (
                   <img
-                    src={p.images[0]}
+                    src={p.thumb || p.images[0]}
                     alt={`${p.name} — ${p.typology} — ${p.location}`}
                     loading="lazy"
                   />

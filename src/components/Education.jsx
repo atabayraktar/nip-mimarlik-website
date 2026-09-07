@@ -16,7 +16,7 @@ export default function Education() {
               <li key={e.year}>
                 <span className="education__year">{e.year}</span>
                 <div>
-                  <h3>{e.degree}</h3>
+                  <h2>{e.degree}</h2>
                   <p>{e.place}</p>
                 </div>
               </li>

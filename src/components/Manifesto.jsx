@@ -3,9 +3,15 @@ import Collapse from './Collapse'
 import { useSection } from '../lib/sections'
 
 const LINES = [
-  ['Lorem', 'ipsum', 'dolor.'],
-  ['Sit', 'amet', 'consectetur.'],
-  ['Elit', 'sed', 'do.'],
+  ['İnsan,', 'yaşam', 've'],
+  ['çevre', 'arasındaki', 'ilişkileri'],
+]
+
+const BODY_PARAGRAPHS = [
+  'Bize göre mimarlık, kapitalist üretim düzeni içerisinde yalnızca ekonomik değeri için meta üreten bir disiplin değil; insan, yaşam ve çevre arasındaki ilişkileri yeniden kuran çok katmanlı bir disiplindir.',
+  'Nip Mimarlık ve Yapı, bu noktadan hareketle mekânları kullanıcısına özgü, değişen ihtiyaçlara uyum sağlayabilen ve dönüşebilen yapılar olarak ele alır. Tasarlamak, bir yaşam biçimini dikte etmek değil; olasılıkları öngörmek ve estetik bakış, işlev, deneyim ile teknik gerçekliği aynı bütünün parçaları olarak değerlendirmektir.',
+  'Bağlam, malzemenin karakteri ve kullanıcının yaşam döngüsü, tasarımın doğal girdilerini oluşturur. Bu girdiler doğrultusunda tekrar eden bir tasarım dilinden uzaklaşarak her projenin kendi kimliğini bulmasını amaçlarız.',
+  'Tasarım ve uygulamayı birbirinden bağımsız süreçler olarak görmeyiz. Ofiste doğan fikri henüz çizim aşamasındayken uygulama süreciyle birlikte ele alır, geliştirir ve projelendiririz. Böylece yaratıcılığın soyut dünyasında başlayan tasarım fikrini; çizgiden detaya, malzemeden uygulamaya uzanan bütüncül bir süreç içerisinde üçüncü boyutta inşa ederiz.',
 ]
 
 const MARQUEE_ITEMS = [
@@ -55,26 +61,29 @@ export default function Manifesto() {
                   </span>
                 ))}
               </h2>
-
-              <p className="manifesto__body" data-reveal>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat — duis aute
-                irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur.
-              </p>
             </div>
 
             <div className="manifesto__media" data-reveal data-reveal-delay="150">
               <img
-                src="https://placehold.co/720x960/EAE9E3/8A8A85?text=+"
-                alt=""
-                aria-hidden="true"
-                width={720}
-                height={960}
+                src="/images/manifesto.webp"
+                alt="Nip Mimarlık ve Yapı ekibinin bir proje sunumu yaptığı stüdyo toplantısı"
+                width={1300}
+                height={867}
                 loading="lazy"
               />
             </div>
+          </div>
+
+          <div className="manifesto__body">
+            {BODY_PARAGRAPHS.map((paragraph, pi) => (
+              <p
+                key={pi}
+                data-reveal
+                data-reveal-delay={pi === 0 ? undefined : String(Math.min(pi * 100, 300))}
+              >
+                {paragraph}
+              </p>
+            ))}
           </div>
         </Collapse>
       </div>

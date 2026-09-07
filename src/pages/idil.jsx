@@ -11,7 +11,7 @@ const DESCRIPTION =
   'nip Mimarlık kurucusu mimar Nilüfer İdil Postacı hakkında: İstanbul Bilgi Üniversitesi mimarlık eğitimi, Çanakkale’deki saha deneyimi, tasarım yaklaşımı ve birlikte çalıştığı mimari projeler.'
 const KEYWORDS =
   'Nilüfer İdil Postacı, İdil Postacı, nip Mimarlık kurucusu, Çanakkale mimar, mimar Çanakkale, İstanbul Bilgi Üniversitesi mimarlık'
-const OG_IMAGE = `${SITE_URL}/images/logos/nip-logos/nip-dark.webp`
+const OG_IMAGE = `${SITE_URL}/images/og/og-idil.jpg`
 const PAGE_URL = `${SITE_URL}/idil/`
 
 const jsonLd = {
@@ -47,6 +47,7 @@ const jsonLd = {
       name: 'Nilüfer İdil Postacı',
       jobTitle: 'Kurucu · Mimar',
       description: DESCRIPTION,
+      image: `${SITE_URL}/images/about/idil-hakkinda.webp`,
       url: PAGE_URL,
       alumniOf: {
         '@type': 'CollegeOrUniversity',
@@ -83,7 +84,10 @@ export default function Idil() {
         <meta property="og:description" content={DESCRIPTION} />
         <meta property="og:url" content={PAGE_URL} />
         <meta property="og:image" content={OG_IMAGE} />
-        <meta property="og:image:type" content="image/webp" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="Nilüfer İdil Postacı — nip Mimarlık kurucusu" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={TITLE} />
