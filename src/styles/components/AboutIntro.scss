@@ -19,6 +19,9 @@
     padding: var(--sp-6) 0;
   }
 
+  // Portrait sits beside the bio paragraphs only — the heading gets its own
+  // grid row above them — so the photo can be vertically centered against
+  // just the bio block's height, independent of the heading's height.
   &__inner {
     position: relative;
     z-index: 1;
@@ -29,8 +32,10 @@
 
     @media (min-width: 900px) {
       grid-template-columns: 420px 1fr;
-      gap: var(--sp-10);
-      align-items: start;
+      grid-template-rows: auto 1fr;
+      column-gap: var(--sp-10);
+      row-gap: 0;
+      align-items: stretch;
     }
   }
 
@@ -45,17 +50,22 @@
       object-fit: cover;
     }
 
-    // Lines up the portrait's top edge with the name heading, not the
-    // eyebrow above it — offset by the eyebrow's rendered line box plus the
-    // gap before the name (measured, since the eyebrow's actual line box is
-    // taller than its font-size × line-height alone would suggest).
     @media (min-width: 900px) {
-      margin-top: calc(var(--sp-6) + 28.5px);
+      grid-column: 1;
+      grid-row: 2;
+      align-self: center;
     }
   }
 
+  // Heading and bio stay one block (so they keep the same left edge, sized
+  // to their widest line together) while subgridding the parent's two rows,
+  // so the bio alone still lines up with the portrait's row for centering.
   &__text {
     @media (min-width: 900px) {
+      grid-column: 2;
+      grid-row: 1 / 3;
+      display: grid;
+      grid-template-rows: subgrid;
       justify-self: end;
       width: fit-content;
     }
@@ -63,6 +73,16 @@
 
   &__heading {
     margin-bottom: var(--sp-6);
+
+    @media (min-width: 900px) {
+      grid-row: 1;
+    }
+  }
+
+  &__bio-group {
+    @media (min-width: 900px) {
+      grid-row: 2;
+    }
   }
 
   &__name {
