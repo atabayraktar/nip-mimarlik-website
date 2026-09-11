@@ -2,11 +2,6 @@ import SectionToggle from './SectionToggle'
 import Collapse from './Collapse'
 import { useSection } from '../lib/sections'
 
-const LINES = [
-  ['İnsan,', 'yaşam', 've'],
-  ['çevre', 'arasındaki', 'ilişkileri'],
-]
-
 const BODY_PARAGRAPHS = [
   'Bize göre mimarlık, kapitalist üretim düzeni içerisinde yalnızca ekonomik değeri için meta üreten bir disiplin değil; insan, yaşam ve çevre arasındaki ilişkileri yeniden kuran çok katmanlı bir disiplindir.',
   'Nip Mimarlık ve Yapı, bu noktadan hareketle mekânları kullanıcısına özgü, değişen ihtiyaçlara uyum sağlayabilen ve dönüşebilen yapılar olarak ele alır. Tasarlamak, bir yaşam biçimini dikte etmek değil; olasılıkları öngörmek ve estetik bakış, işlev, deneyim ile teknik gerçekliği aynı bütünün parçaları olarak değerlendirmektir.',
@@ -28,7 +23,6 @@ const MARQUEE_ITEMS = [
 const MARQUEE_ENABLED = false
 
 export default function Manifesto() {
-  let wordCount = 0
   const [isOpen] = useSection('manifesto')
 
   return (
@@ -39,28 +33,17 @@ export default function Manifesto() {
         <Collapse id="manifesto" open={isOpen}>
           <div className="manifesto__inner">
             <div className="manifesto__col">
-              <h2 className="manifesto__headline">
-                {LINES.map((line, li) => (
-                  <span className="manifesto__line" key={li}>
-                    {line.map((word, wi) => {
-                      const isLast = wi === line.length - 1
-                      const delay = wordCount * 55
-                      wordCount += 1
-                      return (
-                        <span className="manifesto__word" key={wi}>
-                          <span
-                            className="manifesto__word-inner"
-                            data-reveal
-                            style={{ transitionDelay: `${delay}ms` }}
-                          >
-                            {isLast ? <em>{word}</em> : word}
-                          </span>
-                        </span>
-                      )
-                    })}
-                  </span>
+              <div className="manifesto__body">
+                {BODY_PARAGRAPHS.map((paragraph, pi) => (
+                  <p
+                    key={pi}
+                    data-reveal
+                    data-reveal-delay={pi === 0 ? undefined : String(Math.min(pi * 100, 300))}
+                  >
+                    {paragraph}
+                  </p>
                 ))}
-              </h2>
+              </div>
             </div>
 
             <div className="manifesto__media" data-reveal data-reveal-delay="150">
@@ -72,18 +55,6 @@ export default function Manifesto() {
                 loading="lazy"
               />
             </div>
-          </div>
-
-          <div className="manifesto__body">
-            {BODY_PARAGRAPHS.map((paragraph, pi) => (
-              <p
-                key={pi}
-                data-reveal
-                data-reveal-delay={pi === 0 ? undefined : String(Math.min(pi * 100, 300))}
-              >
-                {paragraph}
-              </p>
-            ))}
           </div>
         </Collapse>
       </div>

@@ -29,33 +29,36 @@
     z-index: 1;
   }
 
-  // Headline + photo, side by side on desktop — the body copy below is its
-  // own separate full-width block, not part of this row (see `&__body`).
+  // Text column and photo, side by side on desktop.
   &__inner {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--sp-6);
 
-    @media (min-width: 900px) {
+    // Two-column split needs enough room for the fixed 58ch text column
+    // plus a photo wide enough not to look cramped — tablet widths (up to
+    // ~1194px, including iPad Pro portrait at 1024px) don't have that
+    // room, so they stay stacked like mobile; only real desktop widths
+    // switch to side-by-side.
+    @media (min-width: 1200px) {
       // Column 1 is sized to its own content (`&__col`'s explicit 58ch
       // width below, matching `&__body`'s line length) rather than a
       // fraction — a fr-based split only lines up with the paragraph
       // column at one calibrated viewport, since the paragraphs' width is
       // fixed (58ch) while a fr column keeps scaling with the viewport.
       grid-template-columns: auto 1fr;
-      align-items: start;
-      gap: 0;
+      align-items: center;
+      column-gap: var(--sp-6);
+      row-gap: 0;
     }
   }
 
   &__col {
-    max-width: 900px;
-
     // Matches `&__body`'s font-size purely so `58ch` here measures the
     // same character width as the paragraph column below it — the photo
     // in column 2 then starts exactly where that line length ends,
     // instead of overhanging further left than the running text.
-    @media (min-width: 900px) {
+    @media (min-width: 1200px) {
       font-size: 1.05rem;
       width: 58ch;
       max-width: none;
@@ -69,6 +72,11 @@
     aspect-ratio: 3 / 2;
     overflow: hidden;
     background: var(--paper-2);
+
+    @media (min-width: 1200px) {
+      width: 92%;
+      margin-left: auto;
+    }
 
     img {
       display: block;
@@ -86,41 +94,7 @@
     }
   }
 
-  &__headline {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: clamp(2.25rem, 7vw, 5rem);
-    line-height: 1.06;
-    letter-spacing: -0.02em;
-    margin-bottom: var(--sp-3);
-  }
-
-  &__line {
-    display: block;
-  }
-
-  &__word {
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: bottom;
-    margin-right: 0.28em;
-  }
-
-  &__word-inner {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(105%);
-    transition: opacity 0.7s var(--ease-spring), transform 0.7s var(--ease-spring);
-
-    &.revealed {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
   &__body {
-    max-width: 58ch;
-    margin-top: var(--sp-6);
     font-size: 1.05rem;
     line-height: 1.75;
     color: var(--concrete);
@@ -136,6 +110,13 @@
       p + p {
         margin-top: var(--sp-3);
       }
+    }
+
+    // 58ch line-length only matters once the photo sits beside the text
+    // (see &__inner's 1200px breakpoint) — while stacked, the paragraphs
+    // should use the same full width as the photo below them.
+    @media (min-width: 1200px) {
+      max-width: 58ch;
     }
   }
 
@@ -179,10 +160,5 @@
 @media (prefers-reduced-motion: reduce) {
   .manifesto__marquee-track {
     animation: none;
-  }
-  .manifesto__word-inner {
-    opacity: 1;
-    transform: none;
-    transition: none;
   }
 }
