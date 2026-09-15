@@ -86,10 +86,9 @@
     color: inherit;
 
     svg {
-      // Mark's own viewBox is 810x270 (3:1) — keep that ratio so it doesn't
-      // squash into a different silhouette than the nav burger's resting frame.
-      width: 20px;
-      height: calc(20px / 3);
+      // Mark's own viewBox is 400x400 (1:1).
+      width: 28px;
+      height: 28px;
       display: block;
     }
   }

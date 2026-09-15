@@ -7,15 +7,32 @@ import { useSection } from '../lib/sections'
 const ADDRESS = 'Yeni İzmir Yolu Cd. 20/20A, 17110 Çanakkale Merkez, Çanakkale'
 const MAPS_LINK = 'https://share.google/M7v9Fe0bI3dN86dxn'
 
-// Static resting frame (phase 0) of the nav burger's key/"anahtar" mark —
-// same mark, same viewBox, reused here as the bullet icon for every item.
-const ANAHTAR_ICON = (
-  <svg viewBox="0 0 810 270" aria-hidden="true">
+// Floor-plan / measurement mark, used as the bullet icon for every
+// contact item (replaces the old nav-burger "anahtar" mark here only).
+const CONTACT_ICON = (
+  <svg
+    viewBox="0 0 400 400"
+    aria-hidden="true"
+    fill="none"
+    stroke="currentColor"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     <path
-      fillRule="evenodd"
-      fill="currentColor"
-      d="M0,0 L810,0 L810,270 L540,270 L540,90 L180,90 L180,180 L270,180 L270,270 L0,270 L0,180 L90,180 L90,90 L0,90 Z M630,90 L720,90 L720,180 L630,180 Z"
+      d="M126,66 L308,70 C320,71 328,80 328,92 L325,320 C325,334 317,343 304,343
+             L119,340 C107,340 99,331 99,319 L102,90 C102,77 112,66 126,66 Z"
+      strokeWidth="15"
     />
+    <path d="M229,71 L231,106" strokeWidth="12" />
+    <path d="M288,75 L290,110" strokeWidth="12" />
+    <path d="M100,209 L189,202 L193,334" strokeWidth="13" />
+    <path d="M328,240 A102,102 0 0 0 226,342" strokeWidth="13" />
+    <path d="M26,43 L62,43" strokeWidth="12" />
+    <path d="M45,45 L44,146" strokeWidth="12" />
+    <path d="M31,176 L58,175" strokeWidth="12" />
+    <path d="M31,197 L58,196" strokeWidth="12" />
+    <path d="M44,226 L45,339" strokeWidth="12" />
+    <path d="M26,344 L62,344" strokeWidth="12" />
   </svg>
 )
 
@@ -45,7 +62,7 @@ function ContactItem({ item }) {
         onClick={() => setOpen((v) => !v)}
       >
         <span className="contact__item-icon" aria-hidden="true">
-          {ANAHTAR_ICON}
+          {CONTACT_ICON}
         </span>
         {item.label}
       </button>
@@ -84,7 +101,7 @@ export default function Contact() {
           <div className="contact__item">
             <button type="button" className="contact__item-toggle" onClick={() => setFormOpen(true)}>
               <span className="contact__item-icon" aria-hidden="true">
-                {ANAHTAR_ICON}
+                {CONTACT_ICON}
               </span>
               İletişim Formu
             </button>
